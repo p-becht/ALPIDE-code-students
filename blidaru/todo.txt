@@ -12,4 +12,8 @@ For calculating values: use fits (eg, S-curve fit to get 50% value). Hint: error
 For thresh.py (understand what it does and be able to explain/comment code) and if it does not do a gaussian fit to get the mean, think of a way to do it. Be able to motivate the use of a Gaussian!!! Looking at mean THR and its error, what do we see remarkable? Explain!
 For FHR: why do we expect fake hits in normal operation of the chip? Why do we do this study? What generates fake signals?
 
+The problem you might face is that you cannot execute runTest while connected to a PC that has access to the chip. To overcome this you can make a placeholder shell program that takes a number of arguments (ie, for threshold it takes 4 arguments: THRESHOLD NMASKSTAGES CHARGESTART CHARGESTOP, or 2 arguments for noiseocc: NOISEOCC TRIGGERS) and just prints these values. I have made such a shell script and let it there for you to study. 
+Two things to remember for EXECUTING scripts on linux. After you make a shell/python/etc script,you need to make it EXECUTABLE. That is done by writing (without " ") this "chmod +x crappy_script.py" . Replace .py with .sh for shell.
+Also, at the beginning of each script (shell, python) you need a SHEBANG line (learned this from Pascal xD). Google it!
+
 Anything else we've missed and you need? Ask on Telegram :) 
