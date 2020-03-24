@@ -1,0 +1,60 @@
+#!/bin/bash
+#
+# This script is only an example
+# Assum the input path has the following format:
+#  /.../WaferX/.../ChipX/...
+#
+THEDATAPATH="Data"
+if [ ! -z $1 ]
+then
+  THEDATAPATH="$1"
+fi
+#
+if [ ! -d ${THEDATAPATH} ]
+then
+  echo "cannot access ${THEDATAPATH}: No such directory"
+  exit -1
+fi
+#
+THESAVEPATH="."
+if [ ! -z $2 ]
+then
+  THESAVEPATH=$2
+fi
+#
+if [ ! -d ${THESAVEPATH} ]
+then
+  mkdir -p ${THESAVEPATH}
+fi
+#
+for iPATH in `find ${THEDATAPATH} -type d | grep "Chip"`
+do
+  CHIP_NAME=""
+  WAFER_NAME=""
+  for iDIR in `echo ${iPATH} | sed -e "s/\// /g"`
+  do
+    WAFER_CHECK=`echo ${iDIR} | grep "Wafer"`
+    if [ ! -z ${WAFER_CHECK} ]
+    then
+      WAFER_NAME="${WAFER_CHECK}"
+    fi
+#
+    CHIP_CHECK=`echo ${iDIR} | grep "Chip"`
+    if [ ! -z ${CHIP_CHECK} ]
+    then
+    CHIP_NAME="${CHIP_CHECK}"
+    fi
+  done
+#
+  if [ -z ${WAFER_NAME} -o -z ${CHIP_NAME} ]
+  then
+    echo "Incorrect input path format"
+    continue
+  fi
+#
+  mkdir -p ${THESAVEPATH}/${WAFER_NAME}/${CHIP_NAME}
+  THESAVEFILE="${THESAVEPATH}/${WAFER_NAME}/${CHIP_NAME}/AnalysisResults_${WAFER_NAME}_${CHIP_NAME}.root"
+  root -b -q -l ReadAnalysis.C\(\"${iPATH}\",\"${THESAVEFILE}\"\)
+done
+#
+exit 0

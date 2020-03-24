@@ -1,0 +1,20 @@
+#%Module##
+##
+## modulefile
+##
+proc ModulesHelp { } {
+  puts stderr "Setup pAAnalysis version: $version"
+}
+
+set version master
+set tagname pAAnalysis
+set sw_path YOUR_INSTALL_PATH
+set tagpath $sw_path/$tagname/$version
+
+#module load YOUR_CERN_ROOT5
+
+setenv       PA_ROOT         $tagpath
+prepend-path PATH            $tagpath/bin
+prepend-path LD_LIBRARY_PATH $tagpath/lib
+
+module-whatis "pAAnalysis $version"

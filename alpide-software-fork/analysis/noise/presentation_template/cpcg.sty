@@ -1,0 +1,46 @@
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=newest}
+%\usepackage{pgfpages}
+%\usetikzlibrary[arrows,decorations.pathmorphing,backgrounds,positioning,fit,petri]
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage[T1]{fontenc}
+\usetheme{Madrid}
+\setbeamertemplate{navigation symbols}{}
+\definecolor{cern}{RGB}{0,85,160}
+\setbeamercolor*{structure}{fg=cern}
+%\logo{\includegraphics[height=1cm]{figures/CERN}}
+\setbeamertemplate{items}[triangle]
+\setbeamertemplate{section in toc}[circle]
+\setbeamertemplate{subsection in toc}[circle]
+\setbeamertemplate{sidebar right}{\vfill\llap{\insertlogo\hskip1ex}\vskip1ex}
+
+\setbeamerfont{section in toc}{size=\large}
+\setbeamerfont{section number projected}{size=\large}
+
+\setbeamertemplate{section in toc}
+{\leavevmode\leftskip5ex%
+  \llap{%
+    \usebeamerfont*{section number projected}%
+    \usebeamercolor{section number projected}%
+%    \begin{pgfpicture}{-1ex}{0ex}{1ex}{2ex}
+%      \color{bg}
+%      \pgfpathcircle{\pgfpoint{0pt}{.75ex}}{1.2ex}
+%      \pgfusepath{fill}
+%      \pgftext[base]{\color{fg}\inserttocsectionnumber}
+%    \end{pgfpicture}\kern1.25ex%
+  }%
+  \inserttocsection\par}
+
+\setbeamertemplate{subsection in toc}
+{\leavevmode\leftskip7ex\inserttocsubsection\par}
+
+
+
+
+%\pgfplotsset{every axis/.append style={thick,tick style={semithick}}}
+%\pgfplotscreateplotcyclelist{cernn}{%
+%  color=cern,mark=*,fill=cern\\%
+%  black,dashed,mark options={solid},mark=o\\%
+%}
+%\pgfplotsset{cycle list name=cernn} 

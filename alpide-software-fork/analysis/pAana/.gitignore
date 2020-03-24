@@ -1,0 +1,10 @@
+# custom
+Makefile.in
+TpAAnalysisDict.cxx
+TpAAnalysisDict.h
+.depend
+*.root
+*.swp
+*.log
+*.txt
+*.pdf

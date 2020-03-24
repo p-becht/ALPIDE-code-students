@@ -1,0 +1,4 @@
+readoutADC
+rawReader
+debugReader
+*.dSYM

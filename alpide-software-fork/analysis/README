@@ -1,0 +1,36 @@
+-------------------------------------------------------------------------
+x_macro.sh
+-------------------------------------------------------------------------
+Simple analysis macros compatible with 'runTest' command line interface.
+Macros are executed via 'x_macro.sh' script.
+It uses (almost) the same commands as 'runTests' which start macros
+corresponding to the measurement type.
+Run './x_macro.sh --help' for more information.
+First parameter is the path to the datafile.
+
+e.g. ./x_macro.sh GEN /path/to/SouceScan_*_*.dat 
+     plots source hit map
+e.g. ./x_macro.sh THRESHOLD /path/to/ThresholdScan_*_*.sh
+     plots scan results and calculates thresholds
+
+-------------------------------------------------------------------------
+monitoring/
+-------------------------------------------------------------------------
+Simple event by event monitoring.
+Execute by:
+./x_mon.sh /path/to/RawHits_*_*.dat
+-------------------------------------------------------------------------
+
+-------------------------------------------------------------------------
+process_raw_dir.sh
+process_raw_file.sh
+classes/
+clustering/
+-------------------------------------------------------------------------
+Cluster search algorithm and analysis macros and scripts.
+-------------------------------------------------------------------------
+
+-------------------------------------------------------------------------
+Under development!
+By Miljenko Suljic, m.suljic@cern.ch
+-------------------------------------------------------------------------

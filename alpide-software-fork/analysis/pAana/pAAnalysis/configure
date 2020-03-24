@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+THEINST="."
+if [ ! -z $1 ]
+then
+  THEINST=$1
+fi
+#
+echo "SHELL = /bin/sh"         > Makefile.in
+echo "THEINSTD := ${THEINST}" >> Makefile.in
+echo ".NOEXPORT:"             >> Makefile.in
+#
+exit 0

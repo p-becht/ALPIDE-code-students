@@ -1,0 +1,27 @@
+# CHANGELOG
+
+## 2016/02/22
+- Sperate the TAnalysis into modules with a little optimazation
+- Apply the Makefile to generate the final shared lib
+- Testing and debug
+
+
+## 2016/02/25
+- Add a version flag in Config
+
+
+## 2016/08/12
+- Add in alice-its-alpide-software fork
+
+## 2016/08/14
+- Improve macro/script to convert scan data files into ROOT trees
+  - Auto detect Wafer and Chip numbers
+- Fix a bug of memory leak
+
+## 2016/08/16
+- Improve the macros for chip-by-chip analysis
+  - Add method to detect FW version, wafer number and chip number
+  - Generate a markdown table at the end of the macro
+
+## 2016/08/17
+- Add interface to print all scan resutls and save them to the corresponding folder

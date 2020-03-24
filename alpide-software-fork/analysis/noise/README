@@ -1,0 +1,11 @@
+Code in the folder written by jacobus for analysing data taken 
+with the pALPIDEfs-software/noiseScan.sh script
+
+The result will be summary presentations comparing different settings
+and chips. The folder structure has to follow the one which is defined
+in the pALPIDEfs-software/noiseScan.sh script
+
+For analysis of standard noise occupancy scan, please just use 
+the scripts and macros in the analysis folder
+
+
