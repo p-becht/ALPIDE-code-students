@@ -1,0 +1,3 @@
+[submodule "alpide-software/alpide-software-fork"]
+	path = alpide-software/alpide-software-fork
+	url = https://gitlab.cern.ch/mblidaru/alpide-software-fork.git
