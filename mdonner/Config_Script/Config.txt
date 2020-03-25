@@ -1,0 +1,5 @@
+Value1	1
+VCASN	56
+VCASN2	56
+ITHR	70
+
