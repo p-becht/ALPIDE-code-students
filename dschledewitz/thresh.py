@@ -5,7 +5,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
-graphical_output=False
+graphical_output=True
 
 def scurve_fit(steps, ninj):
     dvs=sorted(steps.keys())
