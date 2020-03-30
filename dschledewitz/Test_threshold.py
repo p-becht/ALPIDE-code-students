@@ -38,5 +38,9 @@ for i in range (len(RN)):
     replace_key("Config1.cfg", "ITHR\t",str(int(ITHR[i]))+"\n" )
     replace_key("Config1.cfg", "VCASN\t",str(int(VCASN[i]))+"\n" )
     replace_key("Config1.cfg", "VCASN2\t",str(int(VCASN2[i]))+"\n" )
-    #run the test shell
-    subprocess.call(["./test_shell.sh"])
+    #run the test with args: THRESHHOLD MASKSTAGES DAC-start-value DAC-stop-value
+    subprocess.call(["./runtest", "THRESHOLD", "164", "0", "50"])
+
+#if call does not work, try this:
+#import shlex
+#pro = subprocess.Popen(shlex.split("./runtest THRESHOLD 164 0 50"), stdout= subprocess.PIPE)
