@@ -48,4 +48,4 @@ for i in range(len(VCASN)):
         
     # Start threshold scan
     # subprocess.call(["./testscript.sh"])
-    subprocess.call(["./runtest.sh", "THRESHOLD", "10", "0", "50"])
+    subprocess.call(["./runtest", "THRESHOLD", "10", "0", "50"])
