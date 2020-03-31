@@ -1,5 +1,0 @@
-Value1	1
-VCASN	67.0
-VCASN2	79.0
-ITHR	100.0
-

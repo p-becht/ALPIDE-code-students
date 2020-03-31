@@ -8,7 +8,8 @@ import tempfile
 import os
 
 # Specify, which file to edit:
-cfg = "Config.txt"
+cfg = "Config.cfg"
+deli = " "
 
 # CHOOSE VALUES
 # ITHR = [40, 50, 60, 70]
@@ -37,13 +38,14 @@ def replace_key(filename,key,value,delimiter):
             f_out.write(line)
 
     # Rename the tempfile and overwrite Config
-    os.rename(f_out.name, "Config.txt")
+    os.rename(f_out.name, cfg)
 
 # Iterate over arrays, we have to convert values to strings to edit Config file
 for i in range(len(VCASN)):
-    replace_key(cfg,"VCASN", str(VCASN[i]), "\t")
-    replace_key(cfg,"VCASN2", str(VCASN2[i]), "\t")
-    replace_key(cfg,"ITHR", str(ITHR[i]),"\t")
+    replace_key(cfg,"VCASN", str(int(VCASN[i])), deli)
+    replace_key(cfg,"VCASN2", str(int(VCASN2[i])), deli)
+    replace_key(cfg,"ITHR", str(int(ITHR[i])), deli)
         
     # Start threshold scan
-    subprocess.call(["./testscript.sh"])
+    # subprocess.call(["./testscript.sh"])
+    subprocess.call(["./runtest.sh", "THRESHOLD", "10", "0", "50"])
