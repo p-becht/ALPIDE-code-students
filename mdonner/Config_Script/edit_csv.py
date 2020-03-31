@@ -41,9 +41,9 @@ def replace_key(filename,key,value,delimiter):
 
 # Iterate over arrays, we have to convert values to strings to edit Config file
 for i in range(len(VCASN)):
-    replace_key(cfg,"VCASN", str(i), "\t")
-    replace_key(cfg,"VCASN2", str(i), "\t")
-    replace_key(cfg,"ITHR", str(j),"\t")
+    replace_key(cfg,"VCASN", str(VCASN[i]), "\t")
+    replace_key(cfg,"VCASN2", str(VCASN2[i]), "\t")
+    replace_key(cfg,"ITHR", str(ITHR[i]),"\t")
         
     # Start threshold scan
     subprocess.call(["./testscript.sh"])
