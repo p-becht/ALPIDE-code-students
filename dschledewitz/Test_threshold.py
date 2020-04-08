@@ -23,7 +23,7 @@ def replace_key(filename, key, value):
 	    #look for the line where the key-parameter is placed
             if line.startswith(key):
 		#change the parameter, by splitting the line and replace the last part by the wished value
-                line = "\t".join((line.split('\t')[0],'{}'.format(value)))
+                line = " ".join((line.split(' ')[0],'{}'.format(value)))
 	    # overwrite the line in the copy
             f_out.write(line)
                                   
@@ -35,9 +35,9 @@ def replace_key(filename, key, value):
 
 # execute the replacement for all parameters we want to change 
 for i in range (len(RN)):
-    replace_key("Config1.cfg", "ITHR\t",str(int(ITHR[i]))+"\n" )
-    replace_key("Config1.cfg", "VCASN\t",str(int(VCASN[i]))+"\n" )
-    replace_key("Config1.cfg", "VCASN2\t",str(int(VCASN2[i]))+"\n" )
+    replace_key("Config.cfg", "ITHR ",str(int(ITHR[i]))+"\n" )
+    replace_key("Config.cfg", "VCASN ",str(int(VCASN[i]))+"\n" )
+    replace_key("Config.cfg", "VCASN2 ",str(int(VCASN2[i]))+"\n" )
     #run the test with args: THRESHHOLD MASKSTAGES DAC-start-value DAC-stop-value
     subprocess.call(["./runtest", "THRESHOLD", "164", "0", "50"])
 
