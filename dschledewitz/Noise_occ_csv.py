@@ -19,7 +19,7 @@ import csv
 data_path = os.path.join(os.path.split(os.path.dirname(__file__))[0],"data","noise_scan_CHIP8_VBB3")
 
 # create arrays for storing the information we want in the csv: VCASN, VCASN2, ITHR, #triggers from the cfg file
-# and from #hits (fakehits) from the NoiseOcc file
+# from the .dat files we need the number of hits
 VCASN = []
 VCASN2= []
 ITHR  = []
@@ -54,27 +54,25 @@ d_FHR = []
 
 def fake_rate(hits, Ntrig):
 
-    # for every config: calculate the rate
-    for i in range(len(hits)):
+    # test if the array is 0-dimensional, if size = 1:  calculate without the len()
+    if (hits.size == 1):
 
-        # test if the array is 0-dimensional, if size = 1:  calculate without the len()
-        if hits[i].size == 1:
-
-            #FHR, if only one event in this configuration
-            FHR.append(hits[i]/Ntrig[i])
-
-            #corresponding error
-            d_FHR.append(np.sqrt(hits[i])/Ntrig[i])
-            continue
-
-        #calculating the FakeHitRate for every configuration
-        FHR.append(sum(hits[i])/(Ntrig[i]*len(hits[i])))
+        #FHR, if only one event in this configuration
+        FHR.append(hits/(Ntrig*524288))
 
         #corresponding error
-        d_FHR.append(np.sqrt(sum(hits[i]))/(Ntrig[i]*len(hits[i])))
+        d_FHR.append(1/np.sqrt(hits)/(Ntrig*524288))
+      
+    else:
+
+        #calculating the FakeHitRate for every configuration (assumption that one pixel would fire once)
+        FHR.append(sum(hits)/(Ntrig*524288))
+
+        #corresponding error
+        d_FHR.append(1/np.sqrt(sum(hits))/(Ntrig*524288))
 
 ## calc by: number of hits in all tested(documented) pixels divided by 
-## the number of tested pixles(length of the array) times the number of test loops (NTRIG)
+## the number of tested pixles(all=524288) times the number of test loops (NTRIG)
 
 ## error calculated by sqrt(hits)/(NTRIG*number of pixels) <- intrinsic noise in the production of e
 
@@ -82,29 +80,75 @@ def fake_rate(hits, Ntrig):
 
 
 ################ MAIN CODE #####################################
-# search in the noise_occ_folder for files
+
+
+### search in the noise_occ_folder for files
+# we need a container for the .dat files to test later , if there exists a .dat file to every .cfg file
+Dat = []
+
 for i in sorted(os.listdir(data_path)):
 
-    # Config files start with "ScanConfig -> we search for them"
-    if i.startswith("ScanConfig"):
-
-        # reading out the data we want and put them into the according arrays, created at the beginning
-        path = os.path.join(data_path,i)
-        VCASN.append(int(get_value(path,"VCASN")))
-        VCASN2.append(int(get_value(path,"VCASN2")))
-        ITHR.append(int(get_value(path, "ITHR")))
-        NTRIG.append(int(get_value(path, "NTRIGGERS")))
-
-    # Data for the #hits is stored in the .dat files beginning with "Noise"
-    elif i.startswith("Noise"):
+    # Data for the #hits is stored in the .dat files beginning with "NoiseOcc"
+    if i.startswith("NoiseOcc"):
         path = os.path.join(data_path,i)
 
         # since we dont need the adress of the pixel, we will only import the #hits
         NHITS.append(np.loadtxt(path ,delimiter=" ",usecols=(2), dtype= int))
 
+        ### extract the timestamp
+        # Therefore split the path to get the timestamp
+        file_type, date, time_ext = i.split("_")   # in time_ext still the.cfg need to be cut off
+        time = time_ext.split(".")[0]
 
-### calculate the fakehit rate
-fake_rate(NHITS, NTRIG)
+        #create the timestamp with both time and Hit data
+        timestamp = date + "_" + time
+        
+        # contain the .dat files to compare them later on
+        Dat.append(timestamp)
+
+### now search for the config files and compare them to the .dat
+for i in sorted(os.listdir(data_path)):
+
+    # Config files start with "ScanConfig" -> search for them
+    if i.startswith("ScanConfig"):
+        
+        #define the whole filepath
+        path = os.path.join(data_path,i)
+
+        # reading out the data we want and put them into the according arrays, created at the beginning
+        VCASN.append(int(get_value(path,"VCASN")))
+        VCASN2.append(int(get_value(path,"VCASN2")))
+        ITHR.append(int(get_value(path, "ITHR")))
+        
+        #we need the number of triggers also for the fakehit rate as varaible, so we define one here
+        num_triggers = int(get_value(path, "NTRIGGERS"))
+        NTRIG.append(num_triggers)
+
+        ### test, if there is also a coresponding NoiseOcc file
+        # Therefore split the path to get the timestamp
+        file_type, date, time_ext = i.split("_")   # in time_ext still the.cfg need to be cut off
+        time = time_ext.split(".")[0]
+
+        #create the timestamp:
+        timestamp = date + "_" + time
+        
+
+        ## testing if a corresponding noiseocc file excists:
+        # if yes: calculate the fakehitrate
+        if timestamp in Dat:
+
+            #use the index of the corresponding timestamp to find the right Hit data
+            Hit_data = NHITS[Dat.index(timestamp)]
+            fake_rate(Hit_data,num_triggers)
+        
+        #if no: assume the sensitvity limit = 1.907e-11
+        else:
+            #FHR_sensitivity limit
+            FHR.append(1/(num_triggers*524288))#
+
+            #d_FHR_sensitivity limit
+            d_FHR.append(1/(num_triggers*524288))
+       
 
 ###creating a csv file
 with open("FakeHitRate.csv","w", newline="") as f:
