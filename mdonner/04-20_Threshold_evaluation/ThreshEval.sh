@@ -6,10 +6,10 @@
 #This file needs to be in the same directory as thresh.py
 #You"ll need to be able to run python scripts via shell (./script.py)
 #for that to work, you might need to change the first line of the python script
-#to #!/usr/bin/env pythonX.X (depending on your version
+#to #!/usr/bin/env pythonX.X (depending on your version)
 
 ############################# USER INPUT SECTION ###############################
-#Read Path from console If run from mdonner: ../../data/thresh_scan_CHIP8_VBB3/
+#If run from original dir: ../../data/thresh_scan_CHIP8_VBB3/
 PATHTOFILES=$1
 if [[ "$PATHTOFILES" == "" ]] ; then
     echo "Error: Please specify the directory of the data files"
