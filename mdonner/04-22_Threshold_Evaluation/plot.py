@@ -40,7 +40,7 @@ for i in range(len(VCASN_0)):
 for png in ["Heatmap.png","Heatmap_soft.png"]:
     
     #Plotting
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(len(ITHR_0),len(VCASN_0)))
     im = ax.imshow(Threshold)
 
     ##Show all ticks and label them correctly
