@@ -35,9 +35,7 @@ Threshold = np.ndarray((len(VCASN_0),len(ITHR_0)))
 for i in range(len(VCASN_0)):
     for j in range(len(ITHR_0)):
         Threshold[i,j] = TRSH[(VCASN == VCASN_0[i]) & (ITHR == ITHR_0[j])]
-
 #######################################
-print(Threshold)
 
 for png in ["Heatmap.png","Heatmap_soft.png"]:
     

@@ -46,7 +46,8 @@ with open(sys.argv[1]) as f:
             steps[dv] = hits
         pr=r
         pc=c
-print(np.mean(thresholds),np.mean(rmss))
+print(np.mean(thresholds))
+#print(np.mean(rmss))
 
 if graphical_output:
     plt.figure()
