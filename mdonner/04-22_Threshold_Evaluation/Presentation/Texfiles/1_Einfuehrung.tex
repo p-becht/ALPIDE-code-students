@@ -196,38 +196,29 @@ for i in range(len(VCASN_0)):
     \end{lstlisting}
 \end{frame}
 
-\begin{frame}{Results for 0 V Back Bias}
+\begin{frame}{Results}
     \begin{minipage}{.49\textwidth}
+	\centering
+	0 V Back Bias
     \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{../bb0_Heatmap.png}
+	\includegraphics[width=\textwidth]{bb0_Heatmap_corrected.png}
     \end{figure}
+    \raggedright
+    \tiny
+    Note: This is a corrected Version of the presentation. The Errors in
+    data have been identified and fixed. The
+    missing config file has been restored, and faulty values have been
+    masked entirely. This is an accurate representation of all values.
     \end{minipage}
     \begin{minipage}{.49\textwidth}
+	\centering
+	3 V Back Bias
     \begin{figure}[H]
 	\centering
-	\includegraphics[width=\textwidth]{../bb0_Heatmap_soft.png}
+	\includegraphics[width=0.75\textwidth]{bb3_Heatmap_corrected.png}
     \end{figure}
     \end{minipage}\\[.5cm]
-    \tiny
-    Note: Value for VCASN = 47 and ITHR = 100 is faulty, due to a premature
-    stop of the measurement after about 7\% of the injections.
-    Threshold calculation fails there.
-\end{frame}
-
-\begin{frame}{Results for 3 V Back Bias}
-    \begin{minipage}{.49\textwidth}
-    \begin{figure}[H]
-	\centering
-	\includegraphics[width=3.5cm]{../bb3_Heatmap.png}
-    \end{figure}
-    \end{minipage}
-    \begin{minipage}{.49\textwidth}
-    \begin{figure}[H]
-	\centering
-	\includegraphics[width=3.5cm]{../bb3_Heatmap_soft.png}
-    \end{figure}
-    \end{minipage}
 \end{frame}
 
 \begin{frame}

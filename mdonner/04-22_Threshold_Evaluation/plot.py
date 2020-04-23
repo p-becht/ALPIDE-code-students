@@ -53,8 +53,8 @@ for png in ["Heatmap.png","Heatmap_soft.png"]:
 
     for i in range(len(VCASN_0)):
         for j in range(len(ITHR_0)):
-            text = ax.text(j,i,round(Threshold[i,j],1),ha="center", va="center", color="w")
-    ax.set_title("Threshold in DAC values")
+            text = ax.text(j,i,int(10*Threshold[i,j]),ha="center", va="center", color="w")
+    ax.set_title("Threshold in Electrons")
 
     plt.savefig(png)
 

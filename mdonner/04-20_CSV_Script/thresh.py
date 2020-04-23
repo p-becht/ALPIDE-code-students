@@ -31,12 +31,13 @@ def scurve_fit(steps, ninj):
 thresholds = []
 rmss = []
 
+xaxis=np.arange(50)
 with open(sys.argv[1]) as f:
     pr = pc = -1
     for line in f:
         r,c,dv,hits = [int(i) for i in line.strip().split()]
         if not (pr==r and pc==c):
-            if pr>0 and pc>0:
+            if pr>=0 and pc>=0:
                 m,s=scurve_fit(steps,50)
                 thresholds.append(m)
                 rmss.append(s)
