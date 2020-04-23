@@ -35,9 +35,7 @@ Threshold = np.ndarray((len(VCASN_0),len(ITHR_0)))
 for i in range(len(VCASN_0)):
     for j in range(len(ITHR_0)):
         Threshold[i,j] = TRSH[(VCASN == VCASN_0[i]) & (ITHR == ITHR_0[j])]
-
 #######################################
-print(Threshold)
 
 for png in ["Heatmap.png","Heatmap_soft.png"]:
     
@@ -55,8 +53,8 @@ for png in ["Heatmap.png","Heatmap_soft.png"]:
 
     for i in range(len(VCASN_0)):
         for j in range(len(ITHR_0)):
-            text = ax.text(j,i,int(10*Threshold[i,j]),ha="center", va="center", color="w")
-    ax.set_title("Threshold in Electrons")
+            text = ax.text(j,i,round(Threshold[i,j],1),ha="center", va="center", color="w")
+    ax.set_title("Threshold in DAC values")
 
     plt.savefig(png)
 
