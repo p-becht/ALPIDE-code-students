@@ -14,7 +14,7 @@ import subprocess
 datafile = os.path.join(os.path.split(os.path.dirname(__file__))[0],"mdonner","04-22_Threshold_Evaluation","bb0_output.csv")
 datafile2 = os.path.join(os.path.split(os.path.dirname(__file__))[0],"mdonner","04-22_Threshold_Evaluation","bb3_output.csv")
 VCASN,ITHR,MEAN = np.loadtxt(datafile ,delimiter=",",usecols=(1,2,3,),skiprows=1,unpack=True)
-vcasn,ithr,mean = np.loadtxt(datafile2 ,delimiter=",",usecols=(1,2,3,),skiprows=8,unpack=True) ##skipping more rows, becaus of THR = 0
+vcasn,ithr,mean = np.loadtxt(datafile2 ,delimiter=",",usecols=(1,2,3,),skiprows=1,unpack=True) 
 
 #####################xAPPNG SHIT
 ##first csv has only BB = 0, need length of the doc
