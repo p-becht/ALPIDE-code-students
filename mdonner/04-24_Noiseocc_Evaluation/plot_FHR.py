@@ -121,7 +121,7 @@ plt.text(22.5, 2*senlim, "Sensitivity Limit", fontsize=12)
 plt.xlabel("Threshold in DAC Values")
 plt.ylabel("Fake hit rate")
 plt.title("V_BB = 0 V")
-plt.subplots_adjust(wspace=2)
+plt.subplots_adjust(hspace=0.3)
 plt.savefig("Fake_Hit_Rate.pdf")
 
 # }}}
