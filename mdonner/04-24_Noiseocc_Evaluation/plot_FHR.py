@@ -3,6 +3,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+plt.style.use('bmh')
+
 csv_Threshold_0 = "../04-22_Threshold_Evaluation/bb0_output.csv"
 csv_Noise_0 = "0bb_output.csv"
 csv_Threshold_3 = "../04-22_Threshold_Evaluation/bb3_output.csv"
@@ -81,12 +83,14 @@ mismatch(VCASN_0, VCASN_0_Noise, ITHR_0, ITHR_0_Noise)
 
 # {{{ Plot 
 
-# Plot section #################################################################
+print(TRSH_3)
+print(NOISE_3)
+
 senlim = min(NOISE_3)
-x_val_0 = [x for x in TRSH_0]
+x_val_0 = [10*x for x in TRSH_0]
 y_val_0 = [y for y in NOISE_0]
 y_err_0 = [y for y in NOISE_0_ERR]
-x_val_3 = [x for x in TRSH_3]
+x_val_3 = [10*x for x in TRSH_3]
 y_val_3 = [y for y in NOISE_3]
 y_err_3 = [y for y in NOISE_3_ERR]
 
@@ -98,12 +102,12 @@ plt.subplot(211)
 plt.errorbar(x_val_0, y_val_0, xerr=None, yerr=y_err_0, fmt='.',capsize=3, c='red')
 
 plt.yscale("log")
-plt.xlim(1.5,26.5)
+plt.xlim(15,265)
 plt.ylim(1e-11,1e-4)
 plt.hlines(senlim, min(x_val_0), max(x_val_0), linewidth=1, linestyle="--")
 plt.text(22.5, 2*senlim, "Sensitivity Limit", fontsize=12)
 
-plt.xlabel("Threshold in DAC Values")
+plt.xlabel("Threshold in Electrons")
 plt.ylabel("Fake hit rate")
 plt.title("V_BB = 0 V")
 
@@ -113,15 +117,14 @@ plt.subplot(212)
 plt.errorbar(x_val_3, y_val_3, xerr=None, yerr=y_err_3, fmt='.' ,capsize=3, c='red')
 
 plt.yscale("log")
-plt.xlim(1.5,26.5)
+plt.xlim(15,265)
 plt.ylim(1e-11,1e-4)
 plt.hlines(senlim, min(x_val_0), max(x_val_0), linewidth=1, linestyle="--")
 plt.text(22.5, 2*senlim, "Sensitivity Limit", fontsize=12)
 
-plt.xlabel("Threshold in DAC Values")
+plt.xlabel("Threshold in Electrons")
 plt.ylabel("Fake hit rate")
 plt.title("V_BB = 3 V")
 plt.subplots_adjust(hspace=0.3)
 plt.savefig("Fake_Hit_Rate.pdf")
-
 # }}}
