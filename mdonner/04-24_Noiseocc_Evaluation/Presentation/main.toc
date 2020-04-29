@@ -1,0 +1,2 @@
+\select@language {german}
+\beamer@sectionintoc {1}{Übersicht}{2}{0}{1}
