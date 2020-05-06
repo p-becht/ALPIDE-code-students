@@ -36,7 +36,7 @@ fi
 
 
 #Create a csv file
-printf "Timestamp,VCASN,ITHR,Threshold [DAC]\n" >> output.csv
+printf "Timestamp,VCASN,ITHR,Threshold [DAC], Threshold_Error\n" >> output.csv
 
 #Start to loop over all N files
 for i in $(ls $PATHTOFILES | grep '.dat'); do
@@ -51,11 +51,12 @@ for i in $(ls $PATHTOFILES | grep '.dat'); do
 
     #Then use python script to calculate Threshold for that run
     printf "Starting evaluation for run $TIMESTAMP with ITHR=$ITHR and VCASN=$VCASN \n"
-    TRSH=$(./thresh.py $PATHTOFILES$i)
+    TRSH=$(./thresh.py $PATHTOFILES$i | head -1)
+    TRSHERR=$(./thresh.py $PATHTOFILES$i | tail -1)
     printf "The calculated threshold in DAC values is $TRSH. Now writing to csv file...\n\n"
 
     # Write everything to the csv file
-    printf '%s\n' "$TIMESTAMP" "$VCASN" "$ITHR" "$TRSH" | paste -sd ',' >> output.csv
+    printf '%s\n' "$TIMESTAMP" "$VCASN" "$ITHR" "$TRSH" "$TRSHERR" | paste -sd ',' >> output.csv
 done
 
 echo Succeeded!
