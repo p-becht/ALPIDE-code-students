@@ -47,7 +47,7 @@ with open(sys.argv[1]) as f:
         pr=r
         pc=c
 print(np.mean(thresholds))
-#print(np.mean(rmss))
+print(np.mean(rmss))
 
 if graphical_output:
     plt.figure()
