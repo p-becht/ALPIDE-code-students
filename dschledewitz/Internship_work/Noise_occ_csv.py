@@ -16,8 +16,8 @@ import csv
 # import the files and get the information out of them 
 
 # get the path to read the files
-data_path = os.path.join(os.path.split(os.path.dirname(__file__))[0],"blidaru","telescope_data","Data","bb0_noise")
-data_path_2 = os.path.join(os.path.split(os.path.dirname(__file__))[0],"blidaru","telescope_data","Data","bb3_noise")
+data_path = os.path.join(os.path.split(os.path.split(os.path.dirname(__file__))[0])[0],"blidaru","telescope_data","Data","bb0_noise")
+data_path_2 = os.path.join(os.path.split(os.path.split(os.path.dirname(__file__))[0])[0],"blidaru","telescope_data","Data","bb3_noise")
 # create arrays for storing the information we want in the csv: VCASN, VCASN2, ITHR, #triggers from the cfg file
 # from the .dat files we need the number of hits
 VCASN = []

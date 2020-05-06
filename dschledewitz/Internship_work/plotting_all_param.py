@@ -11,23 +11,21 @@ import subprocess
 
 
 ### import the datasheet,where all test-configurations are given
-datafile = os.path.join(os.path.split(os.path.dirname(__file__))[0],"mdonner","04-22_Threshold_Evaluation","bb0_output.csv")
-datafile2 = os.path.join(os.path.split(os.path.dirname(__file__))[0],"mdonner","04-22_Threshold_Evaluation","bb3_output.csv")
-VCASN,ITHR,MEAN = np.loadtxt(datafile ,delimiter=",",usecols=(1,2,3,),skiprows=1,unpack=True)
-vcasn,ithr,mean = np.loadtxt(datafile2 ,delimiter=",",usecols=(1,2,3,),skiprows=1,unpack=True) 
-
+#datafile = os.path.join(os.path.split(os.path.split(os.path.dirname(__file__))[0])[0],"mdonner","04-22_Threshold_Evaluation","bb0_output.csv")
+#datafile2 = os.path.join(os.path.split(os.path.split(os.path.dirname(__file__))[0])[0],"mdonner","04-22_Threshold_Evaluation","bb3_output.csv")
+datafile = os.path.join(os.path.split(os.path.dirname(__file__))[0],"Internship_work","plotting_Thr=0V.csv")
+datafile2= os.path.join(os.path.split(os.path.dirname(__file__))[0],"Internship_work","plotting_Thr=3V.csv")
+VCASN,ITHR,MEAN,ERR = np.loadtxt( datafile ,delimiter=",",usecols=(1,2,3,4),skiprows=1,unpack=True)
+vcasn,ithr,mean,err = np.loadtxt( datafile2 ,delimiter=",",usecols=(1,2,3,4),skiprows=31,unpack=True) 
+print(mean,err)
 #####################xAPPNG SHIT
 ##first csv has only BB = 0, need length of the doc
 BB     = VCASN*0
 bb     = vcasn*0+3
 
 #runnumber:
-RN=[]
-for i in range(len(BB)):
-    RN.append(int(i))
-rn=[]
-for i in range(len(bb)):
-    rn.append(int(i))
+RN = np.arange(0,len(BB))
+rn = np.arange(0,len(bb))
 
 ### THRESH is the resulting Treshold for the given parameters calculated with tresh.py
 VCASN2 = VCASN +12
@@ -47,10 +45,11 @@ plt.xticks(RN,x_ax_values)                        # replace RN with our paramete
 ### rotate the presentation of the x-axis-values to ensure they wont overlap
 plt.xticks(rotation=90)
 ### plotting
-plt.plot(RN,MEAN,marker=".",linewidth=0)
+plt.errorbar(RN, MEAN, yerr=ERR, fmt='.k')
+#plt.plot(RN,MEAN,marker=".",linewidth=0)
 plt.xlabel("parameters: [Backbias. VCASN. VCASN2. ITHR]")
 plt.ylabel("Calculated mean threshold [DAC]")
-plt.title("Threshold for various parameter settings")
+plt.title("Threshold for various parameter settings and Backbias of 0V",fontsize=20)
 plt.show()
 
 ####################################################plot for BB=3V
@@ -65,8 +64,9 @@ plt.xticks(rn,x_ax_values)                        # replace RN with our paramete
 ### rotate the presentation of the x-axis-values to ensure they wont overlap
 plt.xticks(rotation=90)
 ### plotting
-plt.plot(rn,mean,marker=".",linewidth=0)
+plt.errorbar(rn, mean, yerr=err, fmt='.k')
+#plt.plot(rn,mean,marker=".",linewidth=0)
 plt.xlabel("parameters: [Backbias. VCASN. VCASN2. ITHR]")
 plt.ylabel("Calculated mean threshold [DAC]")
-plt.title("Threshold for various parameter settings")
+plt.title("Threshold for various parameter settingsand Backbias of 3V",fontsize=20)
 plt.show()
