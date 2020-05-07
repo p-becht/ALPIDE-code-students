@@ -15,8 +15,12 @@ fi
 #For each line an event has taken place
 for i in $(cat $1 | grep -n 'pALPIDEfs_' | awk -F ':' '{print $1}'); do
     LINENUM=$(($i-3))
-    EVENTID=$(sed "$LINENUM""q;d" $FILE | awk -F ' ' '{print $2}')
-    printf "i = $i\n"
-    printf "Line number = $LINENUM\n"
-    printf "Event ID = $EVENTID\n"
+    CHECKIFID=$(sed "$LINENUM""q;d" $FILE | cut -c 1)
+    # If line starts with =, we just found the EVENT ID
+    if [[ $CHECKIFID == "=" ]];
+	EVENTID=$(sed "$LINENUM""q;d" $FILE | awk -F ' ' '{print $2}')
+	printf "i = $i\n"
+	printf "Line number = $LINENUM\n"
+	printf "Event ID = $EVENTID\n"
+    fi
 done
