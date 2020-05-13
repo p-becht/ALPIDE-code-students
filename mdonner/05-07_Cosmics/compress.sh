@@ -16,11 +16,11 @@ Compress() {
 	    echo "Event Found at === $EVENTID === on line $LINENUM! Writing..." > /dev/tty
 	    echo "=== $LINENUM ===" >> "$OUTPUT"
 
-	    #TODO This loop can be optimized for large files, by reading once
-	    #and printing 1000 lines instead of reading every single line until
-	    #=== occurs. The reading is what takes so much time!
-	    for j in $(seq $i $((i+1000))); do #Now write all pixel data to output
-		LINE=$(sed "${j}q;d" $FILE) #This extracts the Lines from the .txt
+	    IFS=$'\n' #This will let the loop run over lines instead of words
+	    set -f
+	    LINEEND=$(($i+1000))
+	    for j in $(sed -n "$i,$LINEEND"p $FILE); do #Now write all pixel data to output
+		LINE="$j" #This extracts the Lines from the .txt
 		if [[ $LINE == *"==="* ]]; then #This checks start of next event
 		    break #And stops the loop
 		else
@@ -31,8 +31,6 @@ Compress() {
     done
 }
 ################################################################################
-
-#Output filename
 
 #Check the Argument given
 if [[ "$1" == "" ]]; then
@@ -59,5 +57,3 @@ else
     echo "Error: $1 is neither a file nor a directory"
     exit 1
 fi
-
-
