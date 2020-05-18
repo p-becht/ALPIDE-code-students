@@ -8,9 +8,6 @@
 Compress() {
     #For each line an event has taken place
     for i in $(cat $FILE | grep -n 'pALPIDEfs_' | awk -F ':' '{print $1}'); do
-	if [[ "$i" == "" ]]; then
-	    echo "No firings detected during run" > /dev/tty
-	fi
 	LINENUM=$(($i-3)) #Remember the line number
 	CHECKIFID=$(sed "${LINENUM}q;d" $FILE | cut -c 1) #Check for the Event ID
 	#If line starts with =, we just found the EVENT ID
@@ -44,9 +41,10 @@ elif [ -d $1 ]; then ### IN CASE THE ARGUMENT IS A DIRECTORY
     cd "$1"
     for file in $(ls | grep '.txt'); do
 	FILE=$file
-	printf "Compressing file $FILE\n"
+	echo "Compressing file $FILE" > /dev/tty
 	FILENAME=$(echo "$FILE" | awk -F '.' '{print $1}')
 	OUTPUT="$FILENAME""_Compressed.txt"
+	echo "Run: $FILE" > "$OUTPUT"
 	$(Compress)
     done
     cd "$CURRENT"
@@ -55,6 +53,7 @@ elif [ -s $1 ]; then ### IN CASE THE ARGUMENT IS A FILE
     FILE=$1
     FILENAME=$(echo "$FILE" | awk -F '/' '{print $NF}' | awk -F '.' '{print $1}')
     OUTPUT="$FILENAME""_Compressed.txt"
+    echo "Run: $FILE" > "$OUTPUT"
     $(Compress)
 else
     echo "Error: $1 is neither a file nor a directory"
