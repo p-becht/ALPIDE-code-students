@@ -8,6 +8,8 @@
 Compress() {
     #For each line an event has taken place
     for i in $(cat $FILE | grep -n 'pALPIDEfs_' | awk -F ':' '{print $1}'); do
+	if [[ "$i" == "" ]]; then
+	    echo "No firings detected during run" > /dev/tty
 	LINENUM=$(($i-3)) #Remember the line number
 	CHECKIFID=$(sed "${LINENUM}q;d" $FILE | cut -c 1) #Check for the Event ID
 	#If line starts with =, we just found the EVENT ID
@@ -37,8 +39,8 @@ if [[ "$1" == "" ]]; then
     echo "The argument is missing. Please enter a file or directory"
     exit 1
 elif [ -d $1 ]; then ### IN CASE THE ARGUMENT IS A DIRECTORY
-    CURRENT=(pwd)
-    cd $1
+    CURRENT=$(pwd)
+    cd "$1"
     for file in $(ls | grep '.txt'); do
 	FILE=$file
 	printf "Compressing file $FILE\n"
@@ -46,7 +48,7 @@ elif [ -d $1 ]; then ### IN CASE THE ARGUMENT IS A DIRECTORY
 	OUTPUT="$FILENAME""_Compressed.txt"
 	$(Compress)
     done
-    cd $CURRENT
+    cd "$CURRENT"
 elif [ -s $1 ]; then ### IN CASE THE ARGUMENT IS A FILE
     printf "Compressing file $1\n"
     FILE=$1
