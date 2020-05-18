@@ -10,6 +10,7 @@ Compress() {
     for i in $(cat $FILE | grep -n 'pALPIDEfs_' | awk -F ':' '{print $1}'); do
 	if [[ "$i" == "" ]]; then
 	    echo "No firings detected during run" > /dev/tty
+	fi
 	LINENUM=$(($i-3)) #Remember the line number
 	CHECKIFID=$(sed "${LINENUM}q;d" $FILE | cut -c 1) #Check for the Event ID
 	#If line starts with =, we just found the EVENT ID
