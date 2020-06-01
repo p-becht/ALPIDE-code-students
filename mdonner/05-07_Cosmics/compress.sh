@@ -12,7 +12,7 @@ Compress() {
     set -f
 
     # Write File Number
-    echo "Run number: $FILENO" > "$OUTPUT"
+    echo "Run: $FILENAME" > "$OUTPUT"
 
     # For each line a hit has been found
     for i in $(cat $FILE | grep -n 'pALPIDEfs_' | awk -F ':' '{print $1}'); do
@@ -76,17 +76,10 @@ Countplanes() {
     done
 
     #Write Everything into a csv
-    printf '%s\n' "$FILENO" "${PLANES[0]}" "${PLANES[1]}" "${PLANES[2]}" "${PLANES[3]}" "${PLANES[4]}" "${PLANES[5]}" "${PLANES[6]}" | paste -sd ',' >> output.csv
+    printf '%s\n' "$FILENAME" "${PLANES[0]}" "${PLANES[1]}" "${PLANES[2]}" "${PLANES[3]}" "${PLANES[4]}" "${PLANES[5]}" "${PLANES[6]}" | paste -sd ',' >> output.csv
 
     rm tmp.txt
 }
-
-# Just some basic stuff for stdout and the creation of files
-Init(){
-    echo "Compressing file $FILE" > /dev/tty
-    echo "Run Number, 1 Plane Events, 2 Plane Events, 3 Plane Events, 4 Plane Events, 5 Plane Events, 6 Plane Events, 7 Plane Events" >> output.csv
-}
-
 ################################################################################
 
 # Check the Argument given
@@ -98,24 +91,23 @@ elif [ -d $1 ]; then ### IN CASE THE ARGUMENT IS A DIRECTORY
     CURRENT=$(pwd)
     cd "$1"
 
+    echo "Run Number, 1 pE, 2 pE, 3 pE, 4 pE, 5 pE, 6 pE, 7 pE" >> output.csv
     # Loop over all files in the given Directory
     for file in $(ls | grep '.txt'); do
 	FILE=$file
 	FILENAME=$(echo "$FILE" | awk -F '.' '{print $1}')
-	FILENO=$(echo "$FILENAME" | tail -c 6)
 	OUTPUT="$FILENAME""_Compressed.txt"
-	$(Init)
 	$(Compress)
 	$(Countplanes)
     done
     cd "$CURRENT"
 
 elif [ -s $1 ]; then ### IN CASE THE ARGUMENT IS A FILE
+    echo "Run Number, 1 pE, 2 pE, 3 pE, 4 pE, 5 pE, 6 pE, 7 pE" >> output.csv
     FILE=$1
     FILENAME=$(echo "$FILE" | awk -F '/' '{print $NF}' | awk -F '.' '{print $1}')
-    FILENO=$(echo "$FILENAME" | tail -c 7)
     OUTPUT="$FILENAME""_Compressed.txt"
-    $(Init)
+    echo "Compressing file $FILE" > /dev/tty
     $(Compress)
     $(Countplanes)
 
