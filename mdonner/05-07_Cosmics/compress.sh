@@ -6,55 +6,119 @@
 
 ################################ CODE ##########################################
 Compress() {
-    #For each line an event has taken place
+
+    # Set this, so that for loops run over lines instead of words
+    IFS=$'\n'
+    set -f
+
+    # Write File Number
+    echo "Run number: $FILENO" > "$OUTPUT"
+
+    # For each line a hit has been found
     for i in $(cat $FILE | grep -n 'pALPIDEfs_' | awk -F ':' '{print $1}'); do
-	LINENUM=$(($i-3)) #Remember the line number
-	CHECKIFID=$(sed "${LINENUM}q;d" $FILE | cut -c 1) #Check for the Event ID
-	#If line starts with =, we just found the EVENT ID
-	if [[ $CHECKIFID == "=" ]] ; then
+
+	# Take the line number
+	LINENUM=$(($i-3))
+
+	# If line starts with =, thats the line that contains the Event ID
+	# This condition is necessary because there are multiple planes
+	if [[ $(sed "${LINENUM}q;d" $FILE | cut -c 1) == "=" ]] ; then
+
+	    # Print, in which Event a hit has been found
 	    EVENTID=$(sed "$LINENUM""q;d" $FILE | awk -F ' ' '{print $2}')
 	    echo "Event Found at === $EVENTID === on line $LINENUM! Writing..." > /dev/tty
-	    echo "=== $LINENUM ===" >> "$OUTPUT"
+	    echo "=== $EVENTID ===" >> "$OUTPUT"
 
-	    IFS=$'\n' #This will let the loop run over lines instead of words
-	    set -f
+	    # We want to count the number of planes that registered a hit
+	    COUNTER=0 
+
+	    # Now loop over each line, and stop when next event starts
 	    LINEEND=$(($i+1000))
-	    for j in $(sed -n "$i,$LINEEND"p $FILE); do #Now write all pixel data to output
-		LINE="$j" #This extracts the Lines from the .txt
-		if [[ $LINE == *"==="* ]]; then #This checks start of next event
-		    break #And stops the loop
+	    for j in $(sed -n "$i,$LINEEND"p $FILE); do
+
+		# Extract the Line from the .txt
+		LINE="$j"
+		# If line is start of next event, break
+		if [[ $LINE == *"==="* ]]; then
+		    break
+
+		# If a plane registered a hit, increase counter
+		elif [[ $LINE == *"---"* ]]; then
+		    COUNTER=$((COUNTER+1))
+		    echo "$LINE" >> "$OUTPUT"
+
+		# If cluster information is stored, planes are counted double!
+		elif [[ $LINE == *"Cluster"* ]]; then
+		    COUNTER=$((COUNTER-1))
+		    echo "$LINE" >> "$OUTPUT"
+
 		else
 		    echo "$LINE" >> "$OUTPUT" #Otherwise it will write the line
 		fi
+
 	    done
+
+	    # Write the counter into a tmpfile
+	    echo "$COUNTER" >> tmp.txt
 	fi
     done
 }
+
+# For each session, we count the number of 1 Plane hits, 2 Plane hits etc.
+Countplanes() {
+    #Array that contains an entry for each number of planes
+    PLANES=(0 0 0 0 0 0)
+
+    for i in $(cat tmp.txt); do	
+	i=$((i-1))
+	#Increase the variable for that amount of Planes by 1
+	PLANES[$i]=$((PLANES[$i]+1))
+    done
+
+    #Write Everything into a csv
+    printf '%s\n' "$FILENO" "${PLANES[0]}" "${PLANES[1]}" "${PLANES[2]}" "${PLANES[3]}" "${PLANES[4]}" "${PLANES[5]}" "${PLANES[6]}" | paste -sd ',' >> output.csv
+
+    rm tmp.txt
+}
+
+# Just some basic stuff for stdout and the creation of files
+Init(){
+    echo "Compressing file $FILE" > /dev/tty
+    echo "Run Number, 1 Plane Events, 2 Plane Events, 3 Plane Events, 4 Plane Events, 5 Plane Events, 6 Plane Events, 7 Plane Events" >> output.csv
+}
+
 ################################################################################
 
-#Check the Argument given
+# Check the Argument given
 if [[ "$1" == "" ]]; then
     echo "The argument is missing. Please enter a file or directory"
     exit 1
+
 elif [ -d $1 ]; then ### IN CASE THE ARGUMENT IS A DIRECTORY
     CURRENT=$(pwd)
     cd "$1"
+
+    # Loop over all files in the given Directory
     for file in $(ls | grep '.txt'); do
 	FILE=$file
-	echo "Compressing file $FILE" > /dev/tty
 	FILENAME=$(echo "$FILE" | awk -F '.' '{print $1}')
+	FILENO=$(echo "$FILENAME" | tail -c 6)
 	OUTPUT="$FILENAME""_Compressed.txt"
-	echo "Run: $FILE" > "$OUTPUT"
+	$(Init)
 	$(Compress)
+	$(Countplanes)
     done
     cd "$CURRENT"
+
 elif [ -s $1 ]; then ### IN CASE THE ARGUMENT IS A FILE
-    printf "Compressing file $1\n"
     FILE=$1
     FILENAME=$(echo "$FILE" | awk -F '/' '{print $NF}' | awk -F '.' '{print $1}')
+    FILENO=$(echo "$FILENAME" | tail -c 7)
     OUTPUT="$FILENAME""_Compressed.txt"
-    echo "Run: $FILE" > "$OUTPUT"
+    $(Init)
     $(Compress)
+    $(Countplanes)
+
 else
     echo "Error: $1 is neither a file nor a directory"
     exit 1
