@@ -67,7 +67,7 @@ Compress() {
 # For each session, we count the number of 1 Plane hits, 2 Plane hits etc.
 Countplanes() {
     #Array that contains an entry for each number of planes
-    PLANES=(0 0 0 0 0 0)
+    PLANES=(0 0 0 0 0 0 0)
 
     for i in $(cat tmp.txt); do	
 	i=$((i-1))
