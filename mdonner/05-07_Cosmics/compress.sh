@@ -97,6 +97,7 @@ elif [ -d $1 ]; then ### IN CASE THE ARGUMENT IS A DIRECTORY
 	FILE=$file
 	FILENAME=$(echo "$FILE" | awk -F '.' '{print $1}')
 	OUTPUT="$FILENAME""_Compressed.txt"
+	echo "Compressing file $FILE" > /dev/tty
 	$(Compress)
 	$(Countplanes)
     done
