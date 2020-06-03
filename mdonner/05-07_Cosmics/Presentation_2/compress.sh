@@ -18,7 +18,7 @@ Compress() {
     for i in $(cat $FILE | grep -n 'pALPIDEfs_' | awk -F ':' '{print $1}'); do
 
 	# Take the line number
-	LINENUM=$(($i-3))
+	LINENUM=$(($i-1))
 
 	# If line starts with =, thats the line that contains the Event ID
 	# This condition is necessary because there are multiple planes
@@ -69,7 +69,7 @@ Countplanes() {
     #Array that contains an entry for each number of planes
     PLANES=(0 0 0 0 0 0 0)
 
-    for i in $(cat tmp); do	
+    for i in $(cat tmp.txt); do	
 	i=$((i-1))
 	#Increase the variable for that amount of Planes by 1
 	PLANES[$i]=$((PLANES[$i]+1))
