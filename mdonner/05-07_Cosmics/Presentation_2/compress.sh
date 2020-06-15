@@ -26,7 +26,7 @@ Compress() {
 
 	    # Print, in which Event a hit has been found
 	    EVENTID=$(sed "$LINENUM""q;d" $FILE | awk -F ' ' '{print $2}')
-	    echo "Event Found at === $EVENTID === on line $LINENUM! Writing..." > /dev/tty
+	    #echo "Event Found at === $EVENTID === on line $LINENUM! Writing..." > /dev/tty
 	    echo "=== $EVENTID ===" >> "$OUTPUT"
 
 	    # We want to count the number of planes that registered a hit
@@ -69,16 +69,24 @@ Countplanes() {
     #Array that contains an entry for each number of planes
     PLANES=(0 0 0 0 0 0 0)
 
-    for i in $(cat tmp.txt); do	
-	i=$((i-1))
-	#Increase the variable for that amount of Planes by 1
-	PLANES[$i]=$((PLANES[$i]+1))
+    for i in {1..7}; do
+	INDEX=$((i-1))
+	N=$(cat tmp | grep -c "$i")
+	PLANES[$INDEX]=$N
     done
+
+    rm tmp
 
     #Write Everything into a csv
     printf '%s\n' "$FILENAME" "${PLANES[0]}" "${PLANES[1]}" "${PLANES[2]}" "${PLANES[3]}" "${PLANES[4]}" "${PLANES[5]}" "${PLANES[6]}" | paste -sd ',' >> output.csv
 
-    rm tmp
+}
+
+Plot() {
+    CHECKPLOT=$(ls | grep "hist.py")
+    if [[ $CHECKPLOT != "" ]]; then
+	./hist.py >> /dev/tty
+    fi
 }
 ################################################################################
 
@@ -101,6 +109,7 @@ elif [ -d $1 ]; then ### IN CASE THE ARGUMENT IS A DIRECTORY
 	$(Compress)
 	$(Countplanes)
     done
+    $(Plot)
     cd "$CURRENT"
 
 elif [ -s $1 ]; then ### IN CASE THE ARGUMENT IS A FILE
@@ -111,6 +120,7 @@ elif [ -s $1 ]; then ### IN CASE THE ARGUMENT IS A FILE
     echo "Compressing file $FILE" > /dev/tty
     $(Compress)
     $(Countplanes)
+    $(Plot)
 
 else
     echo "Error: $1 is neither a file nor a directory"
