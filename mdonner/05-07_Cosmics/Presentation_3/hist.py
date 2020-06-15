@@ -18,6 +18,9 @@ barwidth = 0.5 # Make sure all the bars only take up this space
 # Plot runs in bar diagram
 print("Plotting...")
 for i in range(N):
+    #STR run number
+    #run_number = run_numbers[i]
+    #INT run number
     run_number = 'run '+str(int(run_numbers[i][7:]))
     run = data[i]
     positioning = x+(i*barwidth/N)-barwidth*(N-1)/(2*N)
