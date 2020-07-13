@@ -1,4 +1,4 @@
-PWD /home/maurice/Documents/Bachelor/ALPIDE-code-students/mdonner/07-21-Presentation
+PWD /home/maurice/Documents/Bachelor/ALPIDE-code-students/mdonner/07-21-Presentation/3d_presentation
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
@@ -381,6 +381,18 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
+INPUT Preview.png
+OUTPUT main.vrb
+INPUT main.vrb
+INPUT main.vrb
+INPUT DESY_Before.png
+INPUT DESY_After.png
+INPUT main.vrb
+INPUT main.vrb
+INPUT DESY_Before.png
+INPUT DESY_After.png
+INPUT Before.png
+INPUT After.png
 OUTPUT main.nav
 OUTPUT main.toc
 OUTPUT main.snm

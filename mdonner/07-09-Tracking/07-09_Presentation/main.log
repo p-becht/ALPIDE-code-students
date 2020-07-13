@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2018.11.19)  29 JUN 2020 11:13
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2018.11.19)  8 JUL 2020 23:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1393,7 +1393,62 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \c__siunitx_mathtt_int=\count308
 [1
 
-] [2
+]
+File: Preview.png Graphic file (type QTm)
+<use  "Preview.png" > [2
+
+] [3
+
+] [4
+
+]
+\openout4 = `main.vrb'.
+
+(./main.vrb
+Underfull \hbox (badness 2245) in paragraph at lines 14--15
+[]\TU/LinuxBiolinumO(0)/m/n/6 yes they’re ugly,
+ []
+
+File: DESY_Before.png Graphic file (type QTm)
+<use  "DESY_Before.png" >
+File: DESY_After.png Graphic file (type QTm)
+<use  "DESY_After.png" >) [5
+
+] (./main.vrb
+Underfull \hbox (badness 2245) in paragraph at lines 14--15
+[]\TU/LinuxBiolinumO(0)/m/n/6 yes they’re ugly,
+ []
+
+File: DESY_Before.png Graphic file (type QTm)
+<use  "DESY_Before.png" >
+File: DESY_After.png Graphic file (type QTm)
+<use  "DESY_After.png" >) [6
+
+]
+File: Before.png Graphic file (type QTm)
+<use  "Before.png" >
+Overfull \vbox (27.72638pt too high) detected at line 126
+ []
+
+[7
+
+]
+File: After.png Graphic file (type QTm)
+<use  "After.png" >
+Overfull \vbox (27.72638pt too high) detected at line 133
+ []
+
+[8
+
+] [9
+
+] [10
+
+] [11
+
+] [12
+
+] [13
 
 ]
 \tf@nav=\write6
@@ -1405,19 +1460,19 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@snm=\write8
 \openout8 = `main.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 52.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 52.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 145.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 145.
 (./main.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 52.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 52.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 145.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 145.
  ) 
 Here is how much of TeX's memory you used:
- 37617 strings out of 493068
- 791151 string characters out of 6137719
- 799893 words of memory out of 5000000
- 40944 multiletter control sequences out of 15000+600000
- 8832 words of font info for 56 fonts, out of 8000000 for 9000
+ 38065 strings out of 493068
+ 799664 string characters out of 6137719
+ 863453 words of memory out of 5000000
+ 41376 multiletter control sequences out of 15000+600000
+ 8856 words of font info for 59 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
- 57i,16n,97p,10416b,719s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 57i,16n,97p,10416b,1051s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (2 pages).
+Output written on main.pdf (13 pages).
