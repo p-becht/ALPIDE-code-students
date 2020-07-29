@@ -42,10 +42,10 @@
 \maketitle
 
 \begin{frame}{Threshold Scan}
-    Inject well-defined amount of charge in a number of pixels\\
+    Inject well-defined amount of charge in a selected number of pixels\\
     \( \rightarrow \) Then read out hits and repeat
     \begin{itemize}
-	\item Inject charge in several pixels simultaneously
+	\item Injections are performed multiple times per pixel
 	\item Use only a representative fraction of the Chip (\textasciitilde 1-5\%) \\[1cm]
     \end{itemize}
     \begin{minipage}{.35\textwidth}
@@ -70,7 +70,8 @@
 \end{frame}
 
 \begin{frame}{Threshold Scan}
-    50 Injections per charge point, then plot hit probability. (S-Curve scan)\\[.5cm]
+    For each charge point on the x-axis, perform 50 Injections, then plot hit
+    probability. (S-Curve scan)\\[.5cm]
     \begin{minipage}{.49\textwidth}
 	\centering
 	Example:
@@ -83,28 +84,45 @@
 	\[ 
 	   p _{\text{Hit}} (q _{\text{inj}}) = \frac{1}{2} \left(
 	       1 + \text{Erf} \left[ \frac{q _{\text{inj}} - \mu}{\sqrt{2} \sigma} 
-	       \right] \right)
+	       \right] \right) \\[1cm]
        \]
+       \tiny \( \leftarrow \) Corresponds to a threshold value of
+	roughly 100 \( e ^{-} \) 
     \end{minipage}
 \end{frame}
 
+\begin{frame}[fragile]{Threshold Scan}
+    \LARGE Definition of Threshold: \\[.5cm] \normalsize
+    The Threshold is the minimum amount of charge to be deposited inside the
+    sensitive region of the chip to create a sufficiently strong signal in
+    order for the readout electronics to register an event \\[1cm]
+    On ALPIDE: Threshold is defined mainly by two parameters: \verb`VCASN` and
+    \verb`ITHR`. While increasing \verb`ITHR` increases the Threshold,
+    augmenting \verb`VCASN` decreases it.
+\end{frame}
+
 \begin{frame}{Threshold Scan}
+    After Scan has completed: \\
     \begin{minipage}{.49\textwidth}
-    Distribution of Thresholds:
+	Distribution of Thresholds
     \begin{figure}[H]
        \centering
        \includegraphics[trim=0 0 0 40,clip,width=.9\textwidth]{landau.png}
     \end{figure} 
+	\tiny The Plot shows Thresholds of pixels in DAC, where one
+	DAC value corresponds to 10 electrons, i.e. most pixels will register
+	a hit, if the charge injected is higher than 150 electrons
     \end{minipage}
     \begin{minipage}{.49\textwidth}
-	- Extract mean\\
+	\scriptsize{- Extract mean of all pixels}\\
 	\pause
-	- Repeat with different settings and compare the runs
+	- Repeat with different settings and compare
 	\begin{figure}[H]
 	    \centering
-	    \includegraphics[trim=0 0 0 50, clip, width=.9\textwidth]{thresholdmap.jpg}
+	    \tiny Charge Threshold for different configurations of the main
+	    parameters VCASN and ITHR\\
+	    \includegraphics[trim=0 0 0 50, clip, width=.7\textwidth]{thresholdmap.jpg}
 	\end{figure}
-	\tiny VCASN and ITHR are the main parameters to modify the Threshold
     \end{minipage}
     \pause
     For cosmic muons at 50 GeV:
@@ -113,7 +131,8 @@
 \end{frame}
 
 \begin{frame}{Noiseoccupancy Scan}
-    Gives a selectable number of triggers and returns the number of hits.
+    Trigger the whole pixel matrix (!) without any input of charge, and return
+    the number of hits.
     \begin{itemize}
 	\item If Threshold is low enough for electronic noise to produce a hit,
 	    measurements taken will be affected by a fake hit rate.
@@ -121,20 +140,25 @@
     \pause
     \begin{figure}[H]
 	\centering
-	\includegraphics[trim=0 360 0 70, clip, width=\textwidth]{Fake_Hit_Rate.pdf}
+	\includegraphics[trim=0 360 0 68, clip, width=\textwidth]{Fake_Hit_Rate.pdf}
     \end{figure}
+    \tiny \ \\ \ \\ \
 \end{frame}
 
 \begin{frame}{Noiseoccupancy Scan}
-    Gives a selectable number of random triggers and returns the number of hits.
+    Trigger the whole pixel matrix (!) without any input of charge, and return
+    the number of hits.
     \begin{itemize}
 	\item If Threshold is low enough for electronic noise to produce a hit,
 	    measurements taken will be affected by a fake hit rate.
     \end{itemize}
     \begin{figure}[H]
 	\centering
-	\includegraphics[trim=0 50 0 380, clip, width=\textwidth]{Fake_Hit_Rate.pdf}
+	\includegraphics[trim=0 50 0 382, clip, width=\textwidth]{Fake_Hit_Rate.pdf}
     \end{figure}
+    \tiny Enlarging the depletion zone by applying a Back-Bias voltage, will
+    have a significant effect on Noise, as is typical for semiconductor
+    detectors
 \end{frame}
 
 %\begin{frame}{}
@@ -145,5 +169,39 @@
 %    \]
 %    from the threshold \( \mu \) to \( \infty \) 
 %\end{frame}
+
+\begin{frame}{Outlook}
+    \begin{minipage}{.44\textwidth}
+	\LARGE Progress on Cosmics \normalsize \\
+	\begin{itemize}
+	    \item Event Plotting
+		\begin{itemize}
+		    \item \tiny Trying to create nice Looking (correctly scaled) 3D-
+			Plots of cosmic tracks
+		    \item Writing an Event oranizer for the huge amount of
+			measurements performed
+		\end{itemize}
+	    \item Track analysis
+		\begin{itemize}
+		    \item \tiny Fitting lines to cosmics to determine valid and
+			invalid tracks
+		\end{itemize}
+	    \item Plane Alignment
+		\begin{itemize}
+		    \item \tiny Using Tracks to align the Telescope  based on
+			cosmic data
+		    \item Comparing results to Testbeam Data from 2019 and 2020
+		    \item Investigating differences in alignment after Transport
+		\end{itemize}
+	
+	\end{itemize}
+    \end{minipage}
+    \begin{minipage}{.55\textwidth}
+	\begin{figure}[H]
+	    \centering
+	    \includegraphics[width=\textwidth]{outlook.png}
+	\end{figure}
+    \end{minipage}
+\end{frame}
 
 \end{document}

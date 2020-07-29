@@ -1,4 +1,4 @@
-PWD /home/maurice/Documents/Bachelor/ALPIDE-code-students/mdonner/07-09-Tracking
+PWD /home/maurice/Documents/Bachelor/ALPIDE-code-students/mdonner/07-09-Tracking/New_Presentation
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
@@ -397,7 +397,11 @@ INPUT Afterimasked.png
 OUTPUT main.vrb
 INPUT main.vrb
 INPUT main.vrb
-INPUT Misalignment.png
+INPUT Corry.png
+INPUT main.vrb
+INPUT main.vrb
+INPUT Corry.png
+OUTPUT main.vrb
 INPUT main.vrb
 INPUT main.vrb
 INPUT Misalignment.png

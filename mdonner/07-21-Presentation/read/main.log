@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2018.11.19)  9 JUL 2020 10:47
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2018.11.19)  20 JUL 2020 14:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1050,16 +1050,16 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 33.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 \c__siunitx_mathtt_int=\count194
-(./read.tex) [1
+(./read.tex [1
 
-] (./main.aux) ) 
+]) [2] (./main.aux) ) 
 Here is how much of TeX's memory you used:
  27357 strings out of 493068
  605323 string characters out of 6137719
- 595649 words of memory out of 5000000
+ 596649 words of memory out of 5000000
  30911 multiletter control sequences out of 15000+600000
  5499 words of font info for 42 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
- 59i,11n,94p,10378b,245s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 59i,11n,94p,10378b,313s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (1 page).
+Output written on main.pdf (2 pages).

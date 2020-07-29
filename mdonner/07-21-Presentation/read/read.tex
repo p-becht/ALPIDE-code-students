@@ -9,17 +9,31 @@
 \end{itemize}
 \section*{Slide 2}
 \begin{itemize}
+    \item For that we inject a well-defined amount of charge in a number of pixels,
+	and see if they fire or not.
     \item We're using only a fraction of the chip which serves as a
 	representation, since masking the entire chip would take really long.
+    \item These are the parameters we used for the measurement, if you've
+	worked with ALPIDE before, you will have seen them somewhere.
+    \item If you remember Felicitas' Presentation a few weeks ago, you might
+	remember that the chip is seperated into 32 regions, so this value
+	means, we are 32 pixels (one per region) \\
+	(Since i mention how this works, people who listen or even worked with
+	alpide before, will know, and those who dont, wont pay it any mind)
 \end{itemize}
 \section*{Slide 3} 
 \begin{itemize}
-    \item At some charge, the pixel will start firing.
-    \item In this region of smearing, assuming the electronic noise is
-	gaussian, the hit probablity can be modeled with gaussian
-	error function
+    \item For each charge point, we chose to inject 50 times.
+    \item If we then increase the Amount, at some point the pixel will start firing.
+	This procedure is called an S-Curve scan.
+    \item If there was no electronic noise, this would just be a step-function.
+	But as you can see, there is a little smearing going on.
+	If we now assume that the electronic noise responsible for this smearing is
+	gaussian, the hit probablity can be modeled with gaussian error function
 \end{itemize}
-\section*{Slide 4}
+\section*{Slide 4} 
+Just read lol
+\section*{Slide 5}
 \begin{itemize}
     \item After a run has completed, we get the distribution of the thresholds
 	of all pixels. We then extract the mean of those thresholds, and 
@@ -27,20 +41,32 @@
 	that helps us to determine how the chip has to be configured for 
 	our experiment
     \item Just to look at a quick reference,
-	In the case of cosmics, we expect an energy deposit of 0.03 MeV in
+	In the case of cosmics, we expect an energy deposit of 29 keV in
 	the pixel, which is about 7900 e-h-pairs, so in our analysis, what
 	we'd \textbf{like} to see, is that the telescope is 100\% efficient.
-    \item (Mention VCASN and ITHR)
     \item The error comes from the RMS of the standard deviations
 \end{itemize}
-\section*{Slide 5} 
+\section*{Slide 6} 
 \begin{itemize}
     \item Another scan we did is the noiseoccupancy scan, which gives a
-	selectable number of random triggers and returns the number of hits.
+	selectable number of triggers and returns the number of hits.
 	If the threshold is too low, some pixels will register a hit, due
 	to electronic noise. This is what's called "Fake hit rate"
     \item Now this a measurement taken at no back bias. The sensitivity limit
 	is 1 over the amount of times triggered, times the number of pixels.
     \item as you can see the chips fhr deminishes drastically when applying a
 	back bias voltage
+\end{itemize}
+\section*{Slide 7} 
+\begin{itemize}
+    \item \textbf{Why are there points above the Sensitivity limit?}
+	- One reason for that is that our telescope is susceptible for
+	cosmics. These measurements can take a while, and it is not
+	too unlikely that the sensor is hit by a cosmic muon in the
+	meantime. Due to charge-sharing, these muons will be
+	registered in multiple pixels at once, hence the 10-ish
+	hits.
+	- It might look like there are more deviations in this area, but
+	actually the density of data points for this measurement taken
+	was much higher than the previous one.
 \end{itemize}

@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+plt.style.use('bmh')
+
 desy_683_x = np.array([26.49,26.,30.7,20.93,19.26,-24.43])
 ddesy_683_x = np.array([1.56,2.28,2.8,3.41,3.98,4.61])
 

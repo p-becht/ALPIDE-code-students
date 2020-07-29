@@ -35,7 +35,6 @@ Masked 7681 hits
 Plane 5 : X -79.91 +- 4.61 Y -19.14 +- 4.48
 \end{lstlisting}
     \end{minipage}
-    \pause
     \begin{figure}[H]
 ^^I\centering
 ^^I\includegraphics[trim=0 0 0 18,clip,width=9cm]{Misalignment.png}

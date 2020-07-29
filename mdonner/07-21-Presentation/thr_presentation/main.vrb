@@ -1,0 +1,8 @@
+\frametitle{Threshold Scan}
+\LARGE Definition of Threshold: \\[.5cm] \normalsize
+    The Threshold is the minimum amount of charge to be deposited inside the
+    sensitive region of the chip to create a sufficiently strong signal in
+    order for the readout electronics to register an event \\[1cm]
+    On ALPIDE: Threshold is defined mainly by two parameters: \verb`VCASN` and
+    \verb`ITHR`. While increasing \verb`ITHR` increases the Threshold,
+    augmenting \verb`VCASN` decreases it.
