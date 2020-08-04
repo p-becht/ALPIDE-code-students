@@ -1,0 +1,19 @@
+Before masking:  21.036843214278374
+After masking 1313 values: 1.555373116194696 
+Plane 0 position: X 26.35 +- 21.04 Y -48.79 +- 16.43
+Before masking:  21.01945874107739
+After masking 1435 values: 2.27657110908325 
+Plane 1 position: X 25.9 +- 21.02 Y 17.13 +- 14.94
+Before masking:  21.804578025144135
+After masking 1549 values: 2.8034945005345273 
+Plane 2 position: X 30.61 +- 21.8 Y 21.26 +- 16.02
+Before masking:  22.30803095428946
+After masking 1577 values: 3.4090664743188483 
+Plane 3 position: X 20.94 +- 22.31 Y 20.2 +- 16.7
+Before masking:  25.09542461120584
+After masking 1774 values: 3.9780448152464243 
+Plane 4 position: X 19.42 +- 25.1 Y -54.09 +- 19.62
+Before masking:  24.766366320435957
+After masking 1890 values: 4.614336493798176 
+Plane 5 position: X -24.11 +- 24.77 Y -43.44 +- 19.12
+

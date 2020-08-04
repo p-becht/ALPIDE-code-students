@@ -99,7 +99,7 @@ plt.figure(figsize=(12,10))
 #Plot 0bb 
 plt.subplot(211)
 
-plt.errorbar(x_val_0, y_val_0, xerr=None, yerr=y_err_0, fmt='.',capsize=3, c='red')
+plt.scatter(x_val_0, y_val_0, marker='.', c='red')
 
 plt.yscale("log")
 plt.xlim(15,265)
@@ -114,7 +114,7 @@ plt.title("V_BB = 0 V")
 #Plot 3bb 
 plt.subplot(212)
 
-plt.errorbar(x_val_3, y_val_3, xerr=None, yerr=y_err_3, fmt='.' ,capsize=3, c='red')
+plt.scatter(x_val_3, y_val_3, marker='.', c='red')
 
 plt.yscale("log")
 plt.xlim(15,265)

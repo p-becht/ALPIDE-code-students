@@ -1,0 +1,27 @@
+\frametitle{Cosmic Analysis}
+Feed it with DESY Testbeam Data, to calculate the average offset of the planes:
+\begin{lstlisting}
+Plane 1 position: X 13.74 Y -36.65
+Plane 2 position: X 25.4 Y 16.19
+Plane 3 position: X 30.15 Y 21.23
+Plane 4 position: X 20.29 Y 20.06
+Plane 5 position: X 20.65 Y -52.77
+Plane 6 position: X -22.33 Y -41.59
+\end{lstlisting}
+\pause
+\centering
+\begin{minipage}{.13\textwidth}
+    \tiny yes they're ugly, will produce some nicer plots soon!
+\end{minipage}
+\begin{minipage}{.30\textwidth}
+    \centering
+    \includegraphics[trim=0 50 0 100,clip,width=\textwidth]{DESY_Before.png}
+\end{minipage}
+\begin{minipage}{.1\textwidth}
+    \centering
+    \( \rightarrow \)
+\end{minipage}
+\begin{minipage}{.30\textwidth}
+    \centering
+    \includegraphics[trim=0 50 0 100,clip,width=\textwidth]{DESY_After.png}
+\end{minipage}
