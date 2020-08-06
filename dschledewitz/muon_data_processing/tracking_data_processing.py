@@ -267,11 +267,18 @@ def lin(x, a, b):
     return a * x +b
 Phi =  np.array([])
 Phi1 =  np.array([])
+Phi4,Phi5,Phi6,Phi7 = np.array([]),np.array([]),np.array([]),np.array([])
 Chi =  np.array([])
 Chi1 = np.array([])
 it = 0
-chi11,chi12,chi21,chi22 = 0,20,20,1000
-phi11,phi12,phi21,phi22 = 24,26,26,28#0,2,2,4
+chi11,chi12,chi21,chi22 = 0,100,100,1000
+phi11,phi12,phi21,phi22 = 0,2,2,4#0,2,2,4
+phi31,phi32,phi41,phi42 = 4,6,6,8
+phi51,phi52,phi61,phi62 = 8,10,10,12
+phi71,phi72,phi81,phi82 = 12,14,14,16
+phi91,phi92,phi101,phi102 = 16,18,18,20
+phi111,phi112,phi121,phi122 = 20,22,22,24
+phi131,phi132,phi141,phi142 = 24,26,26,28
 fig, (ax1,ax2) = plt.subplots(1,2,figsize=(14, 10))
 ax1.set_xlim([0, 1024])
 ax1.set_ylim([0, 512])
@@ -284,16 +291,36 @@ ax2.set_ylabel("y-axis [pixels]")
 ax1.set_title("Selection of aligned cosmic events")
 #ax2.set_title("Selection of aligned cosmic events with fits")
 #ax2.set_title("Fitted tracks")
-fig2, (ax3,ax4) = plt.subplots(1,2,figsize=(14, 10))
-ax1.set_xlim([0, 1024])
-ax1.set_ylim([0, 512])
-ax2.set_xlim([0, 1024])
-ax2.set_ylim([0, 512])
-ax1.set_xlabel("x-axis [pixels]")
-ax2.set_xlabel("x-axis [pixels]")
-ax1.set_ylabel("y-axis [pixels]")
-ax2.set_ylabel("y-axis [pixels]")
-ax1.set_title("Selection of aligned cosmic events with $\chi^2_{red}$<= "+str(chi12))
+
+
+fig1, (ax3,ax4) = plt.subplots(1,2,figsize=(14, 10))
+fig2, (ax5,ax6) = plt.subplots(1,2,figsize=(14, 10))
+fig3, (ax7,ax8) = plt.subplots(1,2,figsize=(14, 10))
+fig4, (ax9,ax10) = plt.subplots(1,2,figsize=(14, 10))
+fig5, (ax11,ax12) = plt.subplots(1,2,figsize=(14, 10))
+fig6, (ax13,ax14) = plt.subplots(1,2,figsize=(14, 10))
+fig7, (ax15,ax16) = plt.subplots(1,2,figsize=(14, 10))
+
+def subplot(fig,ax1,ax2,phi11,phi12,phi21,phi22):
+    ax1.set_xlim([0, 1024])
+    ax1.set_ylim([0, 512])
+    ax2.set_xlim([0, 1024])
+    ax2.set_ylim([0, 512])
+    ax1.set_xlabel("x-axis [pixels]")
+    ax2.set_xlabel("x-axis [pixels]")
+    ax1.set_ylabel("y-axis [pixels]")
+    ax2.set_ylabel("y-axis [pixels]")
+    ax1.set_title("Selection of aligned cosmic events, $\phi$ in range "+str(phi11)+" to "+str(phi12))
+    ax2.set_title("Selection of aligned cosmic events, $\phi$ in range "+str(phi21)+" to "+str(phi22))
+subplot(fig1,ax3,ax4,phi11,phi12,phi21,phi22)
+subplot(fig2,ax5,ax6,phi31,phi32,phi41,phi42)
+subplot(fig3,ax7,ax8,phi51,phi52,phi61,phi62)
+subplot(fig4,ax9,ax10,phi71,phi72,phi81,phi82)
+subplot(fig5,ax11,ax12,phi91,phi92,phi101,phi102)
+subplot(fig6,ax13,ax14,phi111,phi112,phi121,phi122)
+subplot(fig7,ax15,ax16,phi131,phi132,phi141,phi142)
+#ax1.set_title("Selection of aligned cosmic events with $\chi^2_{red}$<= "+str(chi12))
+
 
 
 # select an event
@@ -348,7 +375,7 @@ for i in range(len(Mean_x)):
             #print(R2(y,y_fit))
             chi_ = chi(x,y,dy)
             Chi = np.append(Chi,chi_)
-            Chi1 = np.append(Chi1,chi_)
+            #Chi1 = np.append(Chi1,chi_)
             ax1.plot(x[0],y[0],"ro")
             ax1.plot(x,y, label = "$\chi^2_{red}$= "+str(int(chi_))+", "+str(int(len(x)))+"pE")
             #ax1.plot(x,y_fit,"r")
@@ -358,14 +385,76 @@ for i in range(len(Mean_x)):
             
             phi = np.arctan(d_t/d_z)*360/(2*np.pi)
             Phi = np.append(Phi,phi)
+            if len(x)>=4:
+                Phi4 = np.append(Phi4,phi)
+            if len(x)>=5:
+                Phi5 = np.append(Phi5,phi)
+            if len(x)>=6:
+                Phi6 = np.append(Phi6,phi)
+            if len(x)==7:
+                Phi7 = np.append(Phi7,phi)
+
+
+
             if phi > phi11 and phi < phi12:
                 ax3.plot(x[0],y[0],"ro")
                 ax3.plot(x,y)
-        
+                
+            if phi > phi21 and phi < phi22:
+                ax4.plot(x[0],y[0],"ro")
+                ax4.plot(x,y)
+            if phi > phi31 and phi < phi32:
+                ax5.plot(x[0],y[0],"ro")
+                ax5.plot(x,y)
+                
+
+            if phi > phi41 and phi < phi42:
+                ax6.plot(x[0],y[0],"ro")
+                ax6.plot(x,y)
+                #Chi1 = np.append(Chi1,chi_)
+            if phi > phi51 and phi < phi52:
+                ax7.plot(x[0],y[0],"ro")
+                ax7.plot(x,y)
+                #Chi1 = np.append(Chi1,chi_)
+            if phi > phi61 and phi < phi62:
+                ax8.plot(x[0],y[0],"ro")
+                ax8.plot(x,y)
+                #Chi1 = np.append(Chi1,chi_)
+            if phi > phi71 and phi < phi72:
+                ax9.plot(x[0],y[0],"ro")
+                ax9.plot(x,y)
+                #Chi1 = np.append(Chi1,chi_)
+            if phi > phi81 and phi < phi82:
+                ax10.plot(x[0],y[0],"ro")
+                ax10.plot(x,y)
+                #Chi1 = np.append(Chi1,chi_)
+            if phi > phi91 and phi < phi92:
+                ax11.plot(x[0],y[0],"ro")
+                ax11.plot(x,y)
+                #Chi1 = np.append(Chi1,chi_)
+            if phi > phi101 and phi < phi102:
+                ax12.plot(x[0],y[0],"ro")
+                ax12.plot(x,y)
+                #Chi1 = np.append(Chi1,chi_)
+            if phi > phi111 and phi < phi112:
+                ax13.plot(x[0],y[0],"ro")
+                ax13.plot(x,y)
+                Chi1 = np.append(Chi1,chi_)
+            if phi > phi121 and phi < phi122:
+                ax14.plot(x[0],y[0],"ro")
+                ax14.plot(x,y)
+                Chi1 = np.append(Chi1,chi_)
+            if phi > phi131 and phi < phi132:
+                ax15.plot(x[0],y[0],"ro")
+                ax15.plot(x,y)
+                Chi1 = np.append(Chi1,chi_)
+            if phi > phi141 and phi < phi142:
+                ax16.plot(x[0],y[0],"ro")
+                ax16.plot(x,y)
 
 
 
-        if (chi(x,y,dy))>chi21 and (chi(x,y,dy))<chi22:
+        #if (chi(x,y,dy))>chi21 and (chi(x,y,dy))<chi22:
            # ax2.plot(x,y)
         #else:
             #it += 1
@@ -373,17 +462,17 @@ for i in range(len(Mean_x)):
             #print(R2(y,y_fit)
 
         #else:
-            chi_ = chi(x,y,dy)
-            ax2.plot(x[0],y[0],"ro")
-            ax2.plot(x,y, label = "$\chi^2_{red}$= "+str(int(chi_))+", "+str(int(len(x)))+"pE")
+            #chi_ = chi(x,y,dy)
+            #ax2.plot(x[0],y[0],"ro")
+            #ax2.plot(x,y, label = "$\chi^2_{red}$= "+str(int(chi_))+", "+str(int(len(x)))+"pE")
             # chi_ = chi(x,y,dy)
             # Chi = np.append(Chi,chi_)
-            chi1 = chi(x,y,dy)
-            Chi1 = np.append(Chi1,chi1)
-            phi = np.arctan(d_t/d_z)*360/(2*np.pi)
-            if phi > phi21 and phi < phi22:
-                ax4.plot(x[0],y[0],"ro")
-                ax4.plot(x,y)
+            #chi1 = chi(x,y,dy)
+            #Chi1 = np.append(Chi1,chi1)
+            #phi = np.arctan(d_t/d_z)*360/(2*np.pi)
+            # if phi > phi21 and phi < phi22:
+            #     ax4.plot(x[0],y[0],"ro")
+            #     ax4.plot(x,y)
         phi1 = np.arctan(d_t/d_z)*360/(2*np.pi)
         Phi1 = np.append(Phi1,phi1) 
         
@@ -406,22 +495,31 @@ ax4.set_title("Selection of aligned cosmic events, $\phi$ in range "+str(phi21)+
 #ax2.legend()
 plt.show()
 # HISTOGRAM 
-plt.hist(Phi1, label="All tracks")
-plt.hist(Phi, label="Selected tracks, $\chi^2_{red}$ in range "+str(chi11)+" to "+str(chi12))
-plt.title("Angular distribution of 4 or more plane events")
-plt.xlabel("Angle[°]")
-plt.ylabel("Counts")
-plt.legend()
-plt.show()
+# plt.hist(Phi1, bins= 20 ,label="All tracks")
+# plt.hist(Phi,bins= 20 , label="Selected tracks, $\chi^2_{red}$ in range "+str(chi11)+" to "+str(chi12))
+# plt.title("Angular distribution of 7 or more plane events")
+# plt.xlabel("Angle[°]")
+# plt.ylabel("Counts")
+# plt.legend()
+# plt.show()
 
-plt.hist(Chi1, bins=50, label="Selected tracks, $\chi^2_{red}$ in range "+str(chi11)+" to "+str(chi12)+" and "+str(chi21)+" to "+str(chi22))
-plt.hist(Chi,range=(0,1000), bins=50, label="Selected tracks, $\chi^2_{red}$ in range "+str(chi11)+" to "+str(chi12))
-plt.title("Chi-squared distribution of 4 and more plane events")
+#plt.hist(Chi1, bins=50, label="Selected tracks, $\chi^2_{red}$ in range "+str(chi11)+" to "+str(chi12)+" and "+str(chi21)+" to "+str(chi22))
+plt.hist(Chi1,range=(0,100), bins=50, label="Selected tracks, $\phi$ in range "+str(phi111)+" to "+str(phi142))
+plt.title("Chi-squared distribution of 4 and more plane events, $\chi^2_{red}$ in range "+str(chi11)+" to "+str(chi12))
 plt.xlabel("$Chi^2_{red}$")
 plt.ylabel("Counts")
 plt.legend()
 plt.show()
 
+plt.hist(Phi4, bins= 14 ,range=(0,28),label="4 or more pE")
+plt.hist(Phi5, bins= 14 ,range=(0,28),label="5 or more pE")
+plt.hist(Phi6, bins= 14 ,range=(0,28),label="6 or more pE")
+plt.hist(Phi7, bins= 14 ,range=(0,28),label="7 or more pE")
+plt.title("Angular distribution of n-plane-events, $\chi^2_{red}$ in range "+str(chi11)+" to "+str(chi12))
+plt.xlabel("Angle[°]")
+plt.ylabel("Counts")
+plt.legend()
+plt.show()
 """1479 misaligned events of in total 3731############yeay2252 for chi_1000"""
 
 
