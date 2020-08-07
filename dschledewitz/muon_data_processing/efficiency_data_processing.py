@@ -60,19 +60,6 @@ def chi(x,y,dy):
     #print("chi2_red=",chi2_red)
     return chi2_red
 
-
-# goodness
-def R2(y,y_fit):
-    # residual sum of squares
-    ss_res = np.sum((y - y_fit) ** 2)
-
-    # total sum of squares
-    ss_tot = np.sum((y - np.mean(y)) ** 2)
-
-    # r-squared
-    r2 = 1 - (ss_res / ss_tot)
-    return r2
-
 # defenition to count the number of n-plane-events and save the sequence
 def counter(filename):
 
@@ -273,12 +260,6 @@ Chi1 = np.array([])
 it = 0
 chi11,chi12,chi21,chi22 = 0,20,100,1000
 phi11,phi12,phi21,phi22 = 0,2,2,4#0,2,2,4
-phi31,phi32,phi41,phi42 = 4,6,6,8
-phi51,phi52,phi61,phi62 = 8,10,10,12
-phi71,phi72,phi81,phi82 = 12,14,14,16
-phi91,phi92,phi101,phi102 = 16,18,18,20
-phi111,phi112,phi121,phi122 = 20,22,22,24
-phi131,phi132,phi141,phi142 = 24,26,26,28
 fig, (ax1,ax2) = plt.subplots(1,2,figsize=(14, 10))
 ax1.set_xlim([0, 1024])
 ax1.set_ylim([0, 512])
@@ -294,12 +275,6 @@ ax1.set_title("Selection of aligned cosmic events")
 
 
 # fig1, (ax3,ax4) = plt.subplots(1,2,figsize=(14, 10))
-# fig2, (ax5,ax6) = plt.subplots(1,2,figsize=(14, 10))
-# fig3, (ax7,ax8) = plt.subplots(1,2,figsize=(14, 10))
-# fig4, (ax9,ax10) = plt.subplots(1,2,figsize=(14, 10))
-# fig5, (ax11,ax12) = plt.subplots(1,2,figsize=(14, 10))
-# fig6, (ax13,ax14) = plt.subplots(1,2,figsize=(14, 10))
-# fig7, (ax15,ax16) = plt.subplots(1,2,figsize=(14, 10))
 
 def subplot(fig,ax1,ax2,phi11,phi12,phi21,phi22):
     ax1.set_xlim([0, 1024])
@@ -313,13 +288,7 @@ def subplot(fig,ax1,ax2,phi11,phi12,phi21,phi22):
     ax1.set_title("Selection of aligned cosmic events, $\phi$ in range "+str(phi11)+" to "+str(phi12))
     ax2.set_title("Selection of aligned cosmic events, $\phi$ in range "+str(phi21)+" to "+str(phi22))
 # subplot(fig1,ax3,ax4,phi11,phi12,phi21,phi22)
-# subplot(fig2,ax5,ax6,phi31,phi32,phi41,phi42)
-# subplot(fig3,ax7,ax8,phi51,phi52,phi61,phi62)
-# subplot(fig4,ax9,ax10,phi71,phi72,phi81,phi82)
-# subplot(fig5,ax11,ax12,phi91,phi92,phi101,phi102)
-# subplot(fig6,ax13,ax14,phi111,phi112,phi121,phi122)
-# subplot(fig7,ax15,ax16,phi131,phi132,phi141,phi142)
-#ax1.set_title("Selection of aligned cosmic events with $\chi^2_{red}$<= "+str(chi12))
+
 
 
 
@@ -347,32 +316,11 @@ for i in range(len(Mean_x)):
         d_z = (z[-1]-z[0])*2e-2
         d_t = np.sqrt(d_x**2 + d_y**2)
 
-        #print(R2(np.array(Mean_x[i][j]),y_fit))
-        #if (np.sqrt(np.diag(err)[0])/fit[0]*100) <5 and (np.sqrt(np.diag(err)[1])/fit[1]*100) <5:
-            #print("yes: "+ str(R2(y,y_fit)))
-            #pass
-            #ax2.plot(Mean_x[i][j],Mean_y[i][j])
-        # if R2(y,y_fit)>0.8 and R2(y,y_fit)<0.85:
-        #     print(R2(y,y_fit))
-        #     ax2.plot(Mean_x[i][j],Mean_y[i][j])
-        # if R2(y,y_fit)>0.8:
-            # print("good")
-            # print(R2(y,y_fit))
-            # ax1.plot(x,y)
-            # ax1.plot(x,y_fit,"r")
-            # d_x = (x[-1]-x[0])*29.24e-6
-            # d_y = (y[-1]-y[0])*26.88e-6
-            # d_z = (z[-1]-z[0])*2e-2
-            # d_t = np.sqrt(d_x**2 + d_y**2)
-            # phi = np.arctan(d_t/d_z)*360/(2*np.pi)
-            # Phi = np.append(Phi,phi) 
-        
         #chi_ = chi(x,y,dy)
         #Chi = np.append(Chi,chi_)
+
         # chi square
         if (chi(x,y,dy))>chi11 and (chi(x,y,dy))<chi12:
-            #print("good")
-            #print(R2(y,y_fit))
             chi_ = chi(x,y,dy)
             Chi = np.append(Chi,chi_)
             #Chi1 = np.append(Chi1,chi_)
@@ -403,90 +351,12 @@ for i in range(len(Mean_x)):
             # if phi > phi21 and phi < phi22:
             #     ax4.plot(x[0],y[0],"ro")
             #     ax4.plot(x,y)
-            # if phi > phi31 and phi < phi32:
-            #     ax5.plot(x[0],y[0],"ro")
-            #     ax5.plot(x,y)
-                
-
-            # if phi > phi41 and phi < phi42:
-            #     ax6.plot(x[0],y[0],"ro")
-            #     ax6.plot(x,y)
-            #     #Chi1 = np.append(Chi1,chi_)
-            # if phi > phi51 and phi < phi52:
-            #     ax7.plot(x[0],y[0],"ro")
-            #     ax7.plot(x,y)
-            #     #Chi1 = np.append(Chi1,chi_)
-            # if phi > phi61 and phi < phi62:
-            #     ax8.plot(x[0],y[0],"ro")
-            #     ax8.plot(x,y)
-            #     #Chi1 = np.append(Chi1,chi_)
-            # if phi > phi71 and phi < phi72:
-            #     ax9.plot(x[0],y[0],"ro")
-            #     ax9.plot(x,y)
-            #     #Chi1 = np.append(Chi1,chi_)
-            # if phi > phi81 and phi < phi82:
-            #     ax10.plot(x[0],y[0],"ro")
-            #     ax10.plot(x,y)
-            #     #Chi1 = np.append(Chi1,chi_)
-            # if phi > phi91 and phi < phi92:
-            #     ax11.plot(x[0],y[0],"ro")
-            #     ax11.plot(x,y)
-            #     #Chi1 = np.append(Chi1,chi_)
-            # if phi > phi101 and phi < phi102:
-            #     ax12.plot(x[0],y[0],"ro")
-            #     ax12.plot(x,y)
-            #     #Chi1 = np.append(Chi1,chi_)
-            # if phi > phi111 and phi < phi112:
-            #     ax13.plot(x[0],y[0],"ro")
-            #     ax13.plot(x,y)
-            #     Chi1 = np.append(Chi1,chi_)
-            # if phi > phi121 and phi < phi122:
-            #     ax14.plot(x[0],y[0],"ro")
-            #     ax14.plot(x,y)
-            #     Chi1 = np.append(Chi1,chi_)
-            # if phi > phi131 and phi < phi132:
-            #     ax15.plot(x[0],y[0],"ro")
-            #     ax15.plot(x,y)
-            #     Chi1 = np.append(Chi1,chi_)
-            # if phi > phi141 and phi < phi142:
-            #     ax16.plot(x[0],y[0],"ro")
-            #     ax16.plot(x,y)
 
 
 
-        #if (chi(x,y,dy))>chi21 and (chi(x,y,dy))<chi22:
-           # ax2.plot(x,y)
-        #else:
-            #it += 1
-            #print("bad")
-            #print(R2(y,y_fit)
-
-        #else:
-            #chi_ = chi(x,y,dy)
-            #ax2.plot(x[0],y[0],"ro")
-            #ax2.plot(x,y, label = "$\chi^2_{red}$= "+str(int(chi_))+", "+str(int(len(x)))+"pE")
-            # chi_ = chi(x,y,dy)
-            # Chi = np.append(Chi,chi_)
-            #chi1 = chi(x,y,dy)
-            #Chi1 = np.append(Chi1,chi1)
-            #phi = np.arctan(d_t/d_z)*360/(2*np.pi)
-            # if phi > phi21 and phi < phi22:
-            #     ax4.plot(x[0],y[0],"ro")
-            #     ax4.plot(x,y)
         phi1 = np.arctan(d_t/d_z)*360/(2*np.pi)
         Phi1 = np.append(Phi1,phi1) 
         
-
-            #ax2.plot(x,y_fit,"r")
-        #     print(R2(y,y_fit))
-            #print("fuck"+str(it))
-    #x = np.linspace(np.min((REF[i,0,0], REF[i,0,5]))-5,np.max((REF[i,0,0], REF[i,0,5]))+5, 100)
-    #y = fit[0] * x + fit[1]
-        # print(fit)
-        # print(np.sqrt(np.diag(err)))
-        #print(np.sqrt(np.diag(err))/fit*100)
-# ax2.plot(x,y_fit,"green",label="good fit, R>0.8")# $\chi^2$<1000")
-# ax2.plot(x,y_fit,"r", label= "bad fit")
 ax1.set_title("Selection of aligned cosmic events, $\chi^2_{red}$ in range "+str(chi11)+" to "+str(chi12))
 ax2.set_title("Selection of aligned cosmic events, $\chi^2_{red}$ in range "+str(chi21)+" to "+str(chi22))
 # ax3.set_title("Selection of aligned cosmic events, $\phi$ in range "+str(phi11)+" to "+str(phi12))
@@ -520,29 +390,3 @@ plt.xlabel("Angle[°]")
 plt.ylabel("Counts")
 plt.legend()
 plt.show()
-"""1479 misaligned events of in total 3731############yeay2252 for chi_1000"""
-
-
-# # 3 d plotting and fitting
-
-# select an event
-# for i in range(len(Mean_x)):
-#     for j in range(len(Mean_x[i])):
-#         data = np.array([],[],[])
-#         for k in range(len(Mean_y[i][j])):
-#             # check if plane k in event j in run i is not empty
-#             if np.array(Mean_y[i][j][k]).size != 0:
-#                 # get the coordinate information
-#                 data[1] = np.append(data[1], Mean_y[i][j][k])
-#                 data[0] = np.append(data[0], Mean_x[i][j][k])
-#                 #dy = np.append(dy, DMean_y[i][j][k])
-#                 data[2] = np.append(data[2],k)
-#             data[0] *= 29.24e-6
-#             data[1] *= 26.88e-6
-#             data[2] *= 2e-2
-#             #mean pos of the hits
-#             datamean = data.mean(axis=0)
-
-#             uu, dd, vv = np.linalg.svd(data - datamean)
-            
-            
