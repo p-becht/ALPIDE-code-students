@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 import os
 from tqdm import tqdm
-import minseven
+import minsix
 
 #####################   User input section   ###################################
 # Specify Directory containing Cosmic Data
@@ -11,10 +11,10 @@ path="/home/maurice/Documents/Bachelor/ALPIDE-code-students/mdonner/06-16-Analys
 # This is where i stored some testbeam data
 # path="/home/maurice/Documents/Bachelor/Desy_Data/desy2019/" 
 
-min_hits_on_track = 7
+min_hits_on_track = 5
 # Define the number of tracks used for tracking, and plotting
-usetracks = 320
-plottracks = 1
+usetracks = 1600
+plottracks = 3
 connect_tracks = False
 fit_tracks = True
 accurate_scale = False
@@ -139,7 +139,7 @@ if search_txt:
 # }}}
 
 if not search_txt:
-    hit_data = minseven.hit_data
+    hit_data = minsix.hit_data
 #####################        TO PREVENT ERRORS      ######################## {{{
 test_entries = len(hit_data[0]["X"])
 for i in range(7):
@@ -323,7 +323,8 @@ if fit_tracks:
             #    print("chi2 = {} encountered in {}. Event ID: {}".format(
             #        chi2,track,hit_data["ID"][track]))
             #if chi2 <= 200:
-            chisquared.append(chi2)
+            if (number_of_planes == 6) and (chi2 <=200):
+                chisquared.append(chi2)
 
             pbar.update(1)
 # }}}
@@ -338,7 +339,7 @@ plt.title("Distribution of chi2 for {} {} hit events".format(usetracks,min_hits_
 plt.xlabel("chi2")
 plt.ylabel("frequency")
 plt.hist(chisquared,50)
-#plt.xlim(0,150)
+plt.xlim(0,150)
 #plt.ylim(0,35)
 
 if show_animation:

@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1594728612 "main.tex" "main.pdf" "main" 1594728614
+["pdflatex"] 1597650584 "main.tex" "main.pdf" "main" 1597650586
   "/etc/texmf/web2c/texmf.cnf" 1542647551 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
@@ -220,16 +220,16 @@
   "Corry.png" 1594728541 52113 99d8ff1b8b55c279607df37d0123c91c ""
   "Last_Week.png" 1594310118 97725 bc45c38929e6a3e3a45aed3ee58da9bb ""
   "Misalignment.png" 1594640030 40136 244d92d87c66a0c2f76cb00b15387d0e ""
-  "main.aux" 1594728614 2138 5216f678cd94a08adb0d99508d0a542c ""
-  "main.nav" 1594728614 844 28cb51245b94ad3a7e36e73ec7173241 ""
-  "main.out" 1594728613 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "main.tex" 1594728611 5763 fbc7a21415eb8bf5aaccf502bd223785 ""
+  "main.aux" 1597650586 2138 5216f678cd94a08adb0d99508d0a542c ""
+  "main.nav" 1597650586 844 28cb51245b94ad3a7e36e73ec7173241 ""
+  "main.out" 1597650585 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "main.tex" 1597650582 5771 2b3500c5bbab1ebd3a1ca266061804ae ""
   (generated)
-  "main.out"
-  "main.aux"
-  "main.toc"
-  "main.pdf"
-  "main.vrb"
   "main.snm"
+  "main.out"
   "main.log"
+  "main.pdf"
+  "main.toc"
   "main.nav"
+  "main.aux"
+  "main.vrb"

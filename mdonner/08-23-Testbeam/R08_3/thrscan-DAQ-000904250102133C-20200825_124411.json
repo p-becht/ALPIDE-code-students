@@ -1,0 +1,1 @@
+{"serial": "DAQ-000904250102133C", "chipid": 16, "vcasn": 105, "vcasn2": 113, "ithr": 100, "vresetd": 147, "vpulseh": 170, "row": [0, 64, 128, 192, 256, 320, 384, 448], "dctrl": false, "dvmin": 0, "dvmax": 20, "ntrg": 50, "output": "thrscan-DAQ-000904250102133C-20200825_124411.raw", "params": "thrscan-DAQ-000904250102133C-20200825_124411.json"}
