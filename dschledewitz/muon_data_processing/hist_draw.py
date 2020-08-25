@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 
 plt.style.use('bmh')
 
-data = np.loadtxt("output.csv", delimiter=",", skiprows=1, usecols=(1,2,3,4,5,6,7),dtype=int)
-run_numbers = np.loadtxt("output.csv", delimiter=",", skiprows=1, usecols=(0), dtype=str)
+data = np.loadtxt("muon_data_processing/n-event-plane-data.csv", delimiter=",", skiprows=1, usecols=(1,2,3,4,5,6,7),dtype=int)
+run_numbers = np.loadtxt("muon_data_processing/n-event-plane-data.csv", delimiter=",", skiprows=1, usecols=(0), dtype=str)
 
 # X axis
 x = np.arange(1,8,1)
