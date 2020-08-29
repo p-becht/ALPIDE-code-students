@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1596048156 "main.tex" "main.pdf" "main" 1596048159
+["pdflatex"] 1597218663 "main.tex" "main.pdf" "main" 1597218666
   "/etc/texmf/web2c/texmf.cnf" 1542647551 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm" 1136768653 1528 f853c4d1b4e0550255e02831fdc8496f ""
@@ -236,17 +236,17 @@
   "example_112000.png" 1595942300 18905 86cdfd51010637c258706bfe1d7405ce ""
   "example_1459.png" 1595942277 18277 dc2daac9a02338fd21e8198b57397313 ""
   "example_290252.png" 1595942333 18047 54db06ce9d1934d08391e6970e746e73 ""
-  "main.aux" 1596048159 2709 7029d2306c2ff278a3a2a807e11ea776 ""
-  "main.nav" 1596048159 936 d695c103406cf882db54e74960dc8136 ""
-  "main.out" 1596048157 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "main.tex" 1596048154 7875 5caf2e6a86c4e99f795b588264e9e90b ""
+  "main.aux" 1597218665 2709 7029d2306c2ff278a3a2a807e11ea776 ""
+  "main.nav" 1597218665 936 d695c103406cf882db54e74960dc8136 ""
+  "main.out" 1597218664 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "main.tex" 1597218660 7893 d42cecc8b6f57491fa3ee5d8af264a59 ""
   "pointin3d.png" 1595943783 4381 2caea71bb4da2e6d3e8ffc9164fd8b31 ""
   (generated)
-  "main.log"
-  "main.toc"
-  "main.out"
-  "main.nav"
-  "main.snm"
   "main.aux"
   "main.vrb"
+  "main.snm"
   "main.pdf"
+  "main.out"
+  "main.log"
+  "main.toc"
+  "main.nav"
