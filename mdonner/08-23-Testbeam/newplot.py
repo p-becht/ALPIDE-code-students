@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.5
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 import sys
 
 plt.style.use('bmh')
@@ -42,7 +43,8 @@ for i in range(len(ITHR_0)):
         Threshold_Error[i,j] = TRSH_Err[(ITHR == ITHR_0[i]) & (VCASN == VCASN_0[j])]
 #######################################
 
-plt.figure()
+fig = plt.figure()
+ax = fig.add_subplot(111)
 plt.title("Threshold in Electrons for Run {}".format(RUN))
 plt.xlabel("VCASN")
 plt.ylabel("THRESHOLD [electrons]")
@@ -52,14 +54,13 @@ print_errors = str(input())
 
 for i in range(len(ITHR_0)):
     if (print_errors == "y"):
-        plt.scatter(VCASN_0,Threshold[i],marker='.',s=5,color='black',zorder=1)
-        plt.errorbar(VCASN_0,Threshold[i],Threshold_Error[i],
+        ax.scatter(VCASN_0,Threshold[i],marker='.',s=5,color='black',zorder=1)
+        ax.errorbar(VCASN_0,Threshold[i],Threshold_Error[i],
                 linewidth=1,capsize=2,label='ITHR = '+str(ITHR_0[i]),zorder=0)
     else:
-        plt.scatter(VCASN_0,Threshold[i],marker='.',color='black',zorder=1)
-        plt.plot(VCASN_0,Threshold[i],label='ITHR = '+str(ITHR_0[i]),zorder=0)
+        ax.scatter(VCASN_0,Threshold[i],marker='.',color='black',zorder=1)
+        ax.plot(VCASN_0,Threshold[i],label='ITHR = '+str(ITHR_0[i]),zorder=0)
 
-#plt.tight_layout()
 plt.legend()
 plt.savefig("Graph.png")
 

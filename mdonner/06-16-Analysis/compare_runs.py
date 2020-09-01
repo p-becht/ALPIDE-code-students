@@ -27,5 +27,5 @@ plt.scatter(positioning, total_events, c=total_events/1200, marker='.', cmap='pl
 plt.xlabel('Run number')
 plt.xticks(np.arange(380,780,20))
 plt.ylabel('# of events')
-plt.savefig('rate.png',dpi=600)
+plt.savefig('rate.png',dpi=200)
 print("File Written to runs.png")
