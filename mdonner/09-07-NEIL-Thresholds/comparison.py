@@ -37,7 +37,7 @@ ITHR2_0 = getValues(ITHR2)
 Threshold2 = np.ndarray((len(ITHR2_0),len(VCASN2_0)))
 for i in range(len(ITHR2_0)):
     for j in range(len(VCASN2_0)):
-        Threshold2[i,j] = TRSH2[(ITHR2 == ITHR2_0[i]) & (VCASN2 == VCASN2_0[j])]
+        Threshold2[i,j] = 10*TRSH2[(ITHR2 == ITHR2_0[i]) & (VCASN2 == VCASN2_0[j])]
 #######################################
 
 #####  Do the same for the Error  #####
@@ -51,7 +51,7 @@ for i in range(len(ITHR2_0)):
 Threshold= np.ndarray((len(ITHR_0),len(VCASN_0)))
 for i in range(len(ITHR_0)):
     for j in range(len(VCASN_0)):
-        Threshold[i,j] = TRSH[(ITHR == ITHR_0[i]) & (VCASN == VCASN_0[j])]
+        Threshold[i,j] = 10*TRSH[(ITHR == ITHR_0[i]) & (VCASN == VCASN_0[j])]
 #######################################
 
 #####  Do the same for the Error  #####

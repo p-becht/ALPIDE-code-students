@@ -395,6 +395,7 @@ INPUT DavidFirstAngle.jpg
 INPUT DavidFirstEff.jpg
 INPUT MauriceFirstLookCosmics.png
 INPUT DavidOverestimation.jpg
+INPUT DavidCorrection.jpg
 INPUT MauriceEventOrg.png
 INPUT MauriceFirstAlign.png
 INPUT DavidFirstVisual.jpg
@@ -411,6 +412,11 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
 INPUT MauriceChi2.png
 INPUT MauriceMisalign.png
+INPUT DavidFinalAngle.jpg
+INPUT DavidFinalAngle2.jpg
+INPUT DavidFinalAngle3.jpg
+INPUT Open_HighChi.png
+INPUT DavidFirstEff.jpg
 OUTPUT main.nav
 OUTPUT main.toc
 OUTPUT main.snm

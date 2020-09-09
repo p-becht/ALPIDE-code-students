@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2018.11.19)  6 SEP 2020 13:32
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016/Debian) (preloaded format=xelatex 2018.11.19)  9 SEP 2020 14:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1446,19 +1446,23 @@ File: DavidOverestimation.jpg Graphic file (type QTm)
 <use  "DavidOverestimation.jpg" > [8
 
 ]
+File: DavidCorrection.jpg Graphic file (type QTm)
+<use  "DavidCorrection.jpg" > [9
+
+]
 File: MauriceEventOrg.png Graphic file (type QTm)
 <use  "MauriceEventOrg.png" >
 File: MauriceFirstAlign.png Graphic file (type QTm)
 <use  "MauriceFirstAlign.png" >
 File: DavidFirstVisual.jpg Graphic file (type QTm)
-<use  "DavidFirstVisual.jpg" > [9
+<use  "DavidFirstVisual.jpg" > [10
 
 ]
 File: Corry.png Graphic file (type QTm)
 <use  "Corry.png" >
 File: Misalignment.png Graphic file (type QTm)
 <use  "Misalignment.png" >
-Overfull \hbox (15.05785pt too wide) in paragraph at lines 173--173
+Overfull \hbox (15.05785pt too wide) in paragraph at lines 182--182
  [][] 
  []
 
@@ -1466,10 +1470,31 @@ File: MauriceChi2.png Graphic file (type QTm)
 <use  "MauriceChi2.png" >
 File: MauriceMisalign.png Graphic file (type QTm)
 <use  "MauriceMisalign.png" >
-Overfull \vbox (0.1161pt too high) detected at line 173
+Overfull \vbox (0.1161pt too high) detected at line 182
  []
 
-[10
+[11
+
+]
+File: DavidFinalAngle.jpg Graphic file (type QTm)
+<use  "DavidFinalAngle.jpg" >
+File: DavidFinalAngle2.jpg Graphic file (type QTm)
+<use  "DavidFinalAngle2.jpg" > [12
+
+]
+File: DavidFinalAngle3.jpg Graphic file (type QTm)
+<use  "DavidFinalAngle3.jpg" > [13
+
+]
+File: Open_HighChi.png Graphic file (type QTm)
+<use  "Open_HighChi.png" >
+File: DavidFirstEff.jpg Graphic file (type QTm)
+<use  "DavidFirstEff.jpg" >
+Underfull \hbox (badness 10000) in paragraph at lines 226--226
+
+ []
+
+[14
 
 ]
 \tf@nav=\write6
@@ -1481,19 +1506,19 @@ Overfull \vbox (0.1161pt too high) detected at line 173
 \tf@snm=\write8
 \openout8 = `main.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 174.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 174.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 227.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 227.
 (./main.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 174.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 174.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 227.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 227.
  ) 
 Here is how much of TeX's memory you used:
- 37743 strings out of 493068
- 793202 string characters out of 6137719
+ 37765 strings out of 493068
+ 793648 string characters out of 6137719
  801660 words of memory out of 5000000
- 41023 multiletter control sequences out of 15000+600000
- 11094 words of font info for 74 fonts, out of 8000000 for 9000
+ 41038 multiletter control sequences out of 15000+600000
+ 11110 words of font info for 76 fonts, out of 8000000 for 9000
  1347 hyphenation exceptions out of 8191
  57i,16n,97p,10417b,718s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (10 pages).
+Output written on main.pdf (14 pages).
