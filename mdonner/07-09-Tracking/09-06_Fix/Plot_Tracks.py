@@ -43,6 +43,6 @@ for i in range(plottracks):
         # Put everything else into plottable arrays
         x.append(hit_data[i][plane]["XC"]+offset[0][plane])
         y.append(hit_data[i][plane]["YC"]+offset[0][plane])
-        z.append(plane*1024*2/3) #TODO Make sure this is to scale, seems fishy
+        z.append(plane*1024*2/3)
 
         ax.scatter3D(x,y,z,alpha=.7,color='black',marker='.')

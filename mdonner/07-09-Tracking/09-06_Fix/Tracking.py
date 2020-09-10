@@ -1,7 +1,8 @@
 import numpy as np
-import Track_Data
+import Data_Unfitted
 
 plottracks = 3
+exclude_planes = [5,6]
 
 #####################    DEFINE PLANE POSITION   ######################## {{{
 
@@ -22,13 +23,18 @@ offset[0][6], offset[1][6] = -79.91, -19.14
 print('Performing Fit...')
 
 # Import hit data
-hit_data = Track_Data.hit_data
+hit_data = Data_Unfitted.hit_data
 N = len(hit_data) # Number of Tracks
 
 for track in range(N):
     
     # Number of planes belonging to the track
     number_of_planes = hit_data[track]["Number_of_planes"]
+    
+    # Now check if there are planes to be excluded for the tracking algorithm
+    for plane in range(7):
+        if (hit_data[track][plane]["XC"] != -1) and (plane in exclude_planes):
+            number_of_planes -= 1
 
     Fit_Data = np.ndarray((number_of_planes,3))
     std_hit = np.ndarray((number_of_planes))
@@ -37,14 +43,14 @@ for track in range(N):
     counter = 0
     
     for plane in range(7):
-        if (hit_data[track][plane]["XC"] == -1):
+        if (hit_data[track][plane]["XC"] == -1) or (plane in exclude_planes):
             continue
         Fit_Data[counter][0] = hit_data[track][plane]["XC"]+offset[0][plane]
         Fit_Data[counter][1] = hit_data[track][plane]["YC"]+offset[1][plane]
-        Fit_Data[counter][2] = plane*1024*2/3 # TODO Make sure this is to scale
+        Fit_Data[counter][2] = plane*1024*2/3
         std_hit[counter] = hit_data[track][plane]["sig"]
         counter+=1
-
+    
     # Fitting Algorithm:
     datamean = Fit_Data.mean(axis=0)
     uu, dd, vv = np.linalg.svd(Fit_Data - datamean)
@@ -60,7 +66,7 @@ for track in range(N):
     for hit in range(number_of_planes):
         x0 = Fit_Data[hit]
         dist = np.sqrt( ( (np.linalg.norm(x1-x0)**2*np.linalg.norm(x2-x1)**2)
-            - (np.dot((x1-x0),(x2-x1)))**2 )  / np.linalg.norm(x2-x1)**2 )
+            - (np.dot((x1-x0),(x2-x1)))**2 ) / np.linalg.norm(x2-x1)**2 )
         d.append(dist)
 
     hit_data[track]["Track_Point_1"], hit_data[track]["Track_Point_2"] = [],[]
@@ -77,7 +83,7 @@ for track in range(N):
 
 # Export Data
 
-fx = open("Fitted_Data.py","w")
+fx = open("Data_Fitted.py","w")
 fx.write("hit_data = "+str(hit_data))
 fx.close
 

@@ -10,7 +10,7 @@ import numpy as np
 
 # Specify Directory containing Cosmic Data, and the minimum n of hits used per track #
 path="/home/maurice/Documents/Bachelor/ALPIDE-code-students/mdonner/06-16-Analysis/Data/"
-min_hits_on_track = 4
+min_hits_on_track = 5
 ################################################################################
 
 print("Initializing...")
@@ -58,7 +58,7 @@ for filename in os.listdir(path):
                         hit_data[counter][i] = {}
                         hit_data[counter][i]["X"] = tmp_hit_data[i]["X"]
                         hit_data[counter][i]["Y"] = tmp_hit_data[i]["Y"]
-                    if (EventID == "1610210"): print("ACHTUNG: ",filename)
+                    if (EventID == "3418182"): print("ACHTUNG: ",filename)
                     counter+=1
 
                 # Reset all Variables for next event
@@ -116,7 +116,7 @@ with tqdm(total=number_of_tracks) as pbar:
         pbar.update(1)
 
 # Export information into a callable python object
-Filename = "Track_Data.py"
+Filename = "Data_Unfitted.py"
 with open(Filename, 'w') as f:
     f.write("hit_data = ")
     f.write("%s" % hit_data)

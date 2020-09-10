@@ -124,17 +124,7 @@
 
 \begin{frame}{June}
     \begin{itemize}
-	\item Fixing muonrate calculations and looking at overestimation
-	    \begin{figure}[H]
-		\centering
-		\includegraphics[width=.9\textwidth]{DavidOverestimation.jpg}
-	    \end{figure}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{June}
-    \begin{itemize}
-	\item Fixing muonrate calculations and looking at overestimation
+	\item Corrected Muonrate by masking for consecutive events
 	    \begin{figure}[H]
 		\centering
 		\includegraphics[width=.9\textwidth]{DavidCorrection.jpg}
@@ -212,16 +202,18 @@
     \begin{minipage}{.75\textwidth}
 	
     \begin{itemize}
-	\setlength\itemsep{2.5em}
+	\setlength\itemsep{3em}
 	\footnotesize
 	\item Where do these weird patterns come from? 
 	\item How to align with angular data (currently investigated)
-	\item Why are some of the planes only 85\% efficient?
+	\item Why do some of the planes have a \textbf{much} lower rate
+	    than the DUT? \\
+	\item Why is the angular distribution so different from the model?
     \end{itemize}
     \end{minipage}
     \begin{minipage}{.24\textwidth}
 	    \includegraphics[width=\textwidth]{Open_HighChi.png} \\
-	    \includegraphics[trim=430 0 0 0, clip,width=.8\textwidth]{DavidFirstEff.jpg} \\
+	    \includegraphics[trim=430 0 0 0, clip,width=.8\textwidth]{DavidFirstEff.jpg} \\[2.5cm]
     \end{minipage}
 \end{frame}
 \end{document}
