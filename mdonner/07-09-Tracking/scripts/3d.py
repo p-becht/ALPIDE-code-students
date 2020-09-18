@@ -14,11 +14,11 @@ path="/home/maurice/Documents/Bachelor/ALPIDE-code-students/mdonner/06-16-Analys
 min_hits_on_track = 7
 # Define the number of tracks used for tracking, and plotting
 usetracks = 1000000
-plottracks = 314
+plottracks = 3
 connect_tracks = False
 fit_tracks = True
 accurate_scale = False
-show_animation = False
+show_animation = True
 search_txt = False
 
 print_eventid = False
@@ -213,7 +213,7 @@ else:
 
 # Plotting Tracks after Alignment
 if accurate_scale: figx, figy = 5, 5
-else: figx, figy = 8, 5
+else: figx, figy = 5, 7
 fig = plt.figure(figsize=(figx,figy))
 ax = plt.axes(projection='3d')
 ax._axis3don = False
@@ -299,7 +299,7 @@ if fit_tracks:
             points_x = [linepts[0][0],linepts[1][0]]
             points_y = [linepts[0][1],linepts[1][1]]
             points_z = [linepts[0][2],linepts[1][2]]
-            #if (track < plottracks): ax.plot3D(points_x,points_y,points_z, linewidth=.5)
+            if (track < plottracks): ax.plot3D(points_x,points_y,points_z, linewidth=.5)
 
             # Line through two points
             Fit_lines[track] = linepts
@@ -338,16 +338,16 @@ fx = open("gtffeli567.py","w")
 fx.write(str(hit_data))
 fx.close()
 
-plt.figure()
-plt.title("Distribution of chi2 for {} {} hit events".format(usetracks,min_hits_on_track))
-plt.xlabel("chi2")
-plt.ylabel("frequency")
-plt.hist(chisquared,50)
-plt.xlim(0,150)
+#plt.figure()
+#plt.title("Distribution of chi2 for {} {} hit events".format(usetracks,min_hits_on_track))
+#plt.xlabel("chi2")
+#plt.ylabel("frequency")
+#plt.hist(chisquared,50)
+#plt.xlim(0,150)
 #plt.ylim(0,35)
 
 if show_animation:
-    for angle in range(0, 360):
+    for angle in range(0, 1080):
         ax.view_init(30, angle)
         plt.draw()
         plt.pause(.001)

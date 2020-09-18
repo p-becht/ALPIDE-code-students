@@ -1,0 +1,122 @@
+\documentclass{beamer}
+    \usetheme{Boadilla}
+\usepackage{polyglossia}
+    \setmainlanguage{english}
+\usepackage{fontspec}
+    \setsansfont{Linux Biolinum O}
+\usepackage{graphicx}
+\usepackage{xcolor} \usepackage{rotating}
+\usepackage{listings}
+    \lstset{language=bash,
+	basicstyle=\footnotesize\ttfamily\tiny,
+	breaklines=true,
+	framextopmargin=50pt,
+	frame=bottomline,
+	backgroundcolor=\color{white!86!black},
+	commentstyle=\color{blue},
+	keywordstyle=\color{red},
+	stringstyle=\color{orange!80!black}}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[binary-units=true]{siunitx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{subfig}
+\usepackage{tikz}
+    \usetikzlibrary{patterns}
+    \usetikzlibrary{decorations.pathreplacing}
+\usepackage{datenumber}
+\setbeamertemplate{itemize items}[circle]
+\usepackage{hyperref}
+     \hypersetup{
+     colorlinks=true,
+     linkcolor=black,
+     filecolor=magenta}
+
+\title{\texorpdfstring{\color{blue!50!black}\textbf{Status Report}}{}}
+\subtitle{Cosmics with the ALPIDE Telescope}
+\author[Maurice \and Felicitas \and David]{Maurice Donner \and Felicitas Franke \and David Schledewitz}
+\date{September 22th, 2020}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\begin{frame}{Back in May...}
+    \begin{itemize}
+	\item Limited access to GSI
+	\item Set up the telescope to be pointed towards the sky and record
+	    cosmics
+	\item At first \textbf{no scintillators} available \\[1cm]
+    \end{itemize}
+
+\LARGE Method of operation \footnotesize \\[.5cm]
+
+\begin{minipage}[b]{.49\textwidth}
+    \begin{itemize}
+	\item Use a NIM signal generator to create artificial triggers for the
+	    chips.
+	\item Trigger every \textasciitilde \( 100 \ \si{\micro \second} \)
+	\item That way no event should be missed
+    \end{itemize}
+\end{minipage}
+%
+\begin{minipage}[b]{.49\textwidth}
+    \begin{figure}[H]
+    \centering \tiny
+    \begin{tikzpicture}
+    % Draw Coordinate system and axis labels
+    \draw[->] (0,0) -- (4,0) node[anchor=north] {t};
+    \draw[->] (0,0) -- (0,1);
+    \draw (0,0) node[anchor=north] {0 $\si{\micro \second}$};
+    \draw (2,0) node[anchor=north] {95.8 $\si{\micro \second}$};
+    % Draw Strobes
+    \filldraw[fill=blue!20,draw=blue!50!black] (0,0) rectangle (1.8,0.8);
+    \filldraw[fill=blue!20,draw=blue!50!black] (2,0) rectangle (3.8,0.8);
+    % Draw strobe length
+    \draw [decorate,decoration={brace,amplitude=3pt},xshift=0pt,yshift=1pt]
+    (2.0,0.8) -- (3.8,0.8) node [black,midway,yshift=10pt] 
+    {$90 \ \si{\micro \second}$ };
+    % Draw Discriminator Signal
+    \draw[pattern=north west lines,pattern color = red!50!black] (1.9,0) rectangle (2.1,0.8);
+    \draw[pattern=north west lines,pattern color = red!50!black] (0.4,0) rectangle (0.6,0.8);
+    % Draw discriminator signal length
+    \draw [decorate,decoration={brace,amplitude=1pt},xshift=0pt,yshift=1pt]
+    (0.4,0.8) -- (0.6,0.8) node [black,midway,yshift=5pt] 
+    {$10 \ \si{\micro \second}$ };
+    % Draw Legend
+    \filldraw[fill=blue!20,draw=blue!50!black] (0,-0.4) rectangle (0.1,-0.5)
+    node[anchor=west] {STROBE signal};
+    \draw[pattern=north west lines,pattern color = red!50!black] (0,-0.8) rectangle (0.1,-0.9)
+    node[anchor=west] {Discriminator signal};
+    % Draw Trigger
+    \draw[->] (2.0, 1.1) -- (2.0, 0.9) node[anchor=south,yshift=5pt] {\tiny trigger};
+    \end{tikzpicture}
+    \end{figure}
+\end{minipage}
+\end{frame}
+
+\begin{frame}{Back in May...}
+    \Large PROs \footnotesize \\
+    \begin{itemize}
+	\item Running "without" external trigger possible
+	\item Thin time slices makes it really unlikely to detect
+	    two muons at the same time, especially from similar angles.
+    \end{itemize}
+    \Large CONs \footnotesize 
+    \begin{itemize}
+	\item $> 10 \, 000$ Events per second (mostly empty)
+	\item $4.4 \ \si{\mega \byte}$ per second of Data written to the disk
+	\item EUDAQ 1 crashed often at filesizes \( > 5 \ \si{\giga \byte} \)
+	    $\rightarrow$ Runtime limited to \( \approx 17 \ \si{\minute} \) 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Taking Cosmics}
+    Took 380 runs á 17-18 minutes in total over the course of
+\end{frame}
+
+\end{document}
