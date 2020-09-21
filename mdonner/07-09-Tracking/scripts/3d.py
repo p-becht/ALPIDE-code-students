@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 import os
 from tqdm import tqdm
-import minsix
+import minseven
 
 #####################   User input section   ###################################
 # Specify Directory containing Cosmic Data
@@ -11,10 +11,10 @@ path="/home/maurice/Documents/Bachelor/ALPIDE-code-students/mdonner/06-16-Analys
 # This is where i stored some testbeam data
 # path="/home/maurice/Documents/Bachelor/Desy_Data/desy2019/" 
 
-min_hits_on_track = 5
+min_hits_on_track = 7
 # Define the number of tracks used for tracking, and plotting
-usetracks = 1600
-plottracks = 3
+usetracks = 1000000
+plottracks = 20
 connect_tracks = False
 fit_tracks = True
 accurate_scale = False
@@ -136,10 +136,12 @@ if search_txt:
                         pixel_x_mean.append(int(line.split()[1][:-1]))
                         pixel_y_mean.append(int(line.split()[2][:-1]))
 
+else:
+    hit_data = minseven.hit_data
+    hit_data["chi2"] = []
+
 # }}}
 
-if not search_txt:
-    hit_data = minsix.hit_data
 #####################        TO PREVENT ERRORS      ######################## {{{
 test_entries = len(hit_data[0]["X"])
 for i in range(7):
@@ -211,7 +213,7 @@ else:
 
 # Plotting Tracks after Alignment
 if accurate_scale: figx, figy = 5, 5
-else: figx, figy = 8, 5
+else: figx, figy = 5, 10
 fig = plt.figure(figsize=(figx,figy))
 ax = plt.axes(projection='3d')
 ax._axis3don = False
@@ -261,7 +263,6 @@ for i in range(plottracks):
 # Number of tracks is defined in usetracks
 if fit_tracks:
     print('Performing Fit...')
-    chi2 = []
     if (usetracks > len(hit_data[0]["X"])): usetracks = len(hit_data[0]["X"])
     with tqdm(total=usetracks) as pbar:
         for track in range(usetracks):
@@ -325,25 +326,28 @@ if fit_tracks:
             #if chi2 <= 200:
             if (number_of_planes == 6) and (chi2 <=200):
                 chisquared.append(chi2)
-
+            
+            # Add chi2 to the data for felicitas
+            hit_data["chi2"].append(chi2)
+            print(len(hit_data["chi2"]))
             pbar.update(1)
 # }}}
 
 # Export dict
-#fx = open("7plus.txt","w")
-#fx.write(str(hit_data))
-#fx.close()
+fx = open("gtffeli567.py","w")
+fx.write(str(hit_data))
+fx.close()
 
-plt.figure()
-plt.title("Distribution of chi2 for {} {} hit events".format(usetracks,min_hits_on_track))
-plt.xlabel("chi2")
-plt.ylabel("frequency")
-plt.hist(chisquared,50)
-plt.xlim(0,150)
+#plt.figure()
+#plt.title("Distribution of chi2 for {} {} hit events".format(usetracks,min_hits_on_track))
+#plt.xlabel("chi2")
+#plt.ylabel("frequency")
+#plt.hist(chisquared,50)
+#plt.xlim(0,150)
 #plt.ylim(0,35)
 
 if show_animation:
-    for angle in range(0, 360):
+    for angle in range(0, 1080):
         ax.view_init(30, angle)
         plt.draw()
         plt.pause(.001)
