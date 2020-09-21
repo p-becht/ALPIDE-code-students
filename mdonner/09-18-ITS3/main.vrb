@@ -1,0 +1,36 @@
+\frametitle{Cosmic Analysis}
+Implemented a 3D-Fitting algorithm in python:\\
+    \begin{minipage}{.32\textwidth}
+^^I\begin{figure}[H]
+^^I    \centering
+^^I    \includegraphics[trim=0 80 0 80,clip,width=\textwidth]{example_1459.png}
+^^I\end{figure}
+    \end{minipage}
+    \begin{minipage}{.32\textwidth}
+^^I\begin{figure}[H]
+^^I    \centering
+^^I    \includegraphics[trim=0 80 0 80,clip,width=\textwidth]{example_112000.png}
+^^I\end{figure}
+    \end{minipage}
+    \begin{minipage}{.32\textwidth}
+^^I\begin{figure}[H]
+^^I    \centering
+^^I    \includegraphics[trim=0 80 0 80,clip,width=\textwidth]{example_290252.png}
+^^I\end{figure}
+    \end{minipage}\\
+    Using numpy's Singular value decomposition \verb]np.linalg.svd] \\[.1cm]
+    \( \rightarrow \) Calculating \( \chi ^2 \) (goodness of fit) "by hand" \\
+    \begin{minipage}{.4\textwidth}
+^^I\begin{figure}[H]
+^^I    \centering
+^^I    \includegraphics[width=\textwidth]{pointin3d.png}
+^^I\end{figure}
+    \end{minipage}
+    \begin{minipage}{.59\textwidth}
+^^I\footnotesize
+^^I\begin{align*}
+^^I    d^2 = \frac{ \left| x_1-x_0 \right|^2 \left| x_2-x_1 \right|^2
+^^I^^I- \left[ \left( x_1-x_0 \right) \cdot \left( x_2-x_1 \right)
+^^I^^I\right]^2}{\left| x_2-x_1 \right|^2}
+^^I\end{align*}
+    \end{minipage}

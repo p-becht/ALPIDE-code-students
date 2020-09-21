@@ -14,11 +14,11 @@ path="/home/maurice/Documents/Bachelor/ALPIDE-code-students/mdonner/06-16-Analys
 min_hits_on_track = 7
 # Define the number of tracks used for tracking, and plotting
 usetracks = 1000000
-plottracks = 3
+plottracks = 20
 connect_tracks = False
 fit_tracks = True
 accurate_scale = False
-show_animation = True
+show_animation = False
 search_txt = False
 
 print_eventid = False
@@ -213,7 +213,7 @@ else:
 
 # Plotting Tracks after Alignment
 if accurate_scale: figx, figy = 5, 5
-else: figx, figy = 5, 7
+else: figx, figy = 5, 10
 fig = plt.figure(figsize=(figx,figy))
 ax = plt.axes(projection='3d')
 ax._axis3don = False

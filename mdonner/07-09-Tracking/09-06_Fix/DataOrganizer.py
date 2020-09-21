@@ -10,7 +10,7 @@ import numpy as np
 
 # Specify Directory containing Cosmic Data, and the minimum n of hits used per track #
 path="/home/maurice/Documents/Bachelor/ALPIDE-code-students/mdonner/06-16-Analysis/Data/"
-min_hits_on_track = 5
+min_hits_on_track = 4
 ################################################################################
 
 print("Initializing...")
