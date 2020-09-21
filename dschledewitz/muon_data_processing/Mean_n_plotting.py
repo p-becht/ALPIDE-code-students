@@ -140,105 +140,110 @@ d_corr_mean = np.array([d_mean[0,0],
 plt.figure(figsize=(12, 10))
 plt.yscale("log")
 plt.grid(which="both", axis="both")
+plt.errorbar(plane, mean[0], yerr=d_mean[0], xerr=0.5, fmt='r',
+             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "measured mean rate")
 plt.errorbar(plane, intensity, xerr=0.5, fmt='k',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5)
+             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "expected mean rate")
 #ax1.errorbar(plane, intensity, xerr=0.5, fmt='k',
              #elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "expected rate")
-plt.xlabel("number of traversed planes")
-plt.ylabel("mean rate $[1/s]$")
-plt.title("Mean rate of expected multi-plane-events", fontsize=20)
-plt.show()
-# plotting
-fig, (ax1,ax2) = plt.subplots(1,2,figsize=(14, 10))
-ax1.set_yscale("log")
-ax1.grid(which="both", axis="both")
-ax1.errorbar(plane, mean[0], yerr=d_mean[0], xerr=0.5, fmt='r',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "measured mean rate")
-ax1.errorbar(plane, intensity, xerr=0.5, yerr= np.array(intensity)*0.05, fmt='k',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "expected rate")
-# plt.plot(RN,MEAN,marker=".",linewidth=0)
-ax1.set_xlabel("number of traversed planes")
-ax1.set_ylabel("mean rate $[1/s]$")
-ax1.set_title("Mean rate of expected and measured multi-plane-events")#, fontsize=20)
-ax1.legend()
+plt.xlabel("Number of traversed planes", fontsize=18)
+plt.ylabel("mean rate $[1/s]$", fontsize=18)
+plt.title("Mean rate of expected multi-plane-events", fontsize=24)
+plt.legend(fontsize=18)
 
-errr_0 = intensity/mean[0]*np.sqrt((d_mean[0]/mean[0])**2+(0.05)**2)
-ax2.errorbar(plane, intensity/mean[0], yerr= errr_0, xerr=0.5, fmt='k',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5)
-ax2.grid(which="both", axis="both")
-ax2.set_xlabel("number of traversed planes")
-ax2.set_ylabel("Ratio expected/measured rate")
-ax2.set_title("Ratio of expected and measured multi-plane-events and ex to DUT")
-plt.show()
+plt.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/images/presentation/rate_comparison.png", dpi=600)
+# plt.show()
+# plotting
+# fig, (ax1,ax2) = plt.subplots(1,2,figsize=(14, 10))
+# ax1.set_yscale("log")
+# ax1.grid(which="both", axis="both")
+# ax1.errorbar(plane, mean[0], yerr=d_mean[0], xerr=0.5, fmt='r',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "measured mean rate")
+# ax1.errorbar(plane, intensity, xerr=0.5, yerr= np.array(intensity)*0.05, fmt='k',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "expected mean rate")
+# #plt.plot(RN,MEAN,marker=".",linewidth=0)
+# ax1.set_xlabel("number of traversed planes")
+# ax1.set_ylabel("mean rate $[1/s]$")
+# ax1.set_title("Mean rate of expected and measured multi-plane-events", fontsize=20)
+# ax1.legend()
+
+# errr_0 = intensity/mean[0]*np.sqrt((d_mean[0]/mean[0])**2+(0.05)**2)
+# ax2.errorbar(plane, intensity/mean[0], yerr= errr_0, xerr=0.5, fmt='k',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5)
+# ax2.grid(which="both", axis="both")
+# ax2.set_xlabel("number of traversed planes")
+# ax2.set_ylabel("Ratio expected/measured rate")
+# ax2.set_title("Ratio of expected and measured multi-plane-events and ex to DUT")
+# plt.show()
 
 
 # plotting HOLES
-fig, (ax1,ax2) = plt.subplots(1,2,figsize=(14, 10))
-ax1.set_yscale("log")
-ax1.grid(which="both", axis="both")
-ax1.errorbar(plane, mean[0], yerr=d_mean[0], xerr=0.5, fmt='k',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Measured mean rate")
-ax1.errorbar(plane, mean_holes, yerr= d_mean_holes, xerr=0.5, fmt='b',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Mean rate of holes")
-ax1.errorbar(plane, mean_holes_dut, yerr= d_mean_holes_dut, xerr=0.5, fmt='green',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Mean rate of holes-incl. DUT")
+# fig, (ax1,ax2) = plt.subplots(1,2,figsize=(14, 10))
+# ax1.set_yscale("log")
+# ax1.grid(which="both", axis="both")
+# ax1.errorbar(plane, mean[0], yerr=d_mean[0], xerr=0.5, fmt='k',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Measured mean rate")
+# ax1.errorbar(plane, mean_holes, yerr= d_mean_holes, xerr=0.5, fmt='b',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Mean rate of holes")
+# ax1.errorbar(plane, mean_holes_dut, yerr= d_mean_holes_dut, xerr=0.5, fmt='green',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Mean rate of holes-incl. DUT")
 
-ax1.set_xlabel("number of traversed planes")
-ax1.set_ylabel("mean rate $[1/s]$")
-ax1.set_title("Mean rate of measured multi-plane-events, considering holes")
-ax1.legend()
+# ax1.set_xlabel("number of traversed planes")
+# ax1.set_ylabel("mean rate $[1/s]$")
+# ax1.set_title("Mean rate of measured multi-plane-events, considering holes")
+# ax1.legend()
 
-errr_holes = mean_holes/mean[0]*np.sqrt((d_mean[0]/mean[0])**2+(d_mean_holes/mean_holes)**2)
-errr_holes_dut = mean_holes_dut/mean[0]*np.sqrt((d_mean[0]/mean[0])**2+(d_mean_holes_dut/mean_holes_dut)**2)
-ax2.errorbar(plane, mean_holes/mean[0], yerr= errr_holes, xerr=0.5, fmt='b',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "All holes")
-ax2.errorbar(plane, mean_holes_dut/mean[0], yerr= errr_holes_dut, xerr=0.5, fmt='green',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "holes, including DUT")
-ax2.grid(which="both", axis="both")
-ax2.set_xlabel("number of traversed planes")
-ax2.set_ylabel("Ratio holes/all measured events")
-ax2.set_title("Ratio of total evetns to events with holes")
-ax2.legend()
-plt.show()
+# errr_holes = mean_holes/mean[0]*np.sqrt((d_mean[0]/mean[0])**2+(d_mean_holes/mean_holes)**2)
+# errr_holes_dut = mean_holes_dut/mean[0]*np.sqrt((d_mean[0]/mean[0])**2+(d_mean_holes_dut/mean_holes_dut)**2)
+# ax2.errorbar(plane, mean_holes/mean[0], yerr= errr_holes, xerr=0.5, fmt='b',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "All holes")
+# ax2.errorbar(plane, mean_holes_dut/mean[0], yerr= errr_holes_dut, xerr=0.5, fmt='green',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "holes, including DUT")
+# ax2.grid(which="both", axis="both")
+# ax2.set_xlabel("number of traversed planes")
+# ax2.set_ylabel("Ratio holes/all measured events")
+# ax2.set_title("Ratio of total evetns to events with holes")
+# ax2.legend()
+# plt.show()
 
 
 # plotting MORE ON HOLES
-fig, (ax1,ax2) = plt.subplots(1,2,figsize=(14, 10))
-# ax1.set_yscale("log")
-ax1.grid(which="both", axis="both")
-ax1.errorbar(plane[1:6], mean_holes[1:6], yerr=d_mean_holes[1:6], xerr=0.5, fmt='k',
-             elinewidth=1.5, lw=0, capsize=6, capthick=1.5, label= "Total rate of holes")
-ax1.errorbar(plane[1:6], mean_holes_i[0,1:6], yerr= d_mean_holes_i[0,1:6], xerr=0.5, fmt='r',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Rate of 1 hole events")
-ax1.errorbar(plane[1:6], mean_holes_i[1,1:6], yerr= d_mean_holes_i[1,1:6] , xerr=0.5, fmt='b',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Rate of 2 hole events")
-ax1.errorbar(plane[1:6], mean_holes_i[2,1:6], yerr= d_mean_holes_i[2,1:6] , xerr=0.5, fmt='green',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Rate of 3 hole events")
+# fig, (ax1,ax2) = plt.subplots(1,2,figsize=(14, 10))
+# # ax1.set_yscale("log")
+# ax1.grid(which="both", axis="both")
+# ax1.errorbar(plane[1:6], mean_holes[1:6], yerr=d_mean_holes[1:6], xerr=0.5, fmt='k',
+#              elinewidth=1.5, lw=0, capsize=6, capthick=1.5, label= "Total rate of holes")
+# ax1.errorbar(plane[1:6], mean_holes_i[0,1:6], yerr= d_mean_holes_i[0,1:6], xerr=0.5, fmt='r',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Rate of 1 hole events")
+# ax1.errorbar(plane[1:6], mean_holes_i[1,1:6], yerr= d_mean_holes_i[1,1:6] , xerr=0.5, fmt='b',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Rate of 2 hole events")
+# ax1.errorbar(plane[1:6], mean_holes_i[2,1:6], yerr= d_mean_holes_i[2,1:6] , xerr=0.5, fmt='green',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Rate of 3 hole events")
 
-ax1.set_xlabel("number of traversed planes")
-ax1.set_ylabel("mean rate $[1/s]$")
-ax1.set_title("Mean rate of holes")
-ax1.legend()
+# ax1.set_xlabel("number of traversed planes")
+# ax1.set_ylabel("mean rate $[1/s]$")
+# ax1.set_title("Mean rate of holes")
+# ax1.legend()
 
-errr_holes_1 = mean_holes_i_dut[0]/mean_holes_i[0]*np.sqrt((d_mean_holes_i[0]/mean_holes_i[0])**2+
- (d_mean_holes_i_dut[0]/mean_holes_i_dut[0])**2)
-errr_holes_2 = mean_holes_i_dut[1]/mean_holes_i[1]*np.sqrt((d_mean_holes_i[1]/mean_holes_i[1])**2+
- (d_mean_holes_i_dut[1]/mean_holes_i_dut[1])**2)
-errr_holes_3 = mean_holes_i_dut[2]/mean_holes_i[2]*np.sqrt((d_mean_holes_i[2]/mean_holes_i[2])**2+
- (d_mean_holes_i_dut[2]/mean_holes_i_dut[2])**2)
+# errr_holes_1 = mean_holes_i_dut[0]/mean_holes_i[0]*np.sqrt((d_mean_holes_i[0]/mean_holes_i[0])**2+
+#  (d_mean_holes_i_dut[0]/mean_holes_i_dut[0])**2)
+# errr_holes_2 = mean_holes_i_dut[1]/mean_holes_i[1]*np.sqrt((d_mean_holes_i[1]/mean_holes_i[1])**2+
+#  (d_mean_holes_i_dut[1]/mean_holes_i_dut[1])**2)
+# errr_holes_3 = mean_holes_i_dut[2]/mean_holes_i[2]*np.sqrt((d_mean_holes_i[2]/mean_holes_i[2])**2+
+#  (d_mean_holes_i_dut[2]/mean_holes_i_dut[2])**2)
 
-ax2.errorbar(plane[1:6], mean_holes_i_dut[0,1:6]/mean_holes_i[0,1:6], yerr= errr_holes_1[1:6], xerr=0.5, fmt='r',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Ration of 1 hole events")
-ax2.errorbar(plane[2:5], mean_holes_i_dut[1,2:5]/mean_holes_i[1,2:5], yerr= errr_holes_2[2:5], xerr=0.5, fmt='b',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Ration of 2 hole events")
-ax2.errorbar(plane[3], mean_holes_i_dut[2,3]/mean_holes_i[2,3], yerr= errr_holes_3[3], xerr=0.5, fmt='green',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Ration of 3 hole events")             
-ax2.grid(which="both", axis="both")
-ax2.set_xlabel("number of traversed planes")
-ax2.set_ylabel("Ratio of (incl. DUT)/all of  certain holenumber")
-ax2.set_title("Ratio of holes per event to holes including DUT")
-ax2.legend()
-plt.show()
+# ax2.errorbar(plane[1:6], mean_holes_i_dut[0,1:6]/mean_holes_i[0,1:6], yerr= errr_holes_1[1:6], xerr=0.5, fmt='r',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Ration of 1 hole events")
+# ax2.errorbar(plane[2:5], mean_holes_i_dut[1,2:5]/mean_holes_i[1,2:5], yerr= errr_holes_2[2:5], xerr=0.5, fmt='b',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Ration of 2 hole events")
+# ax2.errorbar(plane[3], mean_holes_i_dut[2,3]/mean_holes_i[2,3], yerr= errr_holes_3[3], xerr=0.5, fmt='green',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Ration of 3 hole events")             
+# ax2.grid(which="both", axis="both")
+# ax2.set_xlabel("number of traversed planes")
+# ax2.set_ylabel("Ratio of (incl. DUT)/all of  certain holenumber")
+# ax2.set_title("Ratio of holes per event to holes including DUT")
+# ax2.legend()
+# plt.show()
 
 
 ################## HOLE CORRECTION ####################
@@ -249,36 +254,46 @@ plt.grid(which="both", axis="both")
 # plt.errorbar(plane, intensity,yerr=np.array(intensity)*0.05 , xerr=0.5, fmt='k',
 #               elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Expected rate")
 plt.errorbar(plane, mean[0], xerr=0.5, yerr=d_mean[0], fmt='r',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Uncorrected rate")
+             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Uncorrected mean rate")
 plt.errorbar(plane, corr_mean, xerr=0.5, yerr=d_corr_mean, fmt='b',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Corrected rate")
-plt.xlabel("znumber of traversed planes")
-plt.ylabel("Mean rate $[1/s]$")
-plt.title("Mean rate correction by visible holes", fontsize=20)
-plt.legend()
-plt.show()
+             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Corrected mean rate")
+plt.xlabel("Number of traversed planes", fontsize=18)
+plt.ylabel("Mean rate $[1/s]$", fontsize=18)
+plt.title("Mean rate correction by removing non-consecutive events", fontsize=24)
+plt.legend(fontsize=18)
+plt.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/images/presentation/rate_correction.png", dpi=600)
+# plt.show()
 
 
 # plotting_TOTAL_HITS
-fig, (ax1,ax2) = plt.subplots(1,2,figsize=(12, 10))
-ax1.grid(which="both", axis="both")
-ax1.errorbar(plane, mean[1], yerr=d_mean[1], xerr=0.5, fmt='k',
+
+plt.figure(figsize=(12, 10))
+plt.grid(which="both", axis="both")
+plt.errorbar(plane-1, mean[1], yerr=d_mean[1], xerr=0.5, fmt='k',
              elinewidth=1.5, lw=0, capsize=3, capthick=1.5)
-# plt.errorbar(plane, mean[1], yerr=d_mean[1], xerr=0.5, fmt='r',
+plt.xlabel("Plane", fontsize=18)
+plt.ylabel("Mean rate $[1/s]$", fontsize=18)
+plt.title("Mean rate of measured hits per plane", fontsize=24)
+plt.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/images/presentation/rate_per_plane.png", dpi=600)
+# fig, (ax1,ax2) = plt.subplots(1,2,figsize=(12, 10))
+# ax1.grid(which="both", axis="both")
+# ax1.errorbar(plane, mean[1], yerr=d_mean[1], xerr=0.5, fmt='k',
 #              elinewidth=1.5, lw=0, capsize=3, capthick=1.5)
-ax1.set_xlabel("Traversed plane")
-ax1.set_ylabel("Mean rate $[1/s]$")
-ax1.set_title("Mean rate measured hits per plane")#, fontsize=20)
+# # plt.errorbar(plane, mean[1], yerr=d_mean[1], xerr=0.5, fmt='r',
+# #              elinewidth=1.5, lw=0, capsize=3, capthick=1.5)
+# ax1.set_xlabel("Traversed plane")
+# ax1.set_ylabel("Mean rate $[1/s]$")
+# ax1.set_title("Mean rate measured hits per plane")#, fontsize=20)
 
-ax2.grid(which="both", axis="both")
+# ax2.grid(which="both", axis="both")
 
-errr = mean[1]/mean[1,3]*np.sqrt((d_mean[1]/mean[1])**2+(d_mean[1,3]/mean[1,3])**2)
-ax2.errorbar(plane, mean[1]/mean[1,3], yerr= errr, xerr=0.5, fmt='k',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5)
-ax2.set_xlabel("Traversed plane")
-ax2.set_ylabel("Ratio")
-ax2.set_title("Ratio of hits per plane according to DUT")#, fontsize=20)
-plt.show()
+# errr = mean[1]/mean[1,3]*np.sqrt((d_mean[1]/mean[1])**2+(d_mean[1,3]/mean[1,3])**2)
+# ax2.errorbar(plane, mean[1]/mean[1,3], yerr= errr, xerr=0.5, fmt='k',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5)
+# ax2.set_xlabel("Traversed plane")
+# ax2.set_ylabel("Ratio")
+# ax2.set_title("Ratio of hits per plane according to DUT")#, fontsize=20)
+# plt.show()
 
 ###creating a csv file
 with open("muon_data_processing/csv/mean_rate_multi_plane_events.csv","w", newline="") as f:

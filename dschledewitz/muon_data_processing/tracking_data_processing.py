@@ -271,7 +271,7 @@ Phi4,Phi5,Phi6,Phi7 = np.array([]),np.array([]),np.array([]),np.array([])
 Chi =  np.array([])
 Chi1 = np.array([])
 it = 0
-chi11,chi12,chi21,chi22 = 0,20,100,1000
+chi11,chi12,chi21,chi22 = 0,100,100,1000
 phi11,phi12,phi21,phi22 = 0,2,2,4#0,2,2,4
 phi31,phi32,phi41,phi42 = 4,6,6,8
 phi51,phi52,phi61,phi62 = 8,10,10,12
@@ -503,23 +503,26 @@ plt.show()
 # plt.legend()
 # plt.show()
 
-#plt.hist(Chi1, bins=50, label="Selected tracks, $\chi^2_{red}$ in range "+str(chi11)+" to "+str(chi12)+" and "+str(chi21)+" to "+str(chi22))
-# plt.hist(Chi1,range=(0,100), bins=50, label="Selected tracks, $\phi$ in range "+str(phi111)+" to "+str(phi142))
-# plt.title("Chi-squared distribution of 4 and more plane events, $\chi^2_{red}$ in range "+str(chi11)+" to "+str(chi12))
-# plt.xlabel("$Chi^2_{red}$")
-# plt.ylabel("Counts")
-# plt.legend()
+plt.figure(figsize=(12, 10))
+plt.hist(Chi, bins=40)#, label="Selected tracks, $\chi^2_{red}$ in range "+str(chi11)+" to "+str(chi12))+" and "+str(chi21)+" to "+str(chi22)
+#plt.hist(Chi,range=(0,100), bins=50, label="Selected tracks, $\phi$ in range "+str(phi111)+" to "+str(phi142))
+plt.title("Chi-squared distribution of 4 and more plane events with $\chi^2_{red}\leq$"+str(chi12), fontsize = 24)# in range "+str(chi11)+" to "+str(chi12))
+plt.xlabel("$Chi^2_{red}$", fontsize = 18)
+plt.ylabel("Counts", fontsize = 18)
+#plt.legend()
+plt.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/images/presentation/track_chi.png", dpi=600)
 # plt.show()
-
+plt.figure(figsize=(12, 10))
 plt.hist(Phi4, bins= 14 ,range=(0,28),label="4 or more pE")
 plt.hist(Phi5, bins= 14 ,range=(0,28),label="5 or more pE")
 plt.hist(Phi6, bins= 14 ,range=(0,28),label="6 or more pE")
 plt.hist(Phi7, bins= 14 ,range=(0,28),label="7 or more pE")
-plt.title("Angular distribution of n-plane-events, $\chi^2_{red}$ in range "+str(chi11)+" to "+str(chi12))
-plt.xlabel("Angle[°]")
-plt.ylabel("Counts")
-plt.legend()
-plt.show()
+plt.title("Angular distribution of n-plane-eventswith $\chi^2_{red}\leq$"+str(chi12), fontsize = 24)#, $\chi^2_{red}$ in range "+str(chi11)+" to "+str(chi12), fontsize = 24)
+plt.xlabel("Angle[°]", fontsize = 18)
+plt.ylabel("Counts", fontsize = 18)
+plt.legend(fontsize = 18)
+plt.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/images/presentation/track_angle.png", dpi=600)
+# plt.show()
 """1479 misaligned events of in total 3731############yeay2252 for chi_1000"""
 
 
