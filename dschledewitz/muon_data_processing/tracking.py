@@ -59,10 +59,10 @@ def Mean(val, d_val):
 # ev_num = np.array(np.array([31304, 2231009, 2332345, 4920656, 6549643, 9520660]),
  # np.array([1826261, 2936620, 6626458]), np.array([2290604, 7915917]),
   # np.array([1480603, 1880592, 3186234, 6871459, 8197996])) #4,5,6,7pe
-#ev_num = np.array([1480603, 1880592, 3186234, 6871459, 8197996])  # 7pe
+ev_num = np.array([1480603, 1880592, 3186234, 6871459, 8197996])  # 7pe
 #ev_num = np.array([2290604, 7915917])  # 6pe
 #ev_num = np.array([1826261, 2936620, 6626458]) #5pe
-ev_num = np.array([6549643])#np.array([31304, 2231009, 2332345, 4920656, 6549643, 9520660]) #4pe
+#ev_num = np.array([6549643])#np.array([31304, 2231009, 2332345, 4920656, 6549643, 9520660]) #4pe
 
 # correction
 x = np.array([0., -10.70464573,  -6.25092376,   0.19635326,  25.26630419, 27.30091044,  78.18635686])
@@ -75,11 +75,17 @@ d_y = np.array([3.5754407942229207, 4.222249682772156, 4.001147068181429, 4.2116
 #ev_num = np.array([168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178])
 All_x = []
 All_y = []
-fig, (ax1,ax2) = plt.subplots(1,2,figsize=(14, 10))
+fig, (ax2,ax1) = plt.subplots(1,2,figsize=(18, 10))
 ax1.set_xlim([0, 1024])
 ax1.set_ylim([0, 512])
+ax1.set_xlabel("x-axis [pixels]", fontsize=18)
+ax1.set_ylabel("y-axis [pixels]", fontsize=18)
+ax1.set_title("Aligned cosmic tracks", fontsize=24)
 ax2.set_xlim([0, 1024])
 ax2.set_ylim([0, 512])
+ax2.set_xlabel("x-axis [pixels]", fontsize=18)
+ax2.set_ylabel("y-axis [pixels]", fontsize=18)
+ax2.set_title("Unaligned cosmic tracks", fontsize=24)
 # plt.set_title("Run_000639")
 for e in range(len(ev_num)):
     with open(txt_file) as file:
@@ -125,9 +131,11 @@ for e in range(len(ev_num)):
         
         All_x.append(all_c_x)
         All_y.append(all_c_y)
-ax1.legend()
-plt.legend()
-plt.show()
+########################################### LEGENDS HERE    LEGENDS HERE    LEGENDS HERE    LEGENDS HERE    ####################################
+#ax1.legend()
+#plt.legend()
+plt.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/images/presentation/track_visual.png", dpi=600)
+#plt.show()
 
 # fitting
 def lin(x, a, b):
