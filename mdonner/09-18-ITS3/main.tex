@@ -35,9 +35,9 @@
      linkcolor=black,
      filecolor=magenta}
 
-\title{\texorpdfstring{\color{blue!50!black}\textbf{Status Report}}{}}
-\subtitle{Cosmics with the ALPIDE Telescope}
-\author[Maurice \and Felicitas \and David]{Maurice Donner \and Felicitas Franke \and David Schledewitz}
+\title{\texorpdfstring{\color{blue!50!black}\textbf{Cosmics with ALPIDE}}{}}
+\subtitle{Bachelor Student Report}
+\author[Maurice \and David]{Maurice Donner \and David Schledewitz}
 \date{September 22th, 2020}
 
 \begin{document}
@@ -45,8 +45,16 @@
 \maketitle
 \newpage
 
-\begin{frame}{Back in May...}
+%\begin{frame}{The Telescope}
+%    \begin{figure}[H]
+%	\centering
+%	%\includegraphics[width=\textwidth]{%TODO HIER REIN} %MENTION WHO YOU ARE AND INTRODUCE
+%    \end{figure}
+%\end{frame}
+
+\begin{frame}{First Steps}
     \begin{itemize}
+	\item Started working in May
 	\item Limited access to GSI
 	\item Set up the telescope to be pointed towards the sky and record
 	    cosmics
@@ -57,17 +65,19 @@
 
 \begin{minipage}[b]{.49\textwidth}
     \begin{itemize}
-	\item Use a NIM signal generator to create artificial triggers for the
+	\item Use a NIM pulse generator to create artificial triggers for the
 	    chips.
-	\item Trigger every \textasciitilde \( 100 \ \si{\micro \second} \)
+	\item Trigger every \textasciitilde \( 100 \ \si{\micro \second} \) 
+	    (when not busy).
+	\item When discriminator signal and STROBE are in coincidence, event is
+	    latched to memory
 	\item That way no event should be missed
     \end{itemize}
 \end{minipage}
-%
-%\begin{minipage}[b]{.49\textwidth}
+
     \begin{figure}[H]
     \centering \tiny
-    \begin{tikzpicture}[remember picture, overlay,yshift=1.3cm,xshift=.5cm,scale=1.3]
+    \begin{tikzpicture}[remember picture, overlay,yshift=2cm,xshift=.5cm,scale=1.3]
     % Draw Coordinate system and axis labels
     \draw[->] (0,0) -- (4,0) node[anchor=north] {t};
     \draw[->] (0,0) -- (0,1);
@@ -96,15 +106,16 @@
     \draw[->] (2.0, 1.1) -- (2.0, 0.9) node[anchor=south,yshift=5pt] {\tiny trigger};
     \end{tikzpicture}
     \end{figure}
-%\end{minipage}
 \end{frame}
 
-\begin{frame}{Back in May...}
+\begin{frame}{First Steps}
     \Large PROs \footnotesize \\
     \begin{itemize}
 	\item Running "without" external trigger possible
+	\item Uptime is close to 100\%
+	\item Telescope can (and had) be operated \textbf{REMOTELY}
 	\item Thin time slices makes it really unlikely to detect
-	    two muons at the same time, especially from similar angles.
+	    two muons at the same time, especially from similar angles. \\[.5cm]
     \end{itemize}
     \Large CONs \footnotesize 
     \begin{itemize}
@@ -112,11 +123,11 @@
 	\item $4.4 \ \si{\mega \byte}$ per second of Data written to the disk
 	\item EUDAQ 1 crashed often at filesizes \( > 5 \ \si{\giga \byte} \)
 	    $\rightarrow$ Runtime limited to \( \approx 18 \ \si{\minute} \) 
-    \end{itemize}
+    \end{itemize} 
 \end{frame}
 
-\begin{frame}{Taking Cosmics}
-    Took 380 runs á 14-18 minutes in total over the course of several days
+\begin{frame}{Taking Cosmics} 
+    Took 380 runs á 14-18 minutes in total over the course of several weeks
     \begin{figure}[H]
 	\centering
 	\includegraphics[width=.9\textwidth]{Screenshot.png}
@@ -129,8 +140,8 @@
     \end{minipage}
     \begin{minipage}{.65\textwidth}
 	\begin{itemize}
-	    \item First Analysis showed only \textasciitilde 10 good tracks per
-		run
+	    \item First analysis showed only \textasciitilde 10 good tracks
+	       per run
 	\end{itemize}
     \end{minipage}
 \end{frame}
@@ -139,16 +150,21 @@
     \footnotesize
     \begin{itemize}
 	\item Corryvreckan fails to do analysis with just a few tracks per run \\
-	    \tiny (no way of using multiple \verb`.raw` files?) \footnotesize
-	\item Used the \verb`[TextWriter]` module to transform RAW data into
+	    \tiny (no way of combining multiple \verb`.raw` files for alignment?)
+	    \footnotesize
+	\item Used the \verb`[TextWriter]` module to transform RAW data into 
 	    \verb`.txt` files.
-	\item Reducing filesize from \textasciitilde \( 4.5 \ \si{\giga \byte} \)
-	    to \textasciitilde \( 200 \ \si{\mega \byte} \) per run
+	    \begin{itemize} 
+		    \tiny \item Reducing filesize from \textasciitilde \( 4.5 \ \si{\giga \byte} \)
+		    to \textasciitilde \( 200 \ \si{\mega \byte} \) per run \footnotesize
+	    \end{itemize} 
 	\pause
 	\item Compression program stores only non-empty events.
-	\item Reduces size of \verb`.txt` files to \textasciitilde
-	    \( 90 \ \si{\kilo \byte} \) 
-	\item Further analysis in python
+	    \begin{itemize}
+		    \tiny \item Reduces size of \verb`.txt` files to \textasciitilde
+		    \( 90 \ \si{\kilo \byte} \) (Only non-empty events) \footnotesize
+	    \end{itemize}
+	\item Further analysis in Python
     \end{itemize}
 \end{frame}
 
@@ -157,7 +173,7 @@
     \begin{itemize}
 	\item First visualization attempts
 	\item Plane alignment with testbeam data from 2019 \( \rightarrow \)
-	    inaccurate. \tiny (planes seem to have shifted) \footnotesize
+	    inaccurate \tiny (planes seem to have shifted) \footnotesize
     \end{itemize}
 \begin{minipage}{.45\textwidth}
     \centering
@@ -165,15 +181,26 @@
 \end{minipage}
 \begin{minipage}{.05\textwidth}
     \centering
-    \( \rightarrow \)
+    \( \rightarrow \) \\
+    \tiny (align)
 \end{minipage}
 \begin{minipage}{.45\textwidth}
     \centering
     \includegraphics[trim=0 50 0 100,clip,width=\textwidth]{DESY_After.png}
 \end{minipage}
 \begin{itemize}
-    \item Taking Closer look at alignment
+    \item Taking closer look at alignment
 \end{itemize}
+\begin{tikzpicture}[remember picture, overlay]
+    \node[xshift=13,yshift=0,rotate=90] at (current page.center)
+    {\tiny plane number};
+    \node[xshift=-162,yshift=0,rotate=90] at (current page.center)
+    {\tiny plane number};
+    \node[xshift=60,yshift=-70,rotate=-2] at (current page.center)
+    {\tiny Position [Pixel]};
+    \node[xshift=-115,yshift=-70,rotate=-2] at (current page.center)
+    {\tiny Position [Pixel]};
+\end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Cosmic Analysis}
@@ -187,19 +214,20 @@
     \end{minipage}
     \begin{minipage}{.39\textwidth}
 	\begin{itemize}
-	    \item Disalignment of planes to over \( 1.8 \ \si{\milli \meter} \)
+	    \item First look at perpendicular tracks (testbeam)
+	    \item Disalignment of planes to over \( 1.5 \ \si{\milli \meter} \)
 		(after transport)
 	    \item Generally, testbeam alignment from 2020 closer to cosmic
 		setup than from 2019
-	    \item simple translation algorithm and comparison with the alignment
-		that corryvreckan suggests (second figure)
-	    \item Goal: Do alignment with cosmic data
+	    \item Simple translation algorithm and comparison with the alignment
+		that Corryvreckan suggests (second figure)
+	    \item Goal: Do alignment with cosmic data \\[3pt] \tiny (new complication: angles)
 	\end{itemize}
     \end{minipage}
 \end{frame}
 
 \begin{frame}[fragile]{Cosmic Analysis}
-    Implemented a 3D-Fitting algorithm in python:\\
+    Implemented a 3D-Fitting algorithm in Python:\\
     \begin{minipage}{.32\textwidth}
 	\begin{figure}[H]
 	    \centering
@@ -233,77 +261,10 @@
 		- \left[ \left( x_1-x_0 \right) \cdot \left( x_2-x_1 \right)
 		\right]^2}{\left| x_2-x_1 \right|^2}
 	\end{align*}
-    \end{minipage}
+    \end{minipage}\\[5pt]
 \end{frame}
 
-\begin{frame}{Cosmic Analysis}
-  \LARGE Event analysis \normalsize \\[.1cm]
-  \begin{itemize}
-    \item With simple considerations estimate muon rate traversing a certain number of planes
-    \item Evaluate data and compare to estimations
-  \end{itemize}
-  \begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\textwidth]{rate_comparison}
-    \caption{Comparison of estimated and measured muon rate}
-  \end{figure}
-\end{frame}
-
-\begin{frame}{June}
-  \LARGE event analysis \normalsize \\[.1cm]
-  \begin{itemize}
-    \item Find reasons for overestimation
-    \item Differences in measured hit rate per plane
-    \item possible dependency on Thresholds
-  \end{itemize}
-  \begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\textwidth]{rate_per_plane}
-    \caption{Mean rate of measured hits}
-  \end{figure}
-\end{frame}
-
-\begin{frame}{Cosmic Analysis}
-  \LARGE event analysis \normalsize \\[.1cm]
-  \begin{itemize}
-    \item Non-consecutive events appeared\\
-    (i.e. planes 1,2,3,4,5,7 registered a hit)
-    \item Corrected mean rate by removing non-consecutive events
-  \end{itemize}
-  \begin{figure}[H]
-    \centering
-    \includegraphics[width=.6\textwidth]{rate_correction}
-    \caption{Mean rate correction by non-consecutive events}
-  \end{figure}
-\end{frame}
-
-\begin{frame}{Cosmic Analysis}
-  \LARGE track analysis \normalsize \\[.1cm]
-  \begin{itemize}
-    \item Alignment with data of testbeam june 2020
-    \item Track visualized with 2-dimensional projection
-    \item possibility to classify events as valid or fake track
-  \end{itemize}
-  \begin{figure}[H]
-    \centering
-    \includegraphics[width=.8\textwidth]{track_visual}
-    \caption{Alignment with testbeam 2020 data}
-  \end{figure}
-\end{frame}
-
-\begin{frame}{Cosmic Analysis}
-  \LARGE track analysis \normalsize \\[.1cm]
-  \begin{itemize}
-    \item Fitting the 2D-track projections
-    \item Analysis of $\chi^2_{red}$-distribution and angular distribution
-    \item still open
-  \end{itemize}
-  \begin{figure}[H]
-    \centering
-    \includegraphics[width=.49\textwidth]{track_chi}
-    \includegraphics[width=.49\textwidth]{track_angle}
-  \end{figure}
-\end{frame}
+\input{David.tex}
 
 \begin{frame}{Outlook}
     \begin{minipage}{.44\textwidth}
@@ -318,7 +279,7 @@
 		\begin{itemize} \tiny 
 		    \item Comparing angular distribution and rate with
 			theoretical calculations
-		    \item Looking at cluster sizes and charge deposit
+		    \item Cluster sizes and cluster analysis
 		\end{itemize}
 	    \item The ALPIDE-Telescope \\[5pt]
 		\begin{itemize} \tiny 
@@ -328,7 +289,6 @@
 		    \item As of right now: Eudaq not able to work with low
 			particle rate (maybe you have some input?)
 		\end{itemize}
-	
 	\end{itemize}
     \end{minipage}
     \begin{minipage}{.55\textwidth}
@@ -338,4 +298,13 @@
 	\end{figure}
     \end{minipage}
 \end{frame}
+\begin{frame}{APENDIX}
+  \LARGE $\chi^2_{red}$ \normalsize \\[.5cm]
+  \begin{itemize}
+    \item $\chi^2_{red}=\frac{\chi^2}{dof}$
+    \item dof = number of measurements - variables of the fit
+    \item dof = number of traversed planes - 2 (linear fit)
+  \end{itemize}
+\end{frame}
+
 \end{document}

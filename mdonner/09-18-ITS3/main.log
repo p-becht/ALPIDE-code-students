@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2019/dev/Debian) (preloaded format=xelatex 2020.9.20)  21 SEP 2020 11:26
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2019/dev/Debian) (preloaded format=xelatex 2020.9.20)  22 SEP 2020 07:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1237,41 +1237,41 @@ File: pointin3d.png Graphic file (type bmp)
 <pointin3d.png>
 ) [9
 
-]
-File: rate_comparison.jpg Graphic file (type bmp)
-<rate_comparison.jpg>
-[10
+] (./David.tex [10
 
 ]
-File: rate_per_plane.jpg Graphic file (type bmp)
-<rate_per_plane.jpg>
-
-Overfull \vbox (8.23978pt too high) detected at line 264
- []
-
+File: rate_comparison.png Graphic file (type bmp)
+<rate_comparison.png>
 [11
 
 ]
-File: rate_correction.jpg Graphic file (type bmp)
-<rate_correction.jpg>
+File: rate_per_plane.png Graphic file (type bmp)
+<rate_per_plane.png>
 [12
 
 ]
-File: track_visual.jpg Graphic file (type bmp)
-<track_visual.jpg>
+File: rate_correction.png Graphic file (type bmp)
+<rate_correction.png>
 [13
 
 ]
-File: track_chi.jpg Graphic file (type bmp)
-<track_chi.jpg>
-File: track_angle.jpg Graphic file (type bmp)
-<track_angle.jpg>
+File: track_visual.png Graphic file (type bmp)
+<track_visual.png>
 [14
 
 ]
+File: track_chi.png Graphic file (type bmp)
+<track_chi.png>
+File: track_angle.png Graphic file (type bmp)
+<track_angle.png>
+[15
+
+])
 File: outlook.png Graphic file (type bmp)
 <outlook.png>
-[15
+[16
+
+] [17
 
 ]
 \tf@nav=\write6
@@ -1283,21 +1283,21 @@ File: outlook.png Graphic file (type bmp)
 \tf@snm=\write8
 \openout8 = `main.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 341.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 341.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 310.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 310.
 (./main.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 341.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 341.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 310.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 310.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E.
  ) 
 Here is how much of TeX's memory you used:
- 40557 strings out of 492912
- 837550 string characters out of 6134893
- 945264 words of memory out of 5000000
- 43934 multiletter control sequences out of 15000+600000
- 539832 words of font info for 89 fonts, out of 8000000 for 9000
+ 40640 strings out of 492912
+ 839581 string characters out of 6134893
+ 945263 words of memory out of 5000000
+ 43994 multiletter control sequences out of 15000+600000
+ 544097 words of font info for 121 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  57i,15n,97p,794b,1564s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.xdv (15 pages, 442068 bytes).
+Output written on main.xdv (17 pages, 510376 bytes).
