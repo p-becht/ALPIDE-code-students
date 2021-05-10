@@ -59,7 +59,7 @@ def Mean(val, d_val):
 # ev_num = np.array(np.array([31304, 2231009, 2332345, 4920656, 6549643, 9520660]),
  # np.array([1826261, 2936620, 6626458]), np.array([2290604, 7915917]),
   # np.array([1480603, 1880592, 3186234, 6871459, 8197996])) #4,5,6,7pe
-ev_num = np.array([1480603, 1880592, 3186234, 6871459, 8197996])  # 7pe
+#ev_num = np.array([1480603, 1880592, 3186234, 6871459, 8197996])  # 7pe
 #ev_num = np.array([2290604, 7915917])  # 6pe
 #ev_num = np.array([1826261, 2936620, 6626458]) #5pe
 #ev_num = np.array([6549643])#np.array([31304, 2231009, 2332345, 4920656, 6549643, 9520660]) #4pe
@@ -67,25 +67,43 @@ ev_num = np.array([1480603, 1880592, 3186234, 6871459, 8197996])  # 7pe
 # correction
 x = np.array([0., -10.70464573,  -6.25092376,   0.19635326,  25.26630419, 27.30091044,  78.18635686])
 x_cut = np.array([0.0, -10.942751693937705, -6.107853151401792, 0.3392396058722253, 25.787629617440512, 27.90264139955528, 79.67674933762731])
+#maurice:(corry)
+#x_cut = np.array([0.0, -10.89, -6.06, 0.41, 25.89, 28.06, 79.91])
+
 d_x = np.array([5.0753646042158405, 5.87477832494781, 5.755816368216302, 5.995301277503309, 5.941687387178227, 6.3436679805375995, 6.370528043707604])
 y = np.array([0., 45.15699466, -10.91364125,  -6.02800581,  -6.77937338, 33.55199672,  19.33957541])
 y_cut = np.array([0.0, 46.93523623413028, -11.63021732446464, -6.644735635251222, -7.586362208978847, 34.72339574790476, 19.851017367665627])
+#maurice:
+#y_cut = np.array([0.0, 46.93, -11.77, -6.92, -8, 34.12, 19.14])
 d_y = np.array([3.5754407942229207, 4.222249682772156, 4.001147068181429, 4.2116401173182245, 4.1758062264516, 4.519796135420165, 4.4523349048317495])
 #desy19
+x_19 = np.array([0., 26.49, 26, 30.74, 20.93, 19.26, -24.43])*(-1)
+y_19 = np.array([0., -49.55, 17.34, 21.66, 20.59, -55.71, -44.41])*(-1)
 #ev_num = np.array([168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178])
 All_x = []
 All_y = []
-fig, (ax2,ax1) = plt.subplots(1,2,figsize=(18, 10))
+fig, (ax2,ax3,ax1) = plt.subplots(1,3,figsize=(21, 6))
 ax1.set_xlim([0, 1024])
 ax1.set_ylim([0, 512])
 ax1.set_xlabel("x-axis [pixels]", fontsize=18)
 ax1.set_ylabel("y-axis [pixels]", fontsize=18)
-ax1.set_title("Aligned cosmic tracks", fontsize=24)
+#ax1.set_title("Aligned cosmic tracks", fontsize=24)
 ax2.set_xlim([0, 1024])
 ax2.set_ylim([0, 512])
 ax2.set_xlabel("x-axis [pixels]", fontsize=18)
 ax2.set_ylabel("y-axis [pixels]", fontsize=18)
-ax2.set_title("Unaligned cosmic tracks", fontsize=24)
+#ax2.set_title("Unaligned cosmic tracks", fontsize=24)
+ax3.set_xlim([0, 1024])
+ax3.set_ylim([0, 512])
+ax3.set_xlabel("x-axis [pixels]", fontsize=18)
+ax3.set_ylabel("y-axis [pixels]", fontsize=18)
+
+plt.figure(figsize=(10,8))
+plt.xlim([0, 1024])
+plt.ylim([0, 512])
+plt.xlabel("x-axis [pixels]", fontsize=18)
+plt.ylabel("y-axis [pixels]", fontsize=18)
+
 # plt.set_title("Run_000639")
 for e in range(len(ev_num)):
     with open(txt_file) as file:
@@ -100,6 +118,8 @@ for e in range(len(ev_num)):
         all_y = np.array([])
         all_c_x = np.array([])
         all_c_y = np.array([])
+        all_c19_x = np.array([])
+        all_c19_y = np.array([])
         missing = []
         for i in range(0, 7):
             # print(i)
@@ -120,21 +140,32 @@ for e in range(len(ev_num)):
                 mean_y = mean_y
                 all_x = np.append(all_x, mean_x)
                 all_y = np.append(all_y, mean_y)
-                all_c_x = np.append(all_c_x, mean_x-x[i])#x_cut[i]
-                all_c_y = np.append(all_c_y, mean_y-y[i])#y_cut[i]
+                all_c_x = np.append(all_c_x, mean_x-x_cut[i])#x[i]
+                all_c_y = np.append(all_c_y, mean_y-y_cut[i])#y[i]
+                all_c19_x = np.append(all_c19_x, mean_x-x_19[i])
+                all_c19_y = np.append(all_c19_y, mean_y-y_19[i])
             else:
                 missing.append(i)
         ax2.plot(all_x, all_y,"o-", label="Event "+ str(event_number)+", missing plane(s): "+str(missing))
         ax1.plot((all_c_x),(all_c_y),"o-")#, label="Event "+ str(event_number)+", missing plane(s): "+str(missing))
+        ax3.plot((all_c19_x),(all_c19_y),"o-")
         ax2.plot(all_x[0], all_y[0],"ro-")
         ax1.plot((all_c_x[0]),(all_c_y[0]),"ro-")
+        ax3.plot((all_c19_x[0]),(all_c19_y[0]),"ro-")
+        plt.plot((all_c_x),(all_c_y),"o-")
+        plt.plot((all_c_x[0]),(all_c_y[0]),"ro-")
         
         All_x.append(all_c_x)
         All_y.append(all_c_y)
 ########################################### LEGENDS HERE    LEGENDS HERE    LEGENDS HERE    LEGENDS HERE    ####################################
 #ax1.legend()
 #plt.legend()
-plt.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/images/presentation/track_visual.png", dpi=600)
+ax1.tick_params(axis='both', labelsize=18)
+ax2.tick_params(axis='both', labelsize=18)
+ax3.tick_params(axis='both', labelsize=18)
+plt.tick_params(axis='both', labelsize=18)
+#fig.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/images/presentation/track_visual.png", dpi=300)
+#fig.savefig("/home/david/Desktop/Bachelor_images/6_2/alignment.png", dpi=300)
 #plt.show()
 
 # fitting
@@ -158,9 +189,9 @@ for i in range(len(All_x)):
     y = fit[0] * x + fit[1]
     print(fit)
     print(np.sqrt(np.diag(err)))
-    ax1.plot(x,y)
-plt.show()
-
+    plt.plot(x,y,color="black")
+#plt.savefig("/home/david/Desktop/Bachelor_images/6_2/track_1.png", dpi=300)
+plt.show
 
 
 # create array without DUT for tracking

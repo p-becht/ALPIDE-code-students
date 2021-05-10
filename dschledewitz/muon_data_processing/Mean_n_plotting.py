@@ -17,7 +17,9 @@ datas_holes_dut = np.loadtxt("muon_data_processing/csv/event_HOLES_DUT-data.csv"
 
 
 # theorietical data
-intensity = [0.07812, 0.1486, 0.06728, 0.02618, 0.01044, 0.004055, 0.005013]
+# intensity = [0.07812, 0.1486, 0.06728, 0.02618, 0.01044, 0.004055, 0.005013]
+intensity = np.array([0.202778, 0.096772, 0.022202, 0.006841, 0.002465, 0.000909, 0.001056])
+
 
 
 # split the path to get the Runnumber, to seperate by run size(<416<606)
@@ -67,6 +69,7 @@ d_mean = np.zeros((2,7))
 for i in range(7):
     mean[0,i], d_mean[0,i], sys_1 = Mean(data[:,i],0) # n-plane-events
     mean[1,i], d_mean[1,i], sys_1 = Mean(data_hits[:,i],0) # total_hits
+    
 
 # holes
 #differentiate different hole numbers
@@ -137,21 +140,25 @@ d_corr_mean = np.array([d_mean[0,0],
 
 
 # plotting
-plt.figure(figsize=(12, 10))
+vert_intensity_err = 0.0004
+theory_error= intensity/0.00758*vert_intensity_err
+
+plt.figure(figsize=(14, 10))
 plt.yscale("log")
 plt.grid(which="both", axis="both")
 plt.errorbar(plane, mean[0], yerr=d_mean[0], xerr=0.5, fmt='r',
              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "measured mean rate")
-plt.errorbar(plane, intensity, xerr=0.5, fmt='k',
+plt.errorbar(plane, intensity, xerr=0.5, yerr=theory_error, fmt='k',
              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "expected mean rate")
 #ax1.errorbar(plane, intensity, xerr=0.5, fmt='k',
              #elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "expected rate")
 plt.xlabel("Number of traversed planes", fontsize=18)
 plt.ylabel("mean rate $[1/s]$", fontsize=18)
-plt.title("Mean rate of expected multi-plane-events", fontsize=24)
+#plt.title("Mean rate of expected and measured multi-plane-events", fontsize=24)
+plt.tick_params(axis='both', labelsize=18)
 plt.legend(fontsize=18)
-
-plt.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/images/presentation/rate_comparison.png", dpi=600)
+#plt.savefig("/home/david/Desktop/Bachelor_images/6_1/rate_comparison.png", dpi=300)
+#plt.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/images/presentation/rate_comparison.png", dpi=300)
 # plt.show()
 # plotting
 # fig, (ax1,ax2) = plt.subplots(1,2,figsize=(14, 10))
@@ -178,33 +185,35 @@ plt.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/
 
 
 # plotting HOLES
-# fig, (ax1,ax2) = plt.subplots(1,2,figsize=(14, 10))
-# ax1.set_yscale("log")
-# ax1.grid(which="both", axis="both")
-# ax1.errorbar(plane, mean[0], yerr=d_mean[0], xerr=0.5, fmt='k',
-#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Measured mean rate")
-# ax1.errorbar(plane, mean_holes, yerr= d_mean_holes, xerr=0.5, fmt='b',
-#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Mean rate of holes")
+fig, (ax1,ax2) = plt.subplots(1,2,figsize=(18, 8))
+ax1.set_yscale("log")
+ax1.grid(which="both", axis="both")
+ax1.errorbar(plane, mean[0], yerr=d_mean[0], xerr=0.5, fmt='k',
+             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Measured mean rate")
+ax1.errorbar(plane, mean_holes, yerr= d_mean_holes, xerr=0.5, fmt='b',
+             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Mean rate of events with gaps")
 # ax1.errorbar(plane, mean_holes_dut, yerr= d_mean_holes_dut, xerr=0.5, fmt='green',
 #              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Mean rate of holes-incl. DUT")
 
-# ax1.set_xlabel("number of traversed planes")
-# ax1.set_ylabel("mean rate $[1/s]$")
-# ax1.set_title("Mean rate of measured multi-plane-events, considering holes")
-# ax1.legend()
+ax1.set_xlabel("number of traversed planes", fontsize=18)
+ax1.set_ylabel("mean rate $[1/s]$", fontsize=18)
+ax1.tick_params(axis='both', labelsize=18)
+#ax1.set_title("Mean rate of measured multi-plane-events, considering holes")
+ax1.legend(fontsize=16)
 
-# errr_holes = mean_holes/mean[0]*np.sqrt((d_mean[0]/mean[0])**2+(d_mean_holes/mean_holes)**2)
-# errr_holes_dut = mean_holes_dut/mean[0]*np.sqrt((d_mean[0]/mean[0])**2+(d_mean_holes_dut/mean_holes_dut)**2)
-# ax2.errorbar(plane, mean_holes/mean[0], yerr= errr_holes, xerr=0.5, fmt='b',
-#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "All holes")
+errr_holes = mean_holes/mean[0]*np.sqrt((d_mean[0]/mean[0])**2+(d_mean_holes/mean_holes)**2)
+errr_holes_dut = mean_holes_dut/mean[0]*np.sqrt((d_mean[0]/mean[0])**2+(d_mean_holes_dut/mean_holes_dut)**2)
+ax2.errorbar(plane, mean_holes/mean[0], yerr= errr_holes, xerr=0.5, fmt='b',
+             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "All holes")
 # ax2.errorbar(plane, mean_holes_dut/mean[0], yerr= errr_holes_dut, xerr=0.5, fmt='green',
 #              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "holes, including DUT")
-# ax2.grid(which="both", axis="both")
-# ax2.set_xlabel("number of traversed planes")
-# ax2.set_ylabel("Ratio holes/all measured events")
-# ax2.set_title("Ratio of total evetns to events with holes")
-# ax2.legend()
-# plt.show()
+ax2.grid(which="both", axis="both")
+ax2.set_xlabel("number of traversed planes", fontsize=18)
+ax2.set_ylabel("Ratio of events with gaps to all measured events", fontsize=18)
+ax2.tick_params(axis='both', labelsize=18)
+#ax2.set_title("Ratio of events with gaps to total rate of n-plane-events")
+plt.savefig("/home/david/Desktop/Bachelor_images/6_1/holes.png", dpi=300)
+#plt.show()
 
 
 # plotting MORE ON HOLES
@@ -248,33 +257,49 @@ plt.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/
 
 ################## HOLE CORRECTION ####################
 
-plt.figure(figsize=(12, 10))
+plt.figure(figsize=(14, 10))
 plt.yscale("log")
 plt.grid(which="both", axis="both")
 # plt.errorbar(plane, intensity,yerr=np.array(intensity)*0.05 , xerr=0.5, fmt='k',
 #               elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Expected rate")
-plt.errorbar(plane, mean[0], xerr=0.5, yerr=d_mean[0], fmt='r',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Uncorrected mean rate")
-plt.errorbar(plane, corr_mean, xerr=0.5, yerr=d_corr_mean, fmt='b',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Corrected mean rate")
+plt.errorbar(plane[1:], intensity[1:], xerr=0.5, yerr=theory_error[1:], fmt='k',
+             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Expected mean rate")
+plt.errorbar(plane[1:], mean[0,1:], xerr=0.5, yerr=d_mean[0,1:], fmt='r',
+             elinewidth=1, lw=0, capsize=3, capthick=1, label= "Uncorrected measured mean rate")
+plt.errorbar(plane[1:], corr_mean[1:], xerr=0.5, yerr=d_corr_mean[1:], fmt='b',
+             elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= "Corrected measured mean rate")
 plt.xlabel("Number of traversed planes", fontsize=18)
 plt.ylabel("Mean rate $[1/s]$", fontsize=18)
-plt.title("Mean rate correction by removing non-consecutive events", fontsize=24)
+plt.tick_params(axis='both', labelsize=18)
+#plt.title("Correction of measured mean rate", fontsize=24)
 plt.legend(fontsize=18)
-plt.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/images/presentation/rate_correction.png", dpi=600)
+#plt.savefig("/home/david/Desktop/Bachelor_images/6_1/rate_correction.png", dpi=300)
 # plt.show()
-
+print("Corr: ",corr_mean)
+print("d_Corr: ",d_corr_mean)
 
 # plotting_TOTAL_HITS
+# one_pe = np.array([37654, 32144, 32173, 38718, 31674, 32423, 35551])
+# err_one_pe = one_pe/one_pe[3]*np.sqrt((1/one_pe)+1/one_pe[3])
+# one_pe = one_pe/one_pe[3]
+# errr = mean[1]/mean[1,3]*np.sqrt((d_mean[1]/mean[1])**2+(d_mean[1,3]/mean[1,3])**2)
 
-plt.figure(figsize=(12, 10))
-plt.grid(which="both", axis="both")
-plt.errorbar(plane-1, mean[1], yerr=d_mean[1], xerr=0.5, fmt='k',
-             elinewidth=1.5, lw=0, capsize=3, capthick=1.5)
-plt.xlabel("Plane", fontsize=18)
-plt.ylabel("Mean rate $[1/s]$", fontsize=18)
-plt.title("Mean rate of measured hits per plane", fontsize=24)
-plt.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/images/presentation/rate_per_plane.png", dpi=600)
+# plt.figure(figsize=(14, 10))
+# plt.grid(which="both", axis="both")
+# plt.errorbar(plane-1, mean[1]/mean[1,3], yerr=errr, xerr=0.5, fmt='k',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label = "all events")
+# plt.errorbar(plane-1, one_pe, yerr=err_one_pe, xerr=0.5, fmt='b',
+#              elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label="1-plane-events")
+# plt.xlabel("Plane", fontsize=18)
+# #plt.ylabel("Mean rate $[1/s]$", fontsize=18)
+# plt.ylabel("Ratio", fontsize = 18)
+# plt.tick_params(axis='both', labelsize=18)
+#plt.title("Mean rate of measured hits per plane", fontsize=24)
+#plt.title("Ratio of hits per plane according to DUT", fontsize = 24)
+plt.legend()
+
+# plt.savefig("/home/david/ALPIDE-code-students/dschledewitz/muon_data_processing/images/presentation/rate_per_plane.png", dpi=300)
+# plt.show()
 # fig, (ax1,ax2) = plt.subplots(1,2,figsize=(12, 10))
 # ax1.grid(which="both", axis="both")
 # ax1.errorbar(plane, mean[1], yerr=d_mean[1], xerr=0.5, fmt='k',

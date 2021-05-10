@@ -35,38 +35,42 @@ vcasn2 = vcasn +12
 
 ####################################################plot for BB=0V
 ### build the figure so that nothing will truncated
-plt.figure(figsize=(12,10))
-plt.subplots_adjust(bottom=0.28,top=0.95)
-### set the parameters as x-axis-values
-x_ax_values= np.array([BB,VCASN,VCASN2,ITHR])    # made a matrix of all parameter information we want to display
-x_ax_values = np.swapaxes(x_ax_values,0,1)        # swap axis, so we get a parameter boundle in every row we can identify with the x axis value
-x_ax_values.astype(int)
-plt.xticks(RN,x_ax_values)                        # replace RN with our parameters as axis-values
-### rotate the presentation of the x-axis-values to ensure they wont overlap
-plt.xticks(rotation=90)
-### plotting
-plt.errorbar(RN, MEAN, yerr=ERR, fmt='.k')
-#plt.plot(RN,MEAN,marker=".",linewidth=0)
-plt.xlabel("parameters: [Backbias. VCASN. VCASN2. ITHR]")
-plt.ylabel("Calculated mean threshold [DAC]")
-plt.title("Threshold for various parameter settings and Backbias of 0V",fontsize=20)
-plt.show()
+# plt.figure(figsize=(12,10))
+# plt.subplots_adjust(bottom=0.28,top=0.95)
+# ### set the parameters as x-axis-values
+# x_ax_values= np.array([VCASN,ITHR])#np.array([BB,VCASN,VCASN2,ITHR])    # made a matrix of all parameter information we want to display
+# x_ax_values = np.swapaxes(x_ax_values,0,1)        # swap axis, so we get a parameter boundle in every row we can identify with the x axis value
+# x_ax_values.astype(int)
+# plt.xticks(RN,x_ax_values)                        # replace RN with our parameters as axis-values
+# ### rotate the presentation of the x-axis-values to ensure they wont overlap
+# plt.xticks(rotation=90)
+# ### plotting
+# plt.errorbar(RN, MEAN, yerr=ERR, fmt='.k')
+# #plt.plot(RN,MEAN,marker=".",linewidth=0)
+# plt.xlabel("parameters: [Backbias. VCASN. VCASN2. ITHR]")
+# plt.ylabel("Calculated mean threshold [DAC]")
+# plt.title("Threshold for various parameter settings and Backbias of 0V",fontsize=20)
+# plt.show()
 
 ####################################################plot for BB=3V
 ### build the figure so that nothing will truncated
-plt.figure(figsize=(12,10))
+plt.figure(figsize=(16,8))
 plt.subplots_adjust(bottom=0.28,top=0.95,left=0.07,right=0.98)
 ### set the parameters as x-axis-values
-x_ax_values= np.array([bb,vcasn,vcasn2,ithr])    # made a matrix of all parameter information we want to display
+x_ax_values= np.array([vcasn,ithr])#np.array([bb,vcasn,vcasn2,ithr])    # made a matrix of all parameter information we want to display
 x_ax_values = np.swapaxes(x_ax_values,0,1)        # swap axis, so we get a parameter boundle in every row we can identify with the x axis value
 x_ax_values.astype(int)
 plt.xticks(rn,x_ax_values)                        # replace RN with our parameters as axis-values
 ### rotate the presentation of the x-axis-values to ensure they wont overlap
-plt.xticks(rotation=90)
+plt.xticks(rotation=45)
 ### plotting
 plt.errorbar(rn, mean, yerr=err, fmt='.k')
 #plt.plot(rn,mean,marker=".",linewidth=0)
-plt.xlabel("parameters: [Backbias. VCASN. VCASN2. ITHR]")
-plt.ylabel("Calculated mean threshold [DAC]")
-plt.title("Threshold for various parameter settingsand Backbias of 3V",fontsize=20)
+#plt.xlabel("parameters: [Backbias. VCASN. VCASN2. ITHR]")
+plt.xlabel("Parameters: [VCASN. ITHR.]", fontsize=18)
+plt.ylabel("Mean threshold [DAC]", fontsize=18)
+plt.tick_params(axis='both', labelsize=18)
+#plt.title("Threshold for various parameter settingsand Backbias of 3V",fontsize=20)
+
+plt.savefig("/home/david/Desktop/Bachelor_images/threshold3v.png", dpi=300)
 plt.show()

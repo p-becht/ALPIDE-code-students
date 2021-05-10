@@ -59,7 +59,27 @@ ax2.grid(which="both", axis="both")
 ax2.set_xlabel("Traversed plane")
 ax2.set_ylabel("Counts")
 ax2.set_title("Total number of measured hits per plane")
+
 plt.show()
+
+
+#without subplot
+plt.figure(figsize=(14, 10))
+plt.yscale("log")
+plt.grid(which="both", axis="both")
+plt.errorbar(plane[:3], sum_n_planes[:3], xerr=0.5, fmt='k',elinewidth=1.5, lw=0, capsize=3, capthick=1.5)
+for i in range(3,7):
+    plt.errorbar(plane[i], sum_n_planes[i], xerr=0.5, fmt='r',elinewidth=1.5, lw=0, capsize=3, capthick=1.5, label= str(i+1)+" planes= %s"%(int(sum_n_planes[i])))
+
+plt.xlabel("Number of traversed planes", fontsize=18)
+plt.ylabel("Counts", fontsize=18)
+#plt.title("Mean rate of expected and measured multi-plane-events", fontsize=24)
+plt.tick_params(axis='both', labelsize=18)
+plt.legend(fontsize=18)
+plt.savefig("/home/david/Desktop/Bachelor_images/6_1/total_events.png", dpi=300)
+
+
+
 
 ###holes
 fig, (ax1,ax2) = plt.subplots(1,2,figsize=(14, 10))

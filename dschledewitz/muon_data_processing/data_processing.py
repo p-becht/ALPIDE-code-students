@@ -27,6 +27,9 @@ dut = []
 # container to store all evetns sequenced
 seq = []
 
+# container for rate of one-plane events
+one_p_e = [0,0,0,0,0,0,0]
+
 ###### defenition to get the value of a specific keyword from a file
 def get_value(filename, key):
 
@@ -44,9 +47,11 @@ def get_value(filename, key):
             return value
 
 ##### definition for filling data in the arrays
-def fill(num,container):
+def fill(num,container,plane=10):
     if num == 1:
         container[0] += 1
+        if plane != 10:
+            one_p_e[plane-1] += 1
     elif num == 2:
         container[1] += 1
     elif num == 3:
@@ -114,7 +119,7 @@ def counter(filename):
 
                     else:
                         # count the number of events in this run and reset counting
-                        fill(iter,counts)
+                        fill(iter,counts,plane_n)
 
                         # select eventnumber, for seven plane events
                         # if iter == 7:
@@ -123,8 +128,8 @@ def counter(filename):
                         #     print("six plane event: "+str(event_num))
                         # if iter == 5:
                         #     print("five plane event: "+str(event_num))
-                        if iter == 4:
-                            print(", "+str(event_num))
+                        #if iter == 4:
+                            #print(", "+str(event_num))
                         event_num = int((dat[line-1].split(" ")[1]))
 
                         # select only sequences with more than 1 entries
@@ -233,7 +238,7 @@ def DUT_events(filename):
 for i in sorted(os.listdir(data_path)):
 
     # events stored in the .txt files beginning with "Cosmics"
-    if i.startswith("Cosmics000639"):
+    if i.startswith("Cosmics00"): #Cosmics000639
         path = os.path.join(data_path,i)
 
         # split the path to get the Runnumber
@@ -248,7 +253,7 @@ for i in sorted(os.listdir(data_path)):
         run.append(RUN)
         hits_plane.append(hitnum_plane(path))
         dut.append(DUT_events(path))
-
+print(one_p_e)
 #######################---SEQUENCING   SEQUENCING   SEQUENCING---###############################
 
 # # print(np.array([1,4,5])==1)
