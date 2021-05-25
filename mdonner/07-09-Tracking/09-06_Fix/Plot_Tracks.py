@@ -6,13 +6,15 @@ import pylab
 from mpl_toolkits.mplot3d import proj3d
 
 hit_data = Data_Fitted.hit_data
-plottracks = range(10)
-connect_dots = True
-plot_tracks = False
-print_chi2 = False
-min_number_of_planes = 7
 
-print('Plotting...')
+############################## USER INPUT ######################################
+plottracks = [0]
+connect_dots = True
+plot_tracks = True
+print_chi2 = False
+min_number_of_planes = 3
+################################################################################
+
 
 figx, figy = 5, 5
 xlim, ylim = 1023, 511
@@ -20,8 +22,8 @@ xlim, ylim = 1023, 511
 fig = plt.figure(figsize=(figx,figy))
 # Create 3d Axes
 ax = plt.axes(projection='3d')
-# ... but dont plot them
-ax._axis3don = False
+ax._axis3don = False # ... but dont plot them
+ax.set_box_aspect((3,3,3)) # For aspect ratio
 
 # Define Axes Lenghts (Dont change this, not worth)
 ax.set_xlim3d(0,xlim)
@@ -32,6 +34,8 @@ y = np.arange(0,1024,512)
 X, Y = np.meshgrid(x,y)
 Z = np.ndarray((len(y),len(x)))
 Z.fill(0)
+
+print('Plotting...')
 
 # Draw the planes
 for plane in range(7):

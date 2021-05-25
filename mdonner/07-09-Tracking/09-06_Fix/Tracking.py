@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 from mpl_toolkits.mplot3d import proj3d
 
-exclude_planes = [7]
+exclude_planes = [] # List of Planes not to include
 old_testbeam = False
 
 #####################    DEFINE PLANE POSITION   ######################## {{{
@@ -16,7 +16,6 @@ offset[0][1], offset[1][1] = 10.89, -46.93
 offset[0][2], offset[1][2] = 6.06, 11.77
 offset[0][3], offset[1][3] = -0.41, 6.92
 offset[0][4], offset[1][4] = -25.89, 8.00
-# Plane 5 and 6 seem to be more misaligned than the rest. (Peak in chi2)
 offset[0][5], offset[1][5] = -28.06, -34.12
 offset[0][6], offset[1][6] = -79.91, -19.14
 
@@ -49,6 +48,7 @@ for track in range(N):
 
     Fit_Data = np.ndarray((number_of_planes,3))
     std_hit = np.ndarray((number_of_planes))
+    planes_used = []
 
     # Create a counter for the Fit Array
     counter = 0
@@ -59,13 +59,14 @@ for track in range(N):
         hit_data[track][plane]["YC"]+=offset[1][plane]
         if (hit_data[track][plane]["XC"] == -1) or (plane in exclude_planes):
             continue
+        planes_used.append(plane)
         Fit_Data[counter][0] = hit_data[track][plane]["XC"]
         Fit_Data[counter][1] = hit_data[track][plane]["YC"]
         Fit_Data[counter][2] = plane*1024*2/3
         std_hit[counter] = hit_data[track][plane]["sig"]
         counter+=1
     
-    # Fitting Algorithm:
+    # Fitting Algorithm
     datamean = Fit_Data.mean(axis=0)
     uu, dd, vv = np.linalg.svd(Fit_Data - datamean)
     linepts = vv[0] * np.mgrid[-2500:2500:2j][:,np.newaxis]
@@ -75,21 +76,38 @@ for track in range(N):
     x1 = linepts[0]
     x2 = linepts[1]
 
-    # Calculate shortest distance of a hit to the track
-    d = []
-    for hit in range(number_of_planes):
-        x0 = Fit_Data[hit]
-        dist = np.sqrt( ( (np.linalg.norm(x1-x0)**2*np.linalg.norm(x2-x1)**2)
-            - (np.dot((x1-x0),(x2-x1)))**2 ) / np.linalg.norm(x2-x1)**2 )
-        d.append(dist)
+    # Calculate shortest distance of a hit to the track OUTDATED {{{
+    #d = []
+    #for hit in range(number_of_planes):
+    #    x0 = Fit_Data[hit]
+    #    dist = np.sqrt( ( (np.linalg.norm(x1-x0)**2*np.linalg.norm(x2-x1)**2)
+    #        - (np.dot((x1-x0),(x2-x1)))**2 ) / np.linalg.norm(x2-x1)**2 )
+    #    d.append(dist) }}}
 
-    # Actually, take the residual, not the shortest distance TODO finish this
+    # Take the residual, not the shortest distance 
     d = []
-    for hit in range(number_of_planes):
-        x0 = Fit_Data[hit]
+    for plane in planes_used:
+        x0 = np.array([
+            hit_data[track][plane]["XC"],
+            hit_data[track][plane]["YC"],
+            plane*1024*2/3])
         # Solve for the point in plane of Track z = a+mb
         lbda = (x0[2] - x2[2])/(x2-x1)[2] # m = (z-a)/(b)
         xz = x2+lbda*(x2-x1) # find point in axis that lies in the same plane
+        hit_data[track][plane]["resx"] = (x0-xz)[0]
+        hit_data[track][plane]["resy"] = (x0-xz)[1]
+        d.append(np.linalg.norm(xz-x0))
+
+    #for hit in range(number_of_planes):
+    #    x0 = Fit_Data[hit]
+    #    # Solve for the point in plane of Track z = a+mb
+    #    lbda = (x0[2] - x2[2])/(x2-x1)[2] # m = (z-a)/(b)
+    #    xz = x2+lbda*(x2-x1) # find point in axis that lies in the same plane
+    #    # Save residual TODO make sure that this is written to the RIGHT plane dumbass
+    #    hit_data[track][hit]["resx"] = (x0-xz)[0]
+    #    hit_data[track][hit]["resy"] = (x0-xz)[1]
+    #    d.append(np.linalg.norm(xz-x0))
+
 
         # Proof that it works {{{
         #fig = plt.figure(figsize=(5,5))
