@@ -1,11 +1,12 @@
-#!/usr/bin/env python3.5
+#!/usr/bin/python3
 
 import sys
 import matplotlib
 import matplotlib.pyplot as plt
+plt.style.use('bmh')
 import numpy as np
 
-graphical_output=False
+graphical_output=True
 
 def scurve_fit(steps, ninj):
     dvs=sorted(steps.keys())
@@ -49,17 +50,21 @@ with open(sys.argv[1]) as f:
 print(np.mean(thresholds))
 print(np.mean(rmss))
 
+x = np.arange(0,50,2)
+label=[str(10*i) for i in x]
+for i in range(len(label)):
+    if i%4==0: continue
+    label[i] = ''
+string='Threshold = {}'.format(np.round(10*np.mean(thresholds),2))
+
+
 if graphical_output:
-    plt.figure()
-    plt.xlabel('Threshold in DAC')
+    plt.figure(figsize=(4,2))
+    plt.xlabel('Threshold in electrons')
     plt.ylabel('Frequency')
-    plt.title('Whole ALPIDE')
-    plt.hist(thresholds,range=(0,30), bins=30)
+    plt.xticks(x,label)
+    plt.hist(thresholds,range=(0,50), bins=30,color='#3647a0')
+    plt.text(0,600,string)
+    plt.tight_layout()
     plt.show()
 
-    plt.figure()
-    plt.xlabel('RMS in DAC')
-    plt.ylabel('Frequency')
-    plt.title('Whole ALPIDE')
-    plt.hist(rmss,range=(0,1), bins=50)
-    plt.show()

@@ -1,5 +1,5 @@
 \frametitle{Cosmic Analysis}
-Implemented a 3D-Fitting algorithm in python:\\
+Implemented a 3D-Fitting algorithm in Python:\\
     \begin{minipage}{.32\textwidth}
 ^^I\begin{figure}[H]
 ^^I    \centering
@@ -33,4 +33,4 @@ Implemented a 3D-Fitting algorithm in python:\\
 ^^I^^I- \left[ \left( x_1-x_0 \right) \cdot \left( x_2-x_1 \right)
 ^^I^^I\right]^2}{\left| x_2-x_1 \right|^2}
 ^^I\end{align*}
-    \end{minipage}
+    \end{minipage}\\[5pt]

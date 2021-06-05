@@ -53,12 +53,20 @@ for filename in os.listdir(path):
                     hit_data[counter]["EventID"] = EventID
                     hit_data[counter]["Number_of_planes"] = total_planes
                     
-                    # Write information PER PLANE
-                    for i in range(7):
-                        hit_data[counter][i] = {}
-                        hit_data[counter][i]["X"] = tmp_hit_data[i]["X"]
-                        hit_data[counter][i]["Y"] = tmp_hit_data[i]["Y"]
-                    if (EventID == "3418182"): print("ACHTUNG: ",filename)
+                    # If there is only one plane, write only one plane
+                    if (hit_data[counter]["Number_of_planes"] == 1):
+                        for i in range(7):
+                            if (tmp_hit_data[i]["X"][0] == -1): continue
+                            hit_data[counter]['plane'] = i
+                            hit_data[counter][i] = {}
+                            hit_data[counter][i]["X"] = tmp_hit_data[i]["X"]
+                            hit_data[counter][i]["Y"] = tmp_hit_data[i]["Y"]
+                    else: # Write information PER PLANE
+                        for i in range(7):
+                            hit_data[counter][i] = {}
+                            hit_data[counter][i]["X"] = tmp_hit_data[i]["X"]
+                            hit_data[counter][i]["Y"] = tmp_hit_data[i]["Y"]
+                        if (EventID == "3418182"): print("ACHTUNG: ",filename)
                     counter+=1
 
                 # Reset all Variables for next event
@@ -90,33 +98,57 @@ print("Calculating Cluster positions")
 
 with tqdm(total=number_of_tracks) as pbar:
     for track in range(number_of_tracks):
-        for plane in range(7):
+        if hit_data[track]['Number_of_planes'] == 1:
+            plane_hit = hit_data[track]['plane']
+            Cluster_X = np.mean(hit_data[track][plane_hit]["X"])
+            Cluster_Y = np.mean(hit_data[track][plane_hit]["Y"])
 
-            # Calculate the cluster position. XC stands for X position of Cluster
-            Cluster_X = np.mean(hit_data[track][plane]["X"])
-            Cluster_Y = np.mean(hit_data[track][plane]["Y"])
-            hit_data[track][plane]["XC"] = np.mean(hit_data[track][plane]["X"])
-            hit_data[track][plane]["YC"] = np.mean(hit_data[track][plane]["X"])
-            
             # Calculate the Cluster Spread
-            sdev = np.sqrt(np.std(hit_data[track][plane]["X"])**2+
-                    np.std(hit_data[track][plane]["Y"])**2)
-            if sdev == 0: sdev = 0.5
+            sdev = np.sqrt(np.std(hit_data[track][plane_hit]["X"])**2+
+                    np.std(hit_data[track][plane_hit]["Y"])**2)
 
             # Round values
             sdev = round(sdev,2)
             Cluster_X = round(Cluster_X,2)
             Cluster_Y = round(Cluster_Y,2)
 
+            if sdev == 0: sdev = 0.5
+
+            # Write to Dictionary
+            hit_data[track][plane_hit]["XC"] = Cluster_X
+            hit_data[track][plane_hit]["YC"] = Cluster_Y
+            hit_data[track][plane_hit]["sig"] = sdev
+
+            pbar.update(1)
+
+            continue #Skip to next event
+
+        for plane in range(7):
+
+            # Calculate the cluster position. XC stands for X position of Cluster
+            Cluster_X = np.mean(hit_data[track][plane]["X"])
+            Cluster_Y = np.mean(hit_data[track][plane]["Y"])
+
+            # Calculate the Cluster Spread
+            sdev = np.sqrt(np.std(hit_data[track][plane]["X"])**2+
+                    np.std(hit_data[track][plane]["Y"])**2)
+
+            # Round values
+            sdev = round(sdev,2)
+            Cluster_X = round(Cluster_X,2)
+            Cluster_Y = round(Cluster_Y,2)
+            
+            if sdev == 0: sdev = 0.288
+
             # Write to Dictionary
             hit_data[track][plane]["XC"] = Cluster_X
             hit_data[track][plane]["YC"] = Cluster_Y
             hit_data[track][plane]["sig"] = sdev
 
-        pbar.update(1)
+            pbar.update(1)
 
 # Export information into a callable python object
-Filename = "Data_Unfitted.py"
+Filename = "Data_all.py"
 with open(Filename, 'w') as f:
     f.write("hit_data = ")
     f.write("%s" % hit_data)
